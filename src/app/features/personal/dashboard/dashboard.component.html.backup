@@ -1,0 +1,242 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-8 px-4">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Header Card -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl shadow-xl p-8 mb-6 text-white">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold mb-2">Formulario Sede {{ sedeName }}</h1>
+          <p class="text-blue-100">Ingrese los datos correctamente</p>
+        </div>
+        <i class="pi pi-clipboard text-6xl opacity-20"></i>
+      </div>
+    </div>
+
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+
+      <!-- Información de Sede y Pabellón -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+          <label class="flex items-center text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">
+            <i class="pi pi-building mr-2 text-blue-500"></i>Sede
+          </label>
+          <p class="text-xl font-semibold text-gray-800">{{ sedeName }}</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+          <label class="flex items-center text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">
+            <i class="pi pi-home mr-2 text-green-500"></i>Pabellón
+          </label>
+          <p class="text-xl font-semibold text-gray-800">{{ edificioName }}</p>
+        </div>
+      </div>
+
+      <!-- Tabs para tipo de recolección -->
+      <div class="bg-white rounded-xl shadow-lg p-2 mb-6">
+        <div class="grid grid-cols-3 gap-2">
+          <button
+            type="button"
+            (click)="selectTab('pilas')"
+            [class]="tipoRecoleccionSeleccionado === 'pilas'
+              ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg scale-105'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
+            class="py-4 px-6 rounded-lg font-bold transition-all duration-200 flex items-center justify-center gap-2">
+            <i class="pi pi-box text-xl"></i>
+            <span>Pilas</span>
+          </button>
+          <button
+            type="button"
+            (click)="selectTab('canastillas')"
+            [class]="tipoRecoleccionSeleccionado === 'canastillas'
+              ? 'bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg scale-105'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
+            class="py-4 px-6 rounded-lg font-bold transition-all duration-200 flex items-center justify-center gap-2">
+            <i class="pi pi-shopping-cart text-xl"></i>
+            <span>Canastillas</span>
+          </button>
+          <button
+            type="button"
+            (click)="selectTab('papel_oficina')"
+            [class]="tipoRecoleccionSeleccionado === 'papel_oficina'
+              ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg scale-105'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
+            class="py-4 px-6 rounded-lg font-bold transition-all duration-200 flex items-center justify-center gap-2">
+            <i class="pi pi-file text-xl"></i>
+            <span>Tachos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Información de entrada de datos -->
+      <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4 mb-6">
+        <div class="flex items-center gap-3">
+          <i class="pi pi-info-circle text-blue-600 text-2xl"></i>
+          <p class="text-blue-800 font-medium">Ingrese la cantidad en Kilogramos para cada categoría</p>
+        </div>
+      </div>
+
+      <!-- Campos de entrada según tipo de recolección -->
+      <div class="mb-6">
+
+        <!-- Pilas -->
+        <div *ngIf="tipoRecoleccionSeleccionado === 'pilas'" class="bg-white rounded-xl shadow-lg p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 border-2 border-gray-200 hover:border-gray-400 transition-colors">
+              <label class="flex items-center text-xs font-bold text-gray-600 uppercase tracking-wide mb-3">
+                <i class="pi pi-box mr-2 text-gray-500"></i>PLÁSTICOS
+              </label>
+              <p-inputNumber
+                formControlName="plasticosKg"
+                mode="decimal"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                [min]="0"
+                [step]="0.01"
+                suffix=" kg"
+                styleClass="w-full">
+              </p-inputNumber>
+            </div>
+
+            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border-2 border-green-200 hover:border-green-400 transition-colors">
+              <label class="flex items-center text-xs font-bold text-green-700 uppercase tracking-wide mb-3">
+                <i class="pi pi-sun mr-2 text-green-600"></i>ORGÁNICOS
+              </label>
+              <p-inputNumber
+                formControlName="organicosKg"
+                mode="decimal"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                [min]="0"
+                [step]="0.01"
+                suffix=" kg"
+                styleClass="w-full">
+              </p-inputNumber>
+            </div>
+
+            <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-4 border-2 border-emerald-200 hover:border-emerald-400 transition-colors">
+              <label class="flex items-center text-xs font-bold text-emerald-700 uppercase tracking-wide mb-3">
+                <i class="pi pi-star mr-2 text-emerald-600"></i>VIDRIO
+              </label>
+              <p-inputNumber
+                formControlName="vidrioKg"
+                mode="decimal"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                [min]="0"
+                [step]="0.01"
+                suffix=" kg"
+                styleClass="w-full">
+              </p-inputNumber>
+            </div>
+
+            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2 border-yellow-200 hover:border-yellow-400 transition-colors">
+              <label class="flex items-center text-xs font-bold text-yellow-700 uppercase tracking-wide mb-3">
+                <i class="pi pi-circle mr-2 text-yellow-600"></i>METALES
+              </label>
+              <p-inputNumber
+                formControlName="metalesKg"
+                mode="decimal"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                [min]="0"
+                [step]="0.01"
+                suffix=" kg"
+                styleClass="w-full">
+              </p-inputNumber>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border-2 border-blue-200 hover:border-blue-400 transition-colors">
+              <label class="flex items-center text-xs font-bold text-blue-700 uppercase tracking-wide mb-3">
+                <i class="pi pi-file mr-2 text-blue-600"></i>PAPEL/CARTÓN
+              </label>
+              <p-inputNumber
+                formControlName="papelCartonKg"
+                mode="decimal"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                [min]="0"
+                [step]="0.01"
+                suffix=" kg"
+                styleClass="w-full">
+              </p-inputNumber>
+            </div>
+
+            <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-4 border-2 border-red-200 hover:border-red-400 transition-colors">
+              <label class="flex items-center text-xs font-bold text-red-700 uppercase tracking-wide mb-3">
+                <i class="pi pi-times mr-2 text-red-600"></i>NO APROVECHABLES
+              </label>
+              <p-inputNumber
+                formControlName="noAprovechablesKg"
+                mode="decimal"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                [min]="0"
+                [step]="0.01"
+                suffix=" kg"
+                styleClass="w-full">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canastillas -->
+        <div *ngIf="tipoRecoleccionSeleccionado === 'canastillas'" class="bg-white rounded-xl shadow-lg p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg p-6 border-2 border-cyan-200 hover:border-cyan-400 transition-colors">
+              <label class="flex items-center text-sm font-bold text-cyan-700 uppercase tracking-wide mb-3">
+                <i class="pi pi-clone mr-2 text-cyan-600 text-xl"></i>BOTELLAS
+              </label>
+              <p-inputNumber formControlName="botellasKg" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" [min]="0" [step]="0.01" suffix=" kg" styleClass="w-full"></p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tachos (Papel Oficina) -->
+        <div *ngIf="tipoRecoleccionSeleccionado === 'papel_oficina'" class="bg-white rounded-xl shadow-lg p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 border-2 border-purple-200 hover:border-purple-400 transition-colors">
+              <label class="flex items-center text-sm font-bold text-purple-700 uppercase tracking-wide mb-3">
+                <i class="pi pi-file-edit mr-2 text-purple-600 text-xl"></i>PAPEL OFICINA
+              </label>
+              <p-inputNumber formControlName="papelOficinaKg" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" [min]="0" [step]="0.01" suffix=" kg" styleClass="w-full"></p-inputNumber>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div *ngIf="messages.length > 0" class="mb-6">
+        <div *ngFor="let msg of messages"
+          [class]="msg.severity === 'success' ? 'bg-green-50 border-l-4 border-green-500' : 'bg-red-50 border-l-4 border-red-500'"
+          class="rounded-lg p-4 mb-3 shadow-md">
+          <div class="flex items-center gap-3">
+            <i [class]="msg.severity === 'success' ? 'pi pi-check-circle text-green-600' : 'pi pi-times-circle text-red-600'"
+              class="text-2xl"></i>
+            <p [class]="msg.severity === 'success' ? 'text-green-800' : 'text-red-800'"
+              class="font-medium">{{ msg.detail }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <button
+          type="submit"
+          [disabled]="isSubmitting"
+          class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3">
+          <i [class]="isSubmitting ? 'pi pi-spin pi-spinner' : 'pi pi-save'" class="text-xl"></i>
+          <span>{{ isSubmitting ? 'Guardando...' : 'Guardar Registro' }}</span>
+        </button>
+
+        <button
+          type="button"
+          (click)="verRegistros()"
+          class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3">
+          <i class="pi pi-list text-xl"></i>
+          <span>Ver Registros</span>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

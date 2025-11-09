@@ -1,0 +1,168 @@
+.report-metrics {
+  margin: 2rem 0;
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+
+    ::ng-deep .p-card {
+      height: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .p-card-body {
+        padding: 1.5rem;
+      }
+
+      .p-card-content {
+        padding: 0;
+      }
+    }
+
+    .metric-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .metric-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+        i {
+          font-size: 1.75rem;
+          color: white;
+        }
+      }
+
+      .metric-info {
+        flex: 1;
+        min-width: 0;
+
+        .metric-title {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #6b7280;
+          margin: 0 0 0.5rem 0;
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
+        }
+
+        .metric-value {
+          font-size: 1.75rem;
+          font-weight: 700;
+          color: #1f2937;
+          margin: 0 0 0.25rem 0;
+          line-height: 1.2;
+          word-wrap: break-word;
+        }
+
+        .metric-subtitle {
+          font-size: 0.875rem;
+          color: #9ca3af;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Responsive breakpoints
+@media (max-width: 1200px) {
+  .report-metrics {
+    .metrics-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .report-metrics {
+    margin: 1.5rem 0;
+
+    .metrics-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+
+      ::ng-deep .p-card {
+        .p-card-body {
+          padding: 1.25rem;
+        }
+      }
+
+      .metric-content {
+        .metric-icon {
+          width: 48px;
+          height: 48px;
+
+          i {
+            font-size: 1.5rem;
+          }
+        }
+
+        .metric-info {
+          .metric-value {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .report-metrics {
+    margin: 1rem 0;
+
+    .metrics-grid {
+      gap: 0.875rem;
+
+      ::ng-deep .p-card {
+        .p-card-body {
+          padding: 1rem;
+        }
+      }
+
+      .metric-content {
+        gap: 0.75rem;
+
+        .metric-icon {
+          width: 44px;
+          height: 44px;
+
+          i {
+            font-size: 1.25rem;
+          }
+        }
+
+        .metric-info {
+          .metric-title {
+            font-size: 0.8125rem;
+          }
+
+          .metric-value {
+            font-size: 1.25rem;
+          }
+
+          .metric-subtitle {
+            font-size: 0.8125rem;
+          }
+        }
+      }
+    }
+  }
+}

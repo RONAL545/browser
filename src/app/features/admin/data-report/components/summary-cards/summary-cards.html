@@ -1,0 +1,81 @@
+<div class="summary-cards-container">
+  <div class="grid">
+    <!-- Total Registros -->
+    <div class="col-12 md:col-6 lg:col-4">
+      <p-card class="summary-card">
+        <div class="card-content">
+          <div class="icon-container icon-primary">
+            <i class="pi pi-file"></i>
+          </div>
+          <div class="text-content">
+            <span class="label">Total Registros</span>
+            <span class="value">{{ metrics.totalRegistros }}</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Total Reciclados -->
+    <div class="col-12 md:col-6 lg:col-4">
+      <p-card class="summary-card">
+        <div class="card-content">
+          <div class="icon-container icon-success">
+            <i class="pi pi-check-circle"></i>
+          </div>
+          <div class="text-content">
+            <span class="label">Total Reciclados</span>
+            <span class="value">{{ metrics.totalReciclados | number:'1.2-2' }} KG</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Total No Aprovechable -->
+    <div class="col-12 md:col-6 lg:col-4">
+      <p-card class="summary-card">
+        <div class="card-content">
+          <div class="icon-container icon-danger">
+            <i class="pi pi-times-circle"></i>
+          </div>
+          <div class="text-content">
+            <span class="label">Total No Aprovechable</span>
+            <span class="value">{{ metrics.totalNoAprovechable | number:'1.2-2' }} KG</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Más Reciclado -->
+    <div class="col-12 md:col-6 lg:col-4">
+      <p-card class="summary-card">
+        <div class="card-content">
+          <div class="icon-container icon-warning">
+            <i class="pi pi-star-fill"></i>
+          </div>
+          <div class="text-content">
+            <span class="label">Más Reciclado</span>
+            <span class="value-category">
+              <span class="category-name">{{ metrics.masRecicladoNombre }}</span>
+              <span class="category-kg">{{ metrics.masRecicladoKg | number:'1.2-2' }} KG</span>
+            </span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Promedio Diario -->
+    <div class="col-12 md:col-6 lg:col-4">
+      <p-card class="summary-card">
+        <div class="card-content">
+          <div class="icon-container icon-info">
+            <i class="pi pi-calendar"></i>
+          </div>
+          <div class="text-content">
+            <span class="label">Promedio Diario</span>
+            <span class="value">{{ metrics.promedioDiario | number:'1.2-2' }} KG</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

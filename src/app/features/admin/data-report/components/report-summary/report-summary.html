@@ -1,0 +1,34 @@
+<div class="report-summary" *ngIf="statistics">
+  <h2>Resumen de Datos</h2>
+
+  <!-- Gráficos -->
+  <div class="charts-container">
+    <!-- Gráfico circular -->
+    <div class="chart-card">
+      <h3>Distribución de Residuos por Tipo</h3>
+      <div class="chart-wrapper">
+        <p-chart type="pie" [data]="pieChartData" [options]="pieChartOptions" [style]="{'height': '400px'}"></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico de barras por sedes -->
+    <div class="chart-card" *ngIf="showSedesChart && barChartSedesData?.labels?.length > 0">
+      <h3>Residuos por Sede</h3>
+      <div class="chart-wrapper">
+        <p-chart type="bar" [data]="barChartSedesData" [options]="barChartSedesOptions" [style]="{'height': '500px'}"></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico de barras por edificios -->
+    <div class="chart-card" *ngIf="barChartEdificiosData?.labels?.length > 0">
+      <h3>Residuos por Edificio</h3>
+      <div class="chart-wrapper">
+        <p-chart type="bar" [data]="barChartEdificiosData" [options]="barChartEdificiosOptions" [style]="{'height': '500px'}"></p-chart>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="report-summary" *ngIf="!statistics">
+  <p class="no-data">No hay datos disponibles. Aplica filtros para ver las estadísticas.</p>
+</div>

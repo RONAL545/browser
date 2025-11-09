@@ -1,0 +1,83 @@
+<div class="segregation-metrics">
+  <div class="metrics-grid">
+    <!-- Tasa de Segregación -->
+    <div class="metric-card">
+      <div class="metric-icon" [style.background]="'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'">
+        <i class="pi pi-percentage"></i>
+      </div>
+      <div class="metric-content">
+        <h3 class="metric-title">Tasa de Segregación</h3>
+        <p class="metric-value">{{ metrics.tasaSegregacion | number:'1.1-1' }}%</p>
+        <p class="metric-subtitle">KPI de cumplimiento</p>
+      </div>
+    </div>
+
+    <!-- Sede con Peor Desempeño -->
+    <div class="metric-card" *ngIf="!hasSedeFilter">
+      <div class="metric-icon" [style.background]="'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'">
+        <i class="pi pi-building"></i>
+      </div>
+      <div class="metric-content">
+        <h3 class="metric-title">Sede con Peor Desempeño</h3>
+        <p class="metric-value">{{ metrics.peorSede?.nombre || '-' }}</p>
+        <p class="metric-subtitle" *ngIf="metrics.peorSede">{{ metrics.peorSede.tasa | number:'1.1-1' }}% de cumplimiento</p>
+        <p class="metric-subtitle" *ngIf="!metrics.peorSede">Sin datos</p>
+      </div>
+    </div>
+
+    <!-- Edificio con Peor Desempeño -->
+    <div class="metric-card" *ngIf="!hasSedeFilter && !hasEdificioFilter">
+      <div class="metric-icon" [style.background]="'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'">
+        <i class="pi pi-home"></i>
+      </div>
+      <div class="metric-content">
+        <h3 class="metric-title">Edificio con Peor Desempeño</h3>
+        <p class="metric-value">{{ metrics.peorEdificio?.nombre || '-' }}</p>
+        <p class="metric-subtitle" *ngIf="metrics.peorEdificio">
+          {{ metrics.peorEdificio.sede }} - {{ metrics.peorEdificio.tasa | number:'1.1-1' }}%
+        </p>
+        <p class="metric-subtitle" *ngIf="!metrics.peorEdificio">Sin datos</p>
+      </div>
+    </div>
+
+    <!-- Sede con Mejor Desempeño -->
+    <div class="metric-card" *ngIf="!hasSedeFilter">
+      <div class="metric-icon" [style.background]="'linear-gradient(135deg, #10b981 0%, #059669 100%)'">
+        <i class="pi pi-building"></i>
+      </div>
+      <div class="metric-content">
+        <h3 class="metric-title">Sede con Mejor Desempeño</h3>
+        <p class="metric-value">{{ metrics.mejorSede?.nombre || '-' }}</p>
+        <p class="metric-subtitle" *ngIf="metrics.mejorSede">{{ metrics.mejorSede.tasa | number:'1.1-1' }}% de cumplimiento</p>
+        <p class="metric-subtitle" *ngIf="!metrics.mejorSede">Sin datos</p>
+      </div>
+    </div>
+
+    <!-- Edificio con Mejor Desempeño -->
+    <div class="metric-card" *ngIf="!hasSedeFilter && !hasEdificioFilter">
+      <div class="metric-icon" [style.background]="'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)'">
+        <i class="pi pi-home"></i>
+      </div>
+      <div class="metric-content">
+        <h3 class="metric-title">Edificio con Mejor Desempeño</h3>
+        <p class="metric-value">{{ metrics.mejorEdificio?.nombre || '-' }}</p>
+        <p class="metric-subtitle" *ngIf="metrics.mejorEdificio">
+          {{ metrics.mejorEdificio.sede }} - {{ metrics.mejorEdificio.tasa | number:'1.1-1' }}%
+        </p>
+        <p class="metric-subtitle" *ngIf="!metrics.mejorEdificio">Sin datos</p>
+      </div>
+    </div>
+
+    <!-- Total Verificaciones (Hoy) -->
+    <div class="metric-card" *ngIf="currentDate">
+      <div class="metric-icon" [style.background]="'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)'">
+        <i class="pi pi-check-square"></i>
+      </div>
+      <div class="metric-content">
+        <h3 class="metric-title">Total Verificaciones (Hoy)</h3>
+        <p class="metric-value">{{ metrics.totalVerificacionesHoy }}</p>
+        <p class="metric-subtitle">{{ currentDate | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

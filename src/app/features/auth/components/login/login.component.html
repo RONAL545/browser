@@ -1,0 +1,123 @@
+<div class="login-container">
+  <p-card styleClass="full-screen-card">
+    <!-- Figuras geométricas decorativas (solo desktop) -->
+    <div class="container-shape one">
+      <div class="shape one"></div>
+    </div>
+    <div class="container-shape two">
+      <div class="shape two"></div>
+    </div>
+    <div class="container-shape three right">
+      <div class="shape three right"></div>
+    </div>
+    <div class="container-shape four right">
+      <div class="shape four right"></div>
+    </div>
+    <div class="container-shape five right">
+      <div class="shape five right"></div>
+    </div>
+
+    <ng-template pTemplate="content">
+      <div class="card-content-wrapper">
+        <!-- Partículas (fondo en móvil, columna derecha en desktop) -->
+        <div class="particles-section">
+          <div id="tsparticles-login-bg" class="particles-background"></div>
+        </div>
+
+        <!-- Layout de dos columnas (desktop) -->
+        <div class="login-layout">
+          <!-- Columna izquierda: Formulario -->
+          <div class="form-section">
+            <!-- Header -->
+            <div class="text-center mb-8">
+              <h1 class="text-4xl font-bold mb-2" style="color: #0D2A72;">Sistema ECOTEC</h1>
+              <p class="text-lg" style="color: #1a3d8f;">Gestión de Residuos</p>
+            </div>
+
+            <!-- Formulario -->
+            <div class="form-container">
+              <!-- Logo mini (solo desktop) -->
+              <div class="logo-mini-container">
+                <img src="assets/icons/unajlogo-mini.svg" alt="UNAJ Logo" class="logo-mini" />
+              </div>
+
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                <!-- Mensaje de error -->
+                <p-message
+                  *ngIf="errorMessage"
+                  severity="error"
+                  [text]="errorMessage"
+                  styleClass="w-full">
+                </p-message>
+
+                <!-- Campo de Email/DNI -->
+                <div class="field">
+                  <label for="identifier" class="block text-sm font-semibold mb-2" style="color: #1f2937;">
+                    Email o DNI
+                  </label>
+                  <span class="p-input-icon-left w-full">
+                    <i class="pi pi-user"></i>
+                    <input
+                      pInputText
+                      id="identifier"
+                      formControlName="identifier"
+                      placeholder="Ingresa tu email o DNI"
+                      class="w-full"
+                      [ngClass]="{'ng-invalid ng-dirty': identifier?.invalid && identifier?.touched}"
+                    />
+                  </span>
+                  <small
+                    *ngIf="identifier?.invalid && identifier?.touched"
+                    class="mt-1 block"
+                    style="color: #dc2626;">
+                    <span *ngIf="identifier?.errors?.['required']">El email o DNI es requerido</span>
+                    <span *ngIf="identifier?.errors?.['emailOrDni']">Debe ser un email válido o DNI de 8 dígitos</span>
+                  </small>
+                </div>
+
+                <!-- Campo de Contraseña -->
+                <div class="field">
+                  <label for="password" class="block text-sm font-semibold mb-2" style="color: #1f2937;">
+                    Contraseña
+                  </label>
+                  <p-password
+                    id="password"
+                    formControlName="password"
+                    placeholder="Ingresa tu contraseña"
+                    [toggleMask]="true"
+                    [feedback]="false"
+                    styleClass="w-full"
+                    inputStyleClass="w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': password?.invalid && password?.touched}">
+                  </p-password>
+                  <small
+                    *ngIf="password?.invalid && password?.touched"
+                    class="mt-1 block"
+                    style="color: #dc2626;">
+                    <span *ngIf="password?.errors?.['required']">La contraseña es requerida</span>
+                    <span *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</span>
+                  </small>
+                </div>
+
+                <!-- Botón de Login -->
+                <p-button
+                  type="submit"
+                  label="Iniciar Sesión"
+                  icon="pi pi-sign-in"
+                  styleClass="w-full"
+                  [loading]="loading"
+                  [disabled]="loading">
+                </p-button>
+
+                <!-- Footer -->
+                <div class="text-center text-sm mt-4" style="color: #1f2937;">
+                  <p>¿Olvidaste tu contraseña? <span style="color: #F4B41A; font-weight: 600;">Contacta al administrador</span></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

@@ -1,0 +1,210 @@
+<div class="dashboard-container">
+  <div class="dashboard-wrapper">
+
+    <!-- Header Card -->
+    <div class="header-card">
+      <h1 class="header-title">Formulario SEDE {{ sedeName }} - ADMINISTRATIVO</h1>
+      <p class="header-subtitle">Ingrese los datos correctamente</p>
+    </div>
+
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="dashboard-form">
+
+      <!-- Edificio Asignado -->
+      <div class="edificio-display">
+        <label class="edificio-label">Edificio</label>
+        <div class="edificio-value">{{ edificioName }}</div>
+      </div>
+
+      <!-- Tabs para tipo de recolección -->
+      <div class="tabs-container">
+        <p-button
+          type="button"
+          (click)="selectTab('pilas')"
+          [label]="'Pilas'"
+          icon="pi pi-th-large"
+          [outlined]="tipoRecoleccionSeleccionado !== 'pilas'"
+          [class]="tipoRecoleccionSeleccionado === 'pilas' ? 'tab-active tab-pilas' : ''"
+          styleClass="tab-button">
+        </p-button>
+
+        <p-button
+          type="button"
+          (click)="selectTab('canastillas')"
+          [label]="'Canastillas'"
+          icon="pi pi-box"
+          [outlined]="tipoRecoleccionSeleccionado !== 'canastillas'"
+          [class]="tipoRecoleccionSeleccionado === 'canastillas' ? 'tab-active tab-canastillas' : ''"
+          styleClass="tab-button">
+        </p-button>
+
+        <p-button
+          type="button"
+          (click)="selectTab('papel_oficina')"
+          [label]="'Papel Oficina'"
+          icon="pi pi-file"
+          [outlined]="tipoRecoleccionSeleccionado !== 'papel_oficina'"
+          [class]="tipoRecoleccionSeleccionado === 'papel_oficina' ? 'tab-active tab-papel' : ''"
+          styleClass="tab-button">
+        </p-button>
+      </div>
+
+      <!-- Información de entrada de datos -->
+      <div class="registro-header">
+        <div class="registro-divider"></div>
+        <h2 class="registro-title">Registro de Residuos</h2>
+        <p class="registro-subtitle">Ingrese la cantidad en kilogramos para cada categoría</p>
+      </div>
+
+      <!-- Campos de entrada según tipo de recolección -->
+      <div class="form-container">
+
+        <!-- Pilas -->
+        <div *ngIf="tipoRecoleccionSeleccionado === 'pilas'" class="inputs-grid">
+          <div class="input-field">
+            <label class="input-label">PLÁSTICOS</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="plasticosKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label class="input-label">ORGÁNICOS</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="organicosKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label class="input-label">VIDRIO</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="vidrioKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label class="input-label">METALES</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="metalesKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label class="input-label">PAPEL Y CARTÓN</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="papelCartonKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label class="input-label">NO APROVECHABLES</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="noAprovechablesKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canastillas -->
+        <div *ngIf="tipoRecoleccionSeleccionado === 'canastillas'" class="inputs-grid">
+          <div class="input-field">
+            <label class="input-label">BOTELLAS</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="botellasKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tachos (Papel Oficina) -->
+        <div *ngIf="tipoRecoleccionSeleccionado === 'papel_oficina'" class="inputs-grid">
+          <div class="input-field">
+            <label class="input-label">PAPEL OFICINA</label>
+            <div class="input-with-badge">
+              <input
+                type="text"
+                pInputText
+                formControlName="papelOficinaKg"
+                placeholder="0.00"
+                class="input-text" />
+              <span class="badge-kg">Kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div *ngIf="messages.length > 0" class="messages-container">
+        <div *ngFor="let msg of messages"
+          [class]="msg.severity === 'success' ? 'message-success' : 'message-error'"
+          class="message">
+          <i [class]="msg.severity === 'success' ? 'pi pi-check-circle' : 'pi pi-times-circle'"></i>
+          <p>{{ msg.detail }}</p>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="buttons-container">
+        <p-button
+          type="submit"
+          [label]="isSubmitting ? 'Guardando...' : 'ENVIAR REGISTRO'"
+          icon="pi pi-save"
+          [disabled]="isSubmitting"
+          [loading]="isSubmitting"
+          severity="secondary"
+          styleClass="action-button save-button">
+        </p-button>
+
+        <p-button
+          type="button"
+          label="VER REGISTRO"
+          icon="pi pi-eye"
+          (click)="verRegistros()"
+          severity="secondary"
+          [outlined]="true"
+          styleClass="action-button view-button">
+        </p-button>
+      </div>
+
+    </form>
+  </div>
+</div>

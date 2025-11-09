@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Typography Design System - Debe ir PRIMERO con @use */
+@use "./styles/typography";
+
+/* PrimeIcons */
+@import "primeicons/primeicons.css";
+
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

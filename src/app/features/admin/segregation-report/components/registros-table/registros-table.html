@@ -1,0 +1,85 @@
+<div class="registros-table-section">
+  <h2 class="section-title">
+    <i class="pi pi-list"></i>
+    Todos los Registros de Segregación
+  </h2>
+
+  <p-table
+    [value]="registros"
+    [loading]="loading"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    styleClass="p-datatable-sm"
+    responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="fechaVerificacion">Fecha <p-sortIcon field="fechaVerificacion"></p-sortIcon></th>
+        <th pSortableColumn="user.nombres">Estudiante <p-sortIcon field="user.nombres"></p-sortIcon></th>
+        <th pSortableColumn="user.sede.nombre">Sede <p-sortIcon field="user.sede.nombre"></p-sortIcon></th>
+        <th pSortableColumn="user.edificio.nombre">Edificio <p-sortIcon field="user.edificio.nombre"></p-sortIcon></th>
+        <th class="text-center" pSortableColumn="segregacionCorrecta">Segregación Correcta <p-sortIcon field="segregacionCorrecta"></p-sortIcon></th>
+        <th class="text-center" pSortableColumn="plasticoSegregado">Plástico <p-sortIcon field="plasticoSegregado"></p-sortIcon></th>
+        <th class="text-center" pSortableColumn="papelCartonSegregado">Papel <p-sortIcon field="papelCartonSegregado"></p-sortIcon></th>
+        <th class="text-center" pSortableColumn="vidrioSegregado">Vidrio <p-sortIcon field="vidrioSegregado"></p-sortIcon></th>
+        <th class="text-center" pSortableColumn="metalSegregado">Metal <p-sortIcon field="metalSegregado"></p-sortIcon></th>
+        <th class="text-center" pSortableColumn="organicoSegregado">Orgánico <p-sortIcon field="organicoSegregado"></p-sortIcon></th>
+        <th class="text-center" pSortableColumn="noAprovechableSegregado">No Aprovechable <p-sortIcon field="noAprovechableSegregado"></p-sortIcon></th>
+        <th>Comentarios</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-registro>
+      <tr>
+        <td>{{ registro.fechaVerificacion | date:'dd/MM/yyyy' }}</td>
+        <td>{{ registro.user?.nombres }} {{ registro.user?.apellidos }}</td>
+        <td>{{ registro.user?.sede?.nombre || '-' }}</td>
+        <td>{{ registro.user?.edificio?.nombre || '-' }}</td>
+        <td class="text-center">
+          <span [class]="registro.segregacionCorrecta ? 'badge-success' : 'badge-error'">
+            {{ registro.segregacionCorrecta ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <span [class]="registro.plasticoSegregado ? 'badge-success' : 'badge-error'">
+            {{ registro.plasticoSegregado ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <span [class]="registro.papelCartonSegregado ? 'badge-success' : 'badge-error'">
+            {{ registro.papelCartonSegregado ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <span [class]="registro.vidrioSegregado ? 'badge-success' : 'badge-error'">
+            {{ registro.vidrioSegregado ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <span [class]="registro.metalSegregado ? 'badge-success' : 'badge-error'">
+            {{ registro.metalSegregado ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <span [class]="registro.organicoSegregado ? 'badge-success' : 'badge-error'">
+            {{ registro.organicoSegregado ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <span [class]="registro.noAprovechableSegregado ? 'badge-success' : 'badge-error'">
+            {{ registro.noAprovechableSegregado ? 'Sí' : 'No' }}
+          </span>
+        </td>
+        <td>
+          <span class="observaciones-text">{{ registro.observaciones || '-' }}</span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="12" class="text-center">No hay registros disponibles</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,50 @@
+<!-- 🔝 Encabezado superior (barra fija) -->
+<header class="main-header">
+
+  <!-- ☰ Botón de menú hamburguesa -->
+  <!-- Alterna el estado del sidebar (abrir/cerrar) -->
+  <button class="sidebar-toggle" (click)="toggleSidebar()">
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <!-- 👤 Sección de usuario y acciones del encabezado -->
+  <div class="header-actions">
+
+    <!-- Botón para abrir/cerrar el menú de usuario -->
+    <button class="user-menu-toggle" (click)="toggleUserMenu($event)">
+      <i class="pi pi-user"></i>
+    </button>
+
+    <!-- 📋 Menú desplegable del usuario -->
+    <!-- Solo visible si userMenuOpen es true -->
+    <div
+      class="user-dropdown"
+      *ngIf="userMenuOpen"
+      [class.show]="userMenuOpen"
+      (click)="$event.stopPropagation()">
+
+      <!-- Encabezado del menú: avatar, nombre y correo -->
+      <div class="user-dropdown-header">
+        <div class="user-avatar">
+          <i class="pi pi-user"></i>
+        </div>
+        <div class="user-info">
+          <!-- Datos del usuario autenticado -->
+          <div class="user-name">
+            {{ currentUser?.nombres || 'Usuario' }} {{ currentUser?.apellidos || '' }}
+          </div>
+          <div class="user-email">{{ currentUser?.identifier }}</div>
+        </div>
+      </div>
+
+      <!-- Opciones del menú de usuario -->
+      <div class="user-dropdown-menu">
+        <!-- Botón para ir al perfil del usuario -->
+        <button class="dropdown-item" (click)="navigateToProfile()">
+          <i class="pi pi-user"></i>
+          <span>Mi Perfil</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

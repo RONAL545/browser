@@ -1,0 +1,173 @@
+.summary-cards-container {
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+
+  .grid {
+    margin: 0;
+  }
+
+  .summary-card {
+    height: 100%;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    ::ng-deep .p-card-body {
+      padding: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    ::ng-deep .p-card-content {
+      padding: 0;
+    }
+
+    .card-content {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 1.5rem);
+      min-width: 0;
+
+      .icon-container {
+        width: clamp(48px, 12vw, 64px);
+        height: clamp(48px, 12vw, 64px);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        i {
+          font-size: clamp(1.5rem, 4vw, 2rem);
+          color: white;
+        }
+
+        &.icon-primary {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        &.icon-success {
+          background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+
+        &.icon-danger {
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        &.icon-warning {
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        &.icon-info {
+          background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+      }
+
+      .text-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex: 1;
+        min-width: 0;
+
+        .label {
+          font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+          font-weight: 500;
+          color: #64748b;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          overflow-wrap: break-word;
+        }
+
+        .value {
+          font-size: clamp(1.25rem, 4vw, 1.875rem);
+          font-weight: 700;
+          color: #0f172a;
+          line-height: 1;
+        }
+
+        .value-category {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          .category-name {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.2;
+            overflow-wrap: break-word;
+          }
+
+          .category-kg {
+            font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+            font-weight: 600;
+            color: #64748b;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .summary-cards-container {
+    margin-bottom: 1.5rem;
+
+    .summary-card {
+      ::ng-deep .p-card-body {
+        padding: 1rem;
+      }
+
+      .card-content {
+        gap: 1rem;
+
+        .icon-container {
+          width: 48px;
+          height: 48px;
+
+          i {
+            font-size: 1.5rem;
+          }
+        }
+
+        .text-content {
+          .label {
+            font-size: 0.75rem;
+          }
+
+          .value {
+            font-size: 1.5rem;
+          }
+
+          .value-category {
+            .category-name {
+              font-size: 1.25rem;
+            }
+
+            .category-kg {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-cards-container {
+    margin-bottom: 1rem;
+
+    .summary-card {
+      ::ng-deep .p-card-body {
+        padding: 0.875rem;
+      }
+
+      .card-content {
+        gap: 0.875rem;
+      }
+    }
+  }
+}

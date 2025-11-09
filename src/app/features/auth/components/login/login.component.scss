@@ -1,0 +1,376 @@
+// Contenedor principal
+.login-container {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+// Wrapper del contenido del card
+.card-content-wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  // Móvil: partículas arriba, formulario abajo.
+  flex-direction: column;
+
+  // Desktop: con row-reverse, el formulario (que está segundo en el HTML) pasa a la izquierda
+  // y las partículas (que están primero) a la derecha.
+  @media (min-width: 1200px) {
+    flex-direction: row-reverse;
+  }
+}
+
+// Sección de partículas
+.particles-section {
+  position: relative; // Necesario para que el canvas de partículas se renderice.
+  // En móvil, las partículas ocupan una franja superior.
+  height: 30vh;
+
+  @media (min-width: 1200px) {
+    flex: 1.4; // En desktop, ocupa más espacio (aprox 60%)
+    height: 100vh; // Ocupa toda la altura.
+  }
+}
+
+// Layout principal (solo para el formulario)
+.login-layout {
+  position: relative;
+  z-index: 10; // Se asegura que el formulario esté sobre las figuras decorativas.
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; // Alinea el contenido al inicio en el eje principal (vertical en móvil)
+  flex: 1; // En móvil, ocupa el espacio restante.
+
+  @media (min-width: 1200px) {
+    flex: 1; // En desktop, ocupa el espacio restante (aprox 40%)
+    justify-content: center; // Centra el formulario verticalmente en desktop
+    min-height: 100vh;
+  }
+}
+
+// Sección del formulario
+.form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; // Alinea el contenido arriba en móvil
+  padding: 0.5rem 2rem 2rem; 
+  position: relative;
+
+  @media (min-width: 1200px) {
+    justify-content: center; // Lo vuelve a centrar solo para desktop
+    padding: 2rem; 
+  }
+}
+
+// Contenedor interno de partículas (tsparticles)
+.particles-background {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+// Header móvil (oculto en desktop)
+.mobile-header {
+  @media (min-width: 1025px) {
+    display: none;
+  }
+}
+
+// Logo mini (solo visible en desktop)
+.logo-mini-container {
+  display: none;
+
+  @media (min-width: 1025px) {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+}
+
+.logo-mini {
+  max-width: 150px;
+  height: auto;
+}
+
+// Contenedor del formulario
+.form-container {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px 0 rgba(13, 42, 114, 0.4);
+  border: 2px solid #052795;
+}
+
+:host ::ng-deep {
+  // Card que cubre toda la pantalla
+  .full-screen-card {
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .full-screen-card .p-card-body {
+    padding: 0 !important;
+    height: 100%;
+  }
+
+  .full-screen-card .p-card-content {
+    padding: 0 !important;
+    height: 100%;
+  }
+
+  // Estilos de los inputs
+  .p-password {
+    width: 100%;
+  }
+
+  .p-inputtext {
+    background: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    color: #1f2937 !important;
+    box-shadow: 0 8px 32px 0 rgba(13, 42, 114, 0.4);
+
+    &:focus {
+      border-color: #052795 !important;
+      box-shadow: 0 0 0 0.2rem rgba(120, 134, 207, 0.25) !important;
+      background: #fefefe !important;
+    }
+  }
+
+  .p-password-input {
+    background: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    color: #1f2937 !important;
+
+    &:focus {
+      border-color: #F4B41A !important;
+      box-shadow: 0 0 0 0.2rem rgba(244, 180, 26, 0.25) !important;
+      background: #ffffff !important;
+    }
+  }
+
+  // Botón de login
+  .p-button {
+    background: linear-gradient(135deg, #E7C35B 0%, #E7C35B 100%) !important;
+    border: none !important;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+    color: #0D2A72 !important;
+    font-size: 1rem;
+    width: 100%;
+    justify-content: center;
+
+    &:hover {
+      background: linear-gradient(135deg, #f7c347 0%, #F4B41A 100%) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(244, 180, 26, 0.5);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Labels y campos del formulario
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+
+    label {
+      order: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .p-input-icon-left,
+    .p-password {
+      order: 2;
+    }
+
+    small {
+      order: 3;
+      margin-top: 0.25rem;
+    }
+  }
+
+  // Mensajes de error
+  .p-message {
+    margin-bottom: 1rem;
+  }
+
+  // Iconos dentro del input
+  .p-input-icon-left {
+    position: relative;
+    display: block;
+    width: 100%;
+
+    > i {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #1a3d8f;
+      z-index: 1;
+    }
+
+    > input {
+      width: 100% !important;
+      padding-left: 2.5rem !important;
+    }
+  }
+
+  // Contenedor del password con icono
+  .p-password {
+    position: relative;
+    display: block;
+
+    // El input real
+    .p-password-input {
+      padding-right: 2.5rem !important;
+      width: 100% !important;
+    }
+
+    // Wrapper interno de PrimeNG
+    .p-password-panel {
+      position: relative;
+    }
+
+    // Botón de toggle (contiene el icono) - posicionado sobre el input
+    .p-password-toggle-mask,
+    button[type="button"] {
+      position: absolute !important;
+      right: 0.5rem !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      height: 100% !important;
+      width: 2.5rem !important;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 2 !important;
+
+      &:hover {
+        background: transparent !important;
+      }
+
+      &:focus {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    // Icono dentro del botón
+    .p-icon,
+    svg {
+      color: #1a3d8f !important;
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+    }
+
+    // Asegurar que el input tenga altura consistente
+    input {
+      height: 2.75rem !important;
+    }
+  }
+}
+
+/*figures*/
+@media (min-width: 768px) {
+    .container-shape {
+        position: absolute;
+        filter: drop-shadow(5px -5px 6px rgba(0,0,0,0.4));
+        z-index: 1;
+            }
+
+    .container-shape.right {
+        filter: drop-shadow(-5px -5px 6px rgba(0,0,0,0.4));
+    }
+
+    .shape {
+        background: rgb(48,188,225);
+        transform: rotate(19deg);
+    }
+
+    .shape.right {
+        background: rgba(44, 59, 149,0.7);
+        transform: rotate(-11deg);
+    }
+
+    .container-shape.one {
+        top: 6.3%;
+        left: 26.1%;
+    }
+
+    .container-shape.two {
+        top: 56.4%;
+        left: 13.6%;
+    }
+
+    .container-shape.three {
+        top: 6.55%;
+        left: 67.6%;
+    }
+
+    .container-shape.four {
+        top: 17.79%;
+        left: 86.9%;
+    }
+
+    .container-shape.five {
+        top: 51.5%;
+        left: 75.3%;
+    }
+
+    .shape.one {
+        -webkit-clip-path: polygon(38% 0%, 100% 37%, 100% 100%, 37% 100%, 0% 37%);
+        clip-path: polygon(38% 0%, 100% 37%, 100% 100%, 37% 100%, 0% 37%);
+        width: 3vw;
+        height: 5vh;
+    }
+
+    .shape.two {
+        -webkit-clip-path: polygon(39% 0%, 100% 38%, 99% 100%, 37% 100%, 0% 38%);
+        clip-path: polygon(39% 0%, 100% 38%, 99% 100%, 37% 100%, 0% 38%);
+        width: 11vw;
+        height: 16vh;
+    }
+
+    .shape.three {
+        -webkit-clip-path: polygon(56% 0%, 100% 39%, 69% 100%, 8% 100%, 0% 37%);
+        clip-path: polygon(56% 0%, 100% 39%, 69% 100%, 8% 100%, 0% 37%);
+        width: 4vw;
+        height: 7vh;
+    }
+
+    .shape.four {
+        -webkit-clip-path: polygon(56% 0%, 100% 38%, 70% 100%, 8% 99%, 0% 37%);
+        clip-path: polygon(56% 0%, 100% 38%, 70% 100%, 8% 99%, 0% 37%);
+        width: 6vw;
+        height: 10vh;
+    }
+
+    .shape.five {
+        -webkit-clip-path: polygon(57% 0%, 100% 38%, 70% 100%, 8% 100%, 0% 38%);
+        clip-path: polygon(57% 0%, 100% 38%, 70% 100%, 8% 100%, 0% 38%);
+        width: 13vw;
+        height: 21vh;
+    }
+}

@@ -1,0 +1,75 @@
+<div class="report-filters-card">
+  <h2>Filtros</h2>
+
+  <div class="filters-grid">
+    <div class="filter-group">
+      <label for="sede">Sede</label>
+      <p-select
+        id="sede"
+        [(ngModel)]="selectedSede"
+        [options]="sedes"
+        optionLabel="nombre"
+        optionValue="id"
+        placeholder="Todas las sedes"
+        [showClear]="true"
+        (onChange)="onSedeChange()"
+        styleClass="w-full filter-input">
+      </p-select>
+    </div>
+
+    <div class="filter-group">
+      <label for="edificio">Edificio</label>
+      <p-select
+        id="edificio"
+        [(ngModel)]="selectedEdificio"
+        [options]="edificiosFiltrados"
+        optionLabel="nombre"
+        optionValue="id"
+        placeholder="Todos los edificios"
+        [showClear]="true"
+        [disabled]="!selectedSede"
+        styleClass="w-full filter-input">
+      </p-select>
+    </div>
+
+    <div class="filter-group">
+      <label for="startDate">Fecha Inicio</label>
+      <p-datepicker
+        id="startDate"
+        [(ngModel)]="startDate"
+        [showIcon]="true"
+        placeholder="dd/mm/aaaa"
+        dateFormat="dd/mm/yy"
+        [showClear]="true"
+        appendTo="body"
+        styleClass="w-full filter-input">
+      </p-datepicker>
+    </div>
+
+    <div class="filter-group">
+      <label for="endDate">Fecha Fin</label>
+      <p-datepicker
+        id="endDate"
+        [(ngModel)]="endDate"
+        [showIcon]="true"
+        placeholder="dd/mm/aaaa"
+        dateFormat="dd/mm/yy"
+        [showClear]="true"
+        appendTo="body"
+        styleClass="w-full filter-input">
+      </p-datepicker>
+    </div>
+  </div>
+
+  <div class="filter-actions">
+    <button class="btn btn-secondary" (click)="onClear()">
+      Limpiar
+    </button>
+    <button class="btn btn-primary" (click)="onFilter()">
+      Aplicar Filtros
+    </button>
+    <button class="btn btn-success" (click)="onExport()">
+      Exportar Excel
+    </button>
+  </div>
+</div>

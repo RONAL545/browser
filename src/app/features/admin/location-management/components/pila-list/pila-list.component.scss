@@ -1,0 +1,244 @@
+.pila-list-container {
+  .filters-section {
+    background: white;
+    border-radius: 8px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+
+    .filters-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      flex-wrap: wrap;
+
+      .filter-item {
+        flex: 1;
+        min-width: 200px;
+
+        .filter-label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: var(--font-semibold);
+          color: #495057;
+          font-size: var(--text-sm);
+        }
+      }
+
+      .button-item {
+        display: flex;
+        align-items: flex-end;
+      }
+    }
+  }
+
+  .pila-table-card {
+    background: white;
+    border-radius: 8px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .no-data {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(2rem, 5vw, 3rem);
+      color: #999;
+
+      p {
+        margin: 1rem 0;
+        font-size: var(--text-base);
+      }
+    }
+  }
+}
+
+// PrimeNG Table Modern Styling
+::ng-deep {
+  .pila-list-container {
+    .p-datatable {
+      .p-datatable-header {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 1rem;
+        font-weight: var(--font-semibold);
+      }
+
+      .p-datatable-thead > tr > th {
+        background-color: #0D2A72;
+        color: white;
+        border: 1px solid #0a1f54;
+        padding: 1rem;
+        font-weight: var(--font-semibold);
+        font-size: var(--text-sm);
+        text-align: left;
+
+        &.text-center {
+          text-align: center;
+        }
+
+        .p-sortable-column-icon {
+          color: white;
+          margin-left: 0.5rem;
+        }
+
+        &:hover {
+          background-color: #0f3085;
+        }
+      }
+
+      .p-datatable-tbody > tr {
+        transition: background-color 0.2s ease;
+
+        &:nth-child(even) {
+          background-color: #f8f9fa;
+        }
+
+        &:hover {
+          background-color: #e9ecef;
+        }
+
+        > td {
+          border: 1px solid #e9ecef;
+          padding: 0.875rem 1rem;
+          font-size: var(--text-sm);
+          color: #495057;
+
+          &.text-center {
+            text-align: center;
+          }
+
+          &.actions-cell {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+          }
+
+          &.empty-message {
+            border: none;
+            padding: 0;
+          }
+        }
+      }
+
+      .p-paginator {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 0.5rem 1rem;
+
+        .p-paginator-current {
+          color: #495057;
+          font-size: var(--text-sm);
+        }
+
+        .p-paginator-pages .p-paginator-page {
+          min-width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 4px;
+          color: #495057;
+
+          &.p-highlight {
+            background-color: #0D2A72;
+            border-color: #0D2A72;
+            color: white;
+          }
+
+          &:hover:not(.p-highlight) {
+            background-color: #e9ecef;
+          }
+        }
+
+        .p-dropdown {
+          border-color: #ced4da;
+
+          &:hover {
+            border-color: #0D2A72;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .pila-list-container {
+    .filters-section {
+      padding: 1rem;
+      margin-bottom: 1rem;
+
+      .filters-row {
+        flex-direction: column;
+        align-items: stretch;
+
+        .filter-item {
+          min-width: 100%;
+        }
+
+        .button-item {
+          width: 100%;
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .pila-table-card {
+      padding: 1rem;
+    }
+
+    ::ng-deep .p-datatable {
+      font-size: var(--text-xs);
+
+      .p-datatable-thead > tr > th {
+        padding: 0.75rem 0.5rem;
+        font-size: var(--text-xs);
+      }
+
+      .p-datatable-tbody > tr > td {
+        padding: 0.625rem 0.5rem;
+        font-size: var(--text-xs);
+
+        &.actions-cell {
+          flex-wrap: wrap;
+        }
+      }
+
+      .p-paginator {
+        padding: 0.5rem;
+        font-size: var(--text-xs);
+
+        .p-paginator-pages .p-paginator-page {
+          min-width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .pila-list-container {
+    .filters-section {
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pila-table-card {
+      padding: 0.75rem;
+    }
+
+    ::ng-deep .p-datatable {
+      .p-datatable-thead > tr > th {
+        padding: 0.5rem 0.25rem;
+      }
+
+      .p-datatable-tbody > tr > td {
+        padding: 0.5rem 0.25rem;
+      }
+    }
+  }
+}

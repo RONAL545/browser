@@ -1,0 +1,32 @@
+<div class="summary-segregation" *ngIf="registros && registros.length > 0">
+  <!-- Gráfico Circular: Segregación Correcta vs Incorrecta -->
+  <div class="chart-card">
+    <h3>Porcentaje de Segregación Correcta</h3>
+    <div class="chart-wrapper">
+      <p-chart
+        type="pie"
+        [data]="pieChartData"
+        [options]="pieChartOptions"
+        [style]="{'height': '400px'}"
+        class="w-full md:w-[30rem]">
+      </p-chart>
+    </div>
+  </div>
+
+  <!-- Gráfico de Barras: Correctos vs Incorrectos por Ubicación y Tipo de Residuo -->
+  <div class="chart-card">
+    <h3>Segregación por Ubicación y Tipo de Residuo</h3>
+    <div class="chart-wrapper">
+      <p-chart
+        type="bar"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [style]="{'height': '500px'}">
+      </p-chart>
+    </div>
+  </div>
+</div>
+
+<div class="summary-segregation" *ngIf="!registros || registros.length === 0">
+  <p class="no-data">No hay datos disponibles. Aplica filtros para ver los gráficos.</p>
+</div>

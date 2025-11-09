@@ -1,0 +1,165 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>Mi Perfil</h1>
+  </div>
+
+  <div class="profile-content">
+    <!-- Sidebar -->
+    <div class="profile-sidebar">
+      <div class="user-card">
+        <div class="user-avatar">
+          <i class="pi pi-user"></i>
+        </div>
+        <h2 class="user-name">{{ getUserFullName() }}</h2>
+        <p class="user-id">{{ getUserIdentifier() }}</p>
+      </div>
+
+      <nav class="profile-nav">
+        <button
+          class="nav-item"
+          [class.active]="activeTab === 'personal'"
+          (click)="activeTab = 'personal'">
+          <i class="pi pi-user"></i>
+          <span>Datos Personales</span>
+        </button>
+        <button
+          class="nav-item"
+          [class.active]="activeTab === 'password'"
+          (click)="activeTab = 'password'">
+          <i class="pi pi-lock"></i>
+          <span>Cambio de contraseña</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Content Area -->
+    <div class="profile-main">
+      <!-- Datos Personales -->
+      <p-card *ngIf="activeTab === 'personal'">
+        <div class="section-title">
+          <i class="pi pi-user"></i>
+          <h2>Datos Personales</h2>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <label>NOMBRE COMPLETO</label>
+            <div class="info-value">{{ getUserFullName() }}</div>
+          </div>
+
+          <div class="info-item">
+            <label>USUARIO</label>
+            <div class="info-value">{{ getUserIdentifier() }}</div>
+          </div>
+
+          <div class="info-item">
+            <label>TELÉFONO</label>
+            <div class="info-value">{{ user?.telefono || 'N/A' }}</div>
+          </div>
+
+          <div class="info-item">
+            <label>ROL</label>
+            <div class="info-value">
+              <span class="role-badge">{{ getRoleName() }}</span>
+            </div>
+          </div>
+
+          <div class="info-item" *ngIf="user?.edificio">
+            <label>SEDE</label>
+            <div class="info-value">{{ user?.edificio?.sede?.nombre || 'N/A' }}</div>
+          </div>
+
+          <div class="info-item" *ngIf="user?.edificio">
+            <label>EDIFICIO</label>
+            <div class="info-value">{{ user?.edificio?.nombre || 'N/A' }}</div>
+          </div>
+        </div>
+      </p-card>
+
+      <!-- Cambio de Contraseña -->
+      <p-card *ngIf="activeTab === 'password'">
+        <div class="section-title">
+          <i class="pi pi-lock"></i>
+          <h2>Cambio de contraseña</h2>
+        </div>
+
+        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordChange()" class="password-form">
+          <p-message
+            *ngIf="passwordChangeSuccess"
+            severity="success"
+            text="Contraseña actualizada exitosamente"
+            styleClass="w-full mb-3">
+          </p-message>
+
+          <p-message
+            *ngIf="passwordChangeError"
+            severity="error"
+            [text]="passwordChangeError"
+            styleClass="w-full mb-3">
+          </p-message>
+
+          <div class="form-field">
+            <label for="currentPassword">CONTRASEÑA ACTUAL</label>
+            <p-password
+              id="currentPassword"
+              formControlName="currentPassword"
+              placeholder="Ingrese su contraseña actual"
+              [feedback]="false"
+              [toggleMask]="true"
+              styleClass="w-full">
+            </p-password>
+            <small class="error-message" *ngIf="passwordForm.get('currentPassword')?.touched && passwordForm.get('currentPassword')?.errors?.['required']">
+              La contraseña actual es requerida
+            </small>
+          </div>
+
+          <div class="form-field">
+            <label for="newPassword">NUEVA CONTRASEÑA</label>
+            <p-password
+              id="newPassword"
+              formControlName="newPassword"
+              placeholder="Ingrese su nueva contraseña"
+              [feedback]="true"
+              [toggleMask]="true"
+              styleClass="w-full">
+            </p-password>
+            <small class="error-message" *ngIf="passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.errors?.['required']">
+              La nueva contraseña es requerida
+            </small>
+            <small class="error-message" *ngIf="passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.errors?.['minlength']">
+              La contraseña debe tener al menos 6 caracteres
+            </small>
+          </div>
+
+          <div class="form-field">
+            <label for="confirmPassword">REPETIR CONTRASEÑA</label>
+            <p-password
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Repita su nueva contraseña"
+              [feedback]="false"
+              [toggleMask]="true"
+              styleClass="w-full">
+            </p-password>
+            <small class="error-message" *ngIf="passwordForm.get('confirmPassword')?.touched && passwordForm.get('confirmPassword')?.errors?.['required']">
+              Debe confirmar la contraseña
+            </small>
+            <small class="error-message" *ngIf="passwordForm.get('confirmPassword')?.touched && passwordForm.errors?.['mismatch']">
+              Las contraseñas no coinciden
+            </small>
+          </div>
+
+          <div class="form-actions">
+            <p-button
+              type="submit"
+              label="Guardar Cambios"
+              icon="pi pi-check"
+              [loading]="isChangingPassword"
+              [disabled]="passwordForm.invalid">
+            </p-button>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>

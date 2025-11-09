@@ -1,0 +1,27 @@
+<aside class="sidebar" [class.sidebar-open]="isOpen">
+  <div class="sidebar-header">
+    <h2>{{ roleDisplayName }}</h2>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul class="menu-list">
+      <li *ngFor="let item of menuItems" class="menu-item">
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          class="menu-link"
+        >
+          <i [class]="item.icon"></i>
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="logout-button" (click)="logout()">
+      <i class="pi pi-sign-out"></i>
+      <span>Cerrar Sesión</span>
+    </button>
+  </div>
+</aside>

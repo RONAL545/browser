@@ -1,0 +1,172 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+// PrimeNG Imports
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+
+interface MessageType {
+  severity: 'error' | 'success' | 'info' | 'warn';
+  summary: string;
+  detail: string;
+}
+
+interface TipoRecoleccion {
+  value: 'pilas' | 'canastillas' | 'papel_oficina';
+  label: string;
+}
+
+@Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    CardModule,
+    InputTextModule,
+    InputNumberModule,
+    ButtonModule,
+    MessageModule
+  ],
+  templateUrl: './dashboard.component.html',
+})
+export class DashboardComponent implements OnInit {
+  registroForm: FormGroup;
+  tipoRecoleccionSeleccionado: 'pilas' | 'canastillas' | 'papel_oficina' = 'pilas';
+  activeTabIndex: number = 0;
+  isSubmitting = false;
+  messages: MessageType[] = [];
+
+  sedeName: string = '';
+  edificioName: string = '';
+
+  tiposRecoleccion: TipoRecoleccion[] = [
+    { value: 'pilas', label: 'Pilas' },
+    { value: 'canastillas', label: 'Canastillas' },
+    { value: 'papel_oficina', label: 'Tachos' }
+  ];
+
+  private apiUrl = 'http://localhost:3000/api';
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
+  ) {
+    this.registroForm = this.fb.group({
+      plasticosKg: [0],
+      organicosKg: [0],
+      vidrioKg: [0],
+      metalesKg: [0],
+      papelCartonKg: [0],
+      noAprovechablesKg: [0],
+      botellasKg: [0],
+      papelOficinaKg: [0]
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadUserInfo();
+  }
+
+  loadUserInfo(): void {
+    const user = JSON.parse(localStorage.getItem('current_user') || '{}');
+
+    if (!user.sede || !user.edificio) {
+      this.messages = [{
+        severity: 'error',
+        summary: 'Error',
+        detail: 'No se pudo obtener la información de la sede y pabellón'
+      }];
+      return;
+    }
+
+    this.sedeName = user.sede.nombre || 'No asignada';
+    this.edificioName = user.edificio.nombre || 'No asignado';
+  }
+
+  selectTab(tipo: 'pilas' | 'canastillas' | 'papel_oficina'): void {
+    this.tipoRecoleccionSeleccionado = tipo;
+
+    // Reset all fields when switching tabs
+    this.registroForm.patchValue({
+      plasticosKg: 0,
+      organicosKg: 0,
+      vidrioKg: 0,
+      metalesKg: 0,
+      papelCartonKg: 0,
+      noAprovechablesKg: 0,
+      botellasKg: 0,
+      papelOficinaKg: 0
+    });
+  }
+
+  onSubmit(): void {
+    if (this.registroForm.invalid) {
+      this.registroForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.messages = [];
+
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const formData = {
+      tipoRecoleccion: this.tipoRecoleccionSeleccionado,
+      ...this.registroForm.value
+    };
+
+    this.http.post(`${this.apiUrl}/registros/personal`, formData, { headers })
+      .subscribe({
+        next: (response) => {
+          this.messages = [{
+            severity: 'success',
+            summary: 'Éxito',
+            detail: 'Registro guardado exitosamente'
+          }];
+
+          this.registroForm.patchValue({
+            plasticosKg: 0,
+            organicosKg: 0,
+            vidrioKg: 0,
+            metalesKg: 0,
+            papelCartonKg: 0,
+            noAprovechablesKg: 0,
+            botellasKg: 0,
+            papelOficinaKg: 0
+          });
+
+          this.isSubmitting = false;
+
+          // Clear success message after 5 seconds
+          setTimeout(() => {
+            this.messages = [];
+          }, 5000);
+        },
+        error: (error) => {
+          console.error('Error al guardar registro:', error);
+          this.messages = [{
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error?.message || 'Error al guardar el registro'
+          }];
+          this.isSubmitting = false;
+        }
+      });
+  }
+
+  verRegistros(): void {
+    this.router.navigate(['/app/personal/registros']);
+  }
+}

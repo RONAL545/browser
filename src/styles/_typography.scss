@@ -1,0 +1,324 @@
+// ============================================================================
+// SISTEMA DE TIPOGRAFÍA - ECOTEC
+// ============================================================================
+// Sistema de diseño consistente para toda la aplicación
+// Basado en escalas modulares y responsive design
+
+// ============================================================================
+// FAMILIAS TIPOGRÁFICAS
+// ============================================================================
+
+:root {
+  // Fuente principal del sistema
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               Helvetica, Arial, sans-serif, "Apple Color Emoji",
+               "Segoe UI Emoji", "Segoe UI Symbol";
+
+  // Fuente monoespaciada (para código)
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
+               "Courier New", monospace;
+}
+
+// ============================================================================
+// TAMAÑOS DE FUENTE - Escala Modular con Responsive
+// ============================================================================
+// Utilizamos clamp() para crear tamaños fluidos que se adaptan al viewport
+
+:root {
+  // Tamaños extra pequeños
+  --text-xs: clamp(0.625rem, 1.2vw, 0.75rem);      // 10-12px
+  --text-sm: clamp(0.75rem, 1.5vw, 0.875rem);      // 12-14px
+
+  // Tamaños base
+  --text-base: clamp(0.875rem, 1.8vw, 1rem);       // 14-16px (base)
+  --text-lg: clamp(1rem, 2.2vw, 1.125rem);         // 16-18px
+
+  // Tamaños grandes
+  --text-xl: clamp(1.125rem, 2.5vw, 1.25rem);      // 18-20px
+  --text-2xl: clamp(1.25rem, 3vw, 1.5rem);         // 20-24px
+  --text-3xl: clamp(1.5rem, 4vw, 1.875rem);        // 24-30px
+
+  // Tamaños extra grandes (títulos principales)
+  --text-4xl: clamp(1.875rem, 5vw, 2.25rem);       // 30-36px
+  --text-5xl: clamp(2.25rem, 6vw, 3rem);           // 36-48px
+  --text-6xl: clamp(2.5rem, 7vw, 3.75rem);         // 40-60px
+}
+
+// ============================================================================
+// PESOS DE FUENTE
+// ============================================================================
+
+:root {
+  --font-thin: 100;
+  --font-extralight: 200;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  --font-black: 900;
+}
+
+// ============================================================================
+// LINE HEIGHTS (Interlineado)
+// ============================================================================
+
+:root {
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  --leading-loose: 2;
+}
+
+// ============================================================================
+// LETTER SPACING (Espaciado entre caracteres)
+// ============================================================================
+
+:root {
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+}
+
+// ============================================================================
+// CLASES DE UTILIDAD - Tamaños de Texto
+// ============================================================================
+
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+.text-6xl { font-size: var(--text-6xl); }
+
+// ============================================================================
+// CLASES DE UTILIDAD - Pesos de Fuente
+// ============================================================================
+
+.font-thin { font-weight: var(--font-thin); }
+.font-extralight { font-weight: var(--font-extralight); }
+.font-light { font-weight: var(--font-light); }
+.font-regular { font-weight: var(--font-regular); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+.font-extrabold { font-weight: var(--font-extrabold); }
+.font-black { font-weight: var(--font-black); }
+
+// ============================================================================
+// CLASES DE UTILIDAD - Line Heights
+// ============================================================================
+
+.leading-none { line-height: var(--leading-none); }
+.leading-tight { line-height: var(--leading-tight); }
+.leading-snug { line-height: var(--leading-snug); }
+.leading-normal { line-height: var(--leading-normal); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+.leading-loose { line-height: var(--leading-loose); }
+
+// ============================================================================
+// CLASES DE UTILIDAD - Letter Spacing
+// ============================================================================
+
+.tracking-tighter { letter-spacing: var(--tracking-tighter); }
+.tracking-tight { letter-spacing: var(--tracking-tight); }
+.tracking-normal { letter-spacing: var(--tracking-normal); }
+.tracking-wide { letter-spacing: var(--tracking-wide); }
+.tracking-wider { letter-spacing: var(--tracking-wider); }
+.tracking-widest { letter-spacing: var(--tracking-widest); }
+
+// ============================================================================
+// CLASES DE UTILIDAD - Familias Tipográficas
+// ============================================================================
+
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+
+// ============================================================================
+// COMPONENTES TIPOGRÁFICOS PRE-DISEÑADOS
+// ============================================================================
+
+// Títulos de página principales
+.page-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: #0f172a;
+}
+
+// Títulos de sección
+.section-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: #1e293b;
+}
+
+// Subtítulos
+.subtitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  color: #475569;
+}
+
+// Texto de cuerpo
+.body-text {
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+  color: #334155;
+}
+
+// Texto pequeño (ayuda, notas)
+.caption {
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  color: #64748b;
+}
+
+// Etiquetas (labels)
+.label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: #475569;
+}
+
+// Texto destacado
+.highlight {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: #0f172a;
+}
+
+// Valores numéricos grandes (métricas, estadísticas)
+.metric-value {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-none);
+  color: #0f172a;
+}
+
+// Botones y CTAs
+.button-text {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-wide);
+}
+
+// ============================================================================
+// MIXINS PARA SCSS
+// ============================================================================
+
+// Mixin para aplicar un tamaño de texto específico
+@mixin text-size($size) {
+  font-size: var(--text-#{$size});
+}
+
+// Mixin para aplicar un peso específico
+@mixin font-weight($weight) {
+  font-weight: var(--font-#{$weight});
+}
+
+// Mixin para truncar texto con elipsis (1 línea)
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Mixin para truncar texto multilínea
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Mixin para texto responsive fluido
+@mixin fluid-text($min-size, $max-size, $min-vw: 320px, $max-vw: 1200px) {
+  font-size: clamp(#{$min-size}, calc(#{$min-size} + (#{strip-unit($max-size)} - #{strip-unit($min-size)}) * ((100vw - #{$min-vw}) / (#{strip-unit($max-vw)} - #{strip-unit($min-vw)}))), #{$max-size});
+}
+
+// Función auxiliar para remover unidades
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+// ============================================================================
+// ESTILOS BASE GLOBALES
+// ============================================================================
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Títulos semánticos
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  color: #0f172a;
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+// Párrafos
+p {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+}
+
+// Enlaces
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Énfasis
+strong, b {
+  font-weight: var(--font-bold);
+}
+
+em, i {
+  font-style: italic;
+}
+
+// Código
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}

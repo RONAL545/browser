@@ -1,0 +1,141 @@
+<div class="report-table-container">
+  <h2>Datos de Reciclaje Detallados</h2>
+
+  <p-tabs value="0">
+    <p-tablist>
+      <p-tab value="0">Pilas</p-tab>
+      <p-tab value="1">Canastillas</p-tab>
+      <p-tab value="2">Papel Oficina</p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+      <!-- Tab Pilas -->
+      <p-tabpanel value="0">
+        <div class="table-wrapper">
+          <p-table
+            [value]="pilasData"
+            [paginator]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            styleClass="p-datatable-sm"
+            [globalFilterFields]="['fecha', 'sede', 'edificio', 'registradoPor']"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon></th>
+                <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                <th pSortableColumn="edificio">Edificio <p-sortIcon field="edificio"></p-sortIcon></th>
+                <th pSortableColumn="plasticos">Plásticos (kg) <p-sortIcon field="plasticos"></p-sortIcon></th>
+                <th pSortableColumn="organicos">Orgánicos (kg) <p-sortIcon field="organicos"></p-sortIcon></th>
+                <th pSortableColumn="vidrio">Vidrio (kg) <p-sortIcon field="vidrio"></p-sortIcon></th>
+                <th pSortableColumn="metales">Metales (kg) <p-sortIcon field="metales"></p-sortIcon></th>
+                <th pSortableColumn="papelCarton">Papel y Cartón (kg) <p-sortIcon field="papelCarton"></p-sortIcon></th>
+                <th pSortableColumn="noAprovechables">No Aprovechables (kg) <p-sortIcon field="noAprovechables"></p-sortIcon></th>
+                <th pSortableColumn="registradoPor">Registrado Por <p-sortIcon field="registradoPor"></p-sortIcon></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+              <tr>
+                <td>{{ row.fecha }}</td>
+                <td>{{ row.sede }}</td>
+                <td>{{ row.edificio }}</td>
+                <td>{{ row.plasticos?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.organicos?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.vidrio?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.metales?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.papelCarton?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.noAprovechables?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.registradoPor }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="10" class="text-center">No hay registros de pilas disponibles</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-tabpanel>
+
+      <!-- Tab Canastillas -->
+      <p-tabpanel value="1">
+        <div class="table-wrapper">
+          <p-table
+            [value]="canastillasData"
+            [paginator]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            styleClass="p-datatable-sm"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon></th>
+                <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                <th pSortableColumn="edificio">Edificio <p-sortIcon field="edificio"></p-sortIcon></th>
+                <th pSortableColumn="botellas">Botellas (kg) <p-sortIcon field="botellas"></p-sortIcon></th>
+                <th pSortableColumn="registradoPor">Registrado Por <p-sortIcon field="registradoPor"></p-sortIcon></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+              <tr>
+                <td>{{ row.fecha }}</td>
+                <td>{{ row.sede }}</td>
+                <td>{{ row.edificio }}</td>
+                <td>{{ row.botellas?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.registradoPor }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="5" class="text-center">No hay registros de canastillas disponibles</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-tabpanel>
+
+      <!-- Tab Papel Oficina -->
+      <p-tabpanel value="2">
+        <div class="table-wrapper">
+          <p-table
+            [value]="papelOficinaData"
+            [paginator]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            styleClass="p-datatable-sm"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon></th>
+                <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                <th pSortableColumn="edificio">Edificio <p-sortIcon field="edificio"></p-sortIcon></th>
+                <th pSortableColumn="papelOficina">Papel Oficina (kg) <p-sortIcon field="papelOficina"></p-sortIcon></th>
+                <th pSortableColumn="registradoPor">Registrado Por <p-sortIcon field="registradoPor"></p-sortIcon></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+              <tr>
+                <td>{{ row.fecha }}</td>
+                <td>{{ row.sede }}</td>
+                <td>{{ row.edificio }}</td>
+                <td>{{ row.papelOficina?.toFixed(2) || '0.00' }}</td>
+                <td>{{ row.registradoPor }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="5" class="text-center">No hay registros de papel oficina disponibles</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</div>

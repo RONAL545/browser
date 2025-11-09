@@ -1,0 +1,212 @@
+.registros-table-section {
+  margin-top: clamp(1rem, 3vw, 2rem);
+  background: white;
+  border-radius: 8px;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 0.75rem);
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: #0D2A72;
+    margin: 0 0 clamp(1rem, 2vw, 1.5rem) 0;
+
+    i {
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+    }
+  }
+
+  .badge-success {
+    padding: clamp(0.2rem, 0.5vw, 0.25rem) clamp(0.5rem, 1.5vw, 0.75rem);
+    border-radius: 12px;
+    background: #d1fae5;
+    color: #065f46;
+    font-weight: var(--font-semibold);
+    font-size: var(--text-xs);
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .badge-error {
+    padding: clamp(0.2rem, 0.5vw, 0.25rem) clamp(0.5rem, 1.5vw, 0.75rem);
+    border-radius: 12px;
+    background: #fee2e2;
+    color: #991b1b;
+    font-weight: var(--font-semibold);
+    font-size: var(--text-xs);
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .observaciones-text {
+    display: block;
+    max-width: 300px;
+    white-space: normal;
+    word-wrap: break-word;
+    font-size: var(--text-sm);
+    color: #495057;
+    line-height: 1.5;
+  }
+}
+
+// PrimeNG table modern styling
+::ng-deep {
+  .registros-table-section {
+    .p-datatable {
+      .p-datatable-header {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 1rem;
+        font-weight: var(--font-semibold);
+      }
+
+      .p-datatable-thead > tr > th {
+        background-color: #0D2A72;
+        color: white;
+        border: 1px solid #0a1f54;
+        padding: 1rem;
+        font-weight: var(--font-semibold);
+        font-size: var(--text-sm);
+        text-align: left;
+
+        &.text-center {
+          text-align: center;
+        }
+
+        .p-sortable-column-icon {
+          color: white;
+          margin-left: 0.5rem;
+        }
+
+        &:hover {
+          background-color: #0f3085;
+        }
+      }
+
+      .p-datatable-tbody > tr {
+        transition: background-color 0.2s ease;
+
+        &:nth-child(even) {
+          background-color: #f8f9fa;
+        }
+
+        &:hover {
+          background-color: #e9ecef;
+        }
+
+        > td {
+          border: 1px solid #e9ecef;
+          padding: 0.875rem 1rem;
+          font-size: var(--text-sm);
+          color: #495057;
+
+          &.text-center {
+            text-align: center;
+          }
+        }
+      }
+
+      .p-paginator {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 0.5rem 1rem;
+
+        .p-paginator-current {
+          color: #495057;
+          font-size: var(--text-sm);
+        }
+
+        .p-paginator-pages .p-paginator-page {
+          min-width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 4px;
+          color: #495057;
+
+          &.p-highlight {
+            background-color: #0D2A72;
+            border-color: #0D2A72;
+            color: white;
+          }
+
+          &:hover:not(.p-highlight) {
+            background-color: #e9ecef;
+          }
+        }
+
+        .p-dropdown {
+          border-color: #ced4da;
+
+          &:hover {
+            border-color: #0D2A72;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .registros-table-section {
+    margin-top: 1.5rem;
+    padding: 1rem;
+
+    .section-title {
+      font-size: var(--text-lg);
+      margin-bottom: 1rem;
+    }
+
+    ::ng-deep .p-datatable {
+      font-size: var(--text-xs);
+
+      .p-datatable-thead > tr > th {
+        padding: 0.75rem 0.5rem;
+        font-size: var(--text-xs);
+      }
+
+      .p-datatable-tbody > tr > td {
+        padding: 0.625rem 0.5rem;
+        font-size: var(--text-xs);
+      }
+
+      .p-paginator {
+        padding: 0.5rem;
+        font-size: var(--text-xs);
+
+        .p-paginator-pages .p-paginator-page {
+          min-width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .registros-table-section {
+    margin-top: 1rem;
+    padding: 0.75rem;
+
+    .section-title {
+      font-size: var(--text-base);
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+
+      i {
+        font-size: 1.125rem;
+      }
+    }
+
+    ::ng-deep .p-datatable {
+      .p-datatable-thead > tr > th {
+        padding: 0.5rem 0.25rem;
+      }
+
+      .p-datatable-tbody > tr > td {
+        padding: 0.5rem 0.25rem;
+      }
+    }
+  }
+}

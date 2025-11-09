@@ -1,0 +1,39 @@
+<div class="p-4">
+  <!-- Message -->
+  <div *ngIf="message" class="mb-4">
+    <p-message
+      [severity]="message.severity"
+      [text]="message.text"
+      styleClass="w-full">
+    </p-message>
+  </div>
+
+  <!-- Gestión de Edificios -->
+  <div class="mb-5">
+    <h2 class="text-2xl font-bold mb-3">Gestión de Edificios</h2>
+    <app-edificio-management></app-edificio-management>
+  </div>
+
+  <!-- Gestión de Pilas -->
+  <div>
+    <h2 class="text-2xl font-bold mb-3">Gestión de Pilas de Reciclaje</h2>
+
+    <!-- Formulario -->
+    <div *ngIf="showForm" class="mb-4">
+      <app-pila-form
+        [pila]="selectedPila"
+        (save)="onSave($event)"
+        (cancel)="onCancel()">
+      </app-pila-form>
+    </div>
+
+    <!-- Lista -->
+    <app-pila-list
+      [pilas]="pilas"
+      [loading]="loading"
+      (add)="onAdd()"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)">
+    </app-pila-list>
+  </div>
+</div>

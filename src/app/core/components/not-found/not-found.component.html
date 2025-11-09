@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="overlay" id="particles-404"></div>
+
+  <div class="content">
+    <div class="message">
+      <p class="message-heading">Página No Encontrada</p>
+      <p class="message-description">
+        La página que estás buscando no existe, fue movida o renombrada.
+      </p>
+    </div>
+
+    <div class="links">
+      <!-- Botón: Volver al inicio -->
+      <button class="link-button" (click)="goToHome()">
+        <span class="button-text">
+          {{ isAuthenticated ? 'Volver al Inicio' : 'Ir al Login' }}
+        </span>
+      </button>
+
+      <!-- Botón: Ir al Dashboard (solo si está autenticado) -->
+      <button
+        *ngIf="isAuthenticated"
+        class="link-button secondary"
+        (click)="goToDashboard()">
+        <span class="button-text">Ir al Dashboard</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="pila-list-container">
+  <!-- Filtros y botón -->
+  <div class="filters-section">
+    <div class="filters-row">
+      <div class="filter-item">
+        <label for="sedeFilter" class="filter-label">Filtrar por Sede</label>
+        <p-select
+          id="sedeFilter"
+          [(ngModel)]="selectedSede"
+          [options]="sedes"
+          optionLabel="nombre"
+          placeholder="Todas las sedes"
+          [showClear]="true"
+          (onChange)="onSedeChange()"
+          styleClass="w-full">
+        </p-select>
+      </div>
+
+      <div class="filter-item">
+        <label for="edificioFilter" class="filter-label">Filtrar por Edificio</label>
+        <p-select
+          id="edificioFilter"
+          [(ngModel)]="selectedEdificio"
+          [options]="edificios"
+          optionLabel="nombre"
+          placeholder="Todos los edificios"
+          [showClear]="true"
+          [disabled]="!selectedSede"
+          (onChange)="onEdificioChange()"
+          styleClass="w-full">
+        </p-select>
+      </div>
+
+      <div class="button-item">
+        <button
+          pButton
+          label="Nueva Pila"
+          icon="pi pi-plus"
+          class="p-button-success"
+          (click)="onAdd()"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pila-table-card">
+    <p-table
+      [value]="filteredPilas"
+      [loading]="loading"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} pilas"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      styleClass="p-datatable-sm"
+      responsiveLayout="scroll">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="codigo">Código <p-sortIcon field="codigo"></p-sortIcon></th>
+          <th pSortableColumn="edificio.sede.nombre">Sede <p-sortIcon field="edificio.sede.nombre"></p-sortIcon></th>
+          <th pSortableColumn="edificio.nombre">Edificio <p-sortIcon field="edificio.nombre"></p-sortIcon></th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-pila>
+        <tr>
+          <td><strong>{{ pila.codigo }}</strong></td>
+          <td>{{ pila.edificio?.sede?.nombre || 'N/A' }}</td>
+          <td>{{ pila.edificio?.nombre || 'N/A' }}</td>
+          <td class="text-center actions-cell">
+            <button
+              pButton
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-text p-button-info"
+              pTooltip="Editar"
+              (click)="onEdit(pila)"
+            ></button>
+            <button
+              pButton
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-text p-button-danger"
+              pTooltip="Eliminar"
+              (click)="onDelete(pila)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" class="empty-message">
+            <div class="no-data">
+              <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc"></i>
+              <p>No hay pilas registradas</p>
+              <button
+                pButton
+                label="Crear Primera Pila"
+                icon="pi pi-plus"
+                (click)="onAdd()"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

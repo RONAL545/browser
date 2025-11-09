@@ -1,0 +1,148 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '600px' }"
+  [header]="user ? 'Editar Usuario' : 'Nuevo Usuario'"
+  (onHide)="closeDialog()"
+>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="nombres">Nombres *</label>
+        <input
+          pInputText
+          id="nombres"
+          formControlName="nombres"
+          placeholder="Ingrese nombres"
+          [class.ng-invalid]="userForm.get('nombres')?.invalid && userForm.get('nombres')?.touched"
+        />
+        <small class="p-error" *ngIf="userForm.get('nombres')?.invalid && userForm.get('nombres')?.touched">
+          Este campo es requerido
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="apellidos">Apellidos *</label>
+        <input
+          pInputText
+          id="apellidos"
+          formControlName="apellidos"
+          placeholder="Ingrese apellidos"
+          [class.ng-invalid]="userForm.get('apellidos')?.invalid && userForm.get('apellidos')?.touched"
+        />
+        <small class="p-error" *ngIf="userForm.get('apellidos')?.invalid && userForm.get('apellidos')?.touched">
+          Este campo es requerido
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="identifierType">Tipo de Identificador *</label>
+        <p-select
+          id="identifierType"
+          formControlName="identifierType"
+          [options]="identifierTypes"
+          placeholder="Seleccione tipo"
+          [style]="{ width: '100%' }"
+        ></p-select>
+      </div>
+
+      <div class="form-field">
+        <label for="identifier">Identificador *</label>
+        <input
+          pInputText
+          id="identifier"
+          formControlName="identifier"
+          placeholder="DNI o Email"
+          [class.ng-invalid]="userForm.get('identifier')?.invalid && userForm.get('identifier')?.touched"
+        />
+        <small class="p-error" *ngIf="userForm.get('identifier')?.invalid && userForm.get('identifier')?.touched">
+          Este campo es requerido
+        </small>
+      </div>
+
+      <div class="form-field" *ngIf="!user">
+        <label for="clave">Contraseña *</label>
+        <input
+          pInputText
+          type="password"
+          id="clave"
+          formControlName="clave"
+          placeholder="Mínimo 6 caracteres"
+          [class.ng-invalid]="userForm.get('clave')?.invalid && userForm.get('clave')?.touched"
+        />
+        <small class="p-error" *ngIf="userForm.get('clave')?.invalid && userForm.get('clave')?.touched">
+          Mínimo 6 caracteres
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="roleId">Rol *</label>
+        <p-select
+          id="roleId"
+          formControlName="roleId"
+          [options]="roles"
+          placeholder="Seleccione un rol"
+          [style]="{ width: '100%' }"
+          [class.ng-invalid]="userForm.get('roleId')?.invalid && userForm.get('roleId')?.touched"
+        ></p-select>
+        <small class="p-error" *ngIf="userForm.get('roleId')?.invalid && userForm.get('roleId')?.touched">
+          Este campo es requerido
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="sedeId">Sede</label>
+        <p-select
+          id="sedeId"
+          formControlName="sedeId"
+          [options]="sedes"
+          placeholder="Seleccione una sede"
+          [style]="{ width: '100%' }"
+          (onChange)="onSedeChange($event)"
+          [showClear]="true"
+        ></p-select>
+      </div>
+
+      <div class="form-field">
+        <label for="edificioId">Edificio/Pabellón</label>
+        <p-select
+          id="edificioId"
+          formControlName="edificioId"
+          [options]="edificios"
+          placeholder="Seleccione un edificio"
+          [style]="{ width: '100%' }"
+          [showClear]="true"
+          [disabled]="!userForm.get('sedeId')?.value"
+        ></p-select>
+      </div>
+
+      <div class="form-field">
+        <label for="telefono">Teléfono</label>
+        <input
+          pInputText
+          id="telefono"
+          formControlName="telefono"
+          placeholder="Ingrese teléfono"
+        />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button
+        pButton
+        label="Cancelar"
+        icon="pi pi-times"
+        class="p-button-text"
+        type="button"
+        (click)="closeDialog()"
+      ></button>
+      <button
+        pButton
+        [label]="user ? 'Actualizar' : 'Crear'"
+        icon="pi pi-check"
+        type="submit"
+        [loading]="loading"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

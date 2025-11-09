@@ -1,0 +1,106 @@
+<div class="min-h-screen bg-gray-50 py-8 px-4">
+  <div class="max-w-7xl mx-auto">
+    <p-card styleClass="shadow-lg">
+      <ng-template pTemplate="header">
+        <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 flex justify-between items-center rounded-t-lg">
+          <h1 class="text-3xl font-bold m-0">Historial de Registros de Recolección</h1>
+          <p-button
+            (onClick)="volver()"
+            label="Volver al formulario"
+            icon="pi pi-arrow-left"
+            severity="secondary"
+            [outlined]="true"
+            styleClass="text-white border-white hover:bg-white hover:text-blue-700">
+          </p-button>
+        </div>
+      </ng-template>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="text-center py-12">
+        <p-progressSpinner
+          styleClass="w-16 h-16"
+          strokeWidth="4"
+          animationDuration="1s">
+        </p-progressSpinner>
+        <p class="text-gray-600 mt-4 text-lg">Cargando registros...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!loading && registros.length === 0" class="text-center py-12">
+        <i class="pi pi-inbox text-6xl text-gray-400 mb-4"></i>
+        <p class="text-gray-600 text-xl font-semibold">No hay registros todavía</p>
+        <p class="text-gray-500 mt-2">Realiza tu primer registro desde el formulario</p>
+      </div>
+
+      <!-- Table -->
+      <div *ngIf="!loading && registros.length > 0" class="registros-table-container">
+        <p-table
+          [value]="registros"
+          [paginator]="true"
+          [rows]="10"
+          [rowsPerPageOptions]="[5, 10, 20]"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+          styleClass="p-datatable-sm"
+          responsiveLayout="scroll">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="fechaRegistro">Fecha <p-sortIcon field="fechaRegistro"></p-sortIcon></th>
+              <th pSortableColumn="tipoRecoleccion">Tipo de Recolección <p-sortIcon field="tipoRecoleccion"></p-sortIcon></th>
+              <th>Detalle de Residuos</th>
+              <th class="text-center">Total Recolectado (kg)</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-registro>
+            <tr>
+              <td>
+                <div class="fecha-cell">
+                  <i class="pi pi-calendar"></i>
+                  <span class="fecha-principal">{{ registro.fechaRegistro | date:'dd/MM/yyyy' }}</span>
+                </div>
+                <div class="hora-cell">
+                  {{ registro.fechaRegistro | date:'HH:mm' }}
+                </div>
+              </td>
+              <td>
+                <p-tag
+                  [value]="getTipoLabel(registro.tipoRecoleccion)"
+                  [severity]="getTipoSeverity(registro.tipoRecoleccion)"
+                  [rounded]="true"
+                  styleClass="text-base px-4 py-2">
+                </p-tag>
+              </td>
+              <td>
+                <div class="detalles-residuos">
+                  <span *ngFor="let detalle of getDetalles(registro); let last = last" class="detalle-item">
+                    {{ detalle.nombre }}: {{ detalle.kg.toFixed(2) }} kg<span *ngIf="!last">, </span>
+                  </span>
+                </div>
+                <div *ngIf="getDetalles(registro).length === 0" class="sin-detalles">
+                  Sin detalles
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="total-kg">{{ getTotalFormatted(registro) }}</span>
+                <span class="kg-label">kg</span>
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="4" class="empty-message">
+                <div class="no-data">
+                  <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc"></i>
+                  <p>No se encontraron registros</p>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-card>
+  </div>
+</div>

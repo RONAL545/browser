@@ -1,0 +1,86 @@
+<div class="dashboard-container-estudiante">
+  <div class="dashboard-wrapper-estudiante">
+
+    <!-- Header Card -->
+    <div class="header-card-estudiante">
+      <h1 class="header-title-estudiante">Formulario SEDE {{ sedeName }} - ADMINISTRATIVO</h1>
+      <p class="header-subtitle-estudiante">Ingrese los datos correctamente</p>
+    </div>
+
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="dashboard-form-estudiante">
+
+      <!-- Edificio/Pila Selector -->
+      <div class="edificio-selector-estudiante">
+        <label class="edificio-label">Edificio: {{ edificioName }}</label>
+        <p-select
+          [options]="pilas"
+          formControlName="pilaId"
+          optionLabel="codigo"
+          optionValue="id"
+          placeholder="Seleccionar Pila"
+          [showClear]="false"
+          styleClass="w-full">
+        </p-select>
+      </div>
+
+      <!-- Tipos de Residuos con SI/NO -->
+      <div class="residuos-grid">
+        <div
+          *ngFor="let tipo of tiposResiduos; let i = index"
+          [ngClass]="tipo.color"
+          class="residuo-card">
+          <span class="residuo-label">{{ tipo.nombre }}</span>
+          <div class="checkbox-group">
+            <div class="checkbox-wrapper" (click)="seleccionarCheckbox(i, true)">
+              <label class="checkbox-label">SI</label>
+              <div class="custom-checkbox" [class.checked]="isCheckboxSelected(i, true)">
+                <i *ngIf="isCheckboxSelected(i, true)" class="pi pi-check"></i>
+              </div>
+            </div>
+            <div class="checkbox-wrapper" (click)="seleccionarCheckbox(i, false)">
+              <label class="checkbox-label">NO</label>
+              <div class="custom-checkbox" [class.checked]="isCheckboxSelected(i, false)">
+                <i *ngIf="isCheckboxSelected(i, false)" class="pi pi-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campo de Observaciones/Comentarios -->
+      <div class="observaciones-field-estudiante">
+        <label for="observaciones" class="observaciones-label">Comentarios (Opcional)</label>
+        <textarea
+          id="observaciones"
+          formControlName="observaciones"
+          rows="3"
+          placeholder="Agregue cualquier observación sobre la segregación..."
+          class="observaciones-textarea">
+        </textarea>
+      </div>
+
+      <!-- Messages -->
+      <div *ngIf="messages.length > 0" class="messages-container-estudiante">
+        <div *ngFor="let msg of messages"
+          [class]="msg.severity === 'success' ? 'message-success' : 'message-error'"
+          class="message">
+          <i [class]="msg.severity === 'success' ? 'pi pi-check-circle' : 'pi pi-times-circle'"></i>
+          <p>{{ msg.detail }}</p>
+        </div>
+      </div>
+
+      <!-- Botón Enviar -->
+      <div class="button-container-estudiante">
+        <p-button
+          type="submit"
+          [label]="isSubmitting ? 'Enviando...' : 'Enviar'"
+          [disabled]="isSubmitting"
+          [loading]="isSubmitting"
+          severity="secondary"
+          styleClass="enviar-button">
+        </p-button>
+      </div>
+
+    </form>
+  </div>
+</div>

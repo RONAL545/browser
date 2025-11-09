@@ -1,0 +1,45 @@
+.data-report-page {
+
+  .page-header {
+    width: 100%;
+    margin-bottom: 2rem;
+
+    h1 {
+      color: #0D2A72;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #666;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+  }
+
+  .loading-container,
+  .error-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+
+    p {
+      font-size: 1.1rem;
+      color: #666;
+    }
+  }
+
+  app-report-filters,
+  app-report-summary,
+  app-report-table {
+    width: 100%;
+  }
+}
