@@ -1,8 +1,8 @@
 <button
   pButton
   [type]="type"
-  [label]="!iconOnly ? label : undefined"
-  [icon]="icon"
+  [label]="computedLabel"
+  [icon]="computedIcon"
   [disabled]="disabled || loading"
   [loading]="loading"
   [class]="buttonClass"

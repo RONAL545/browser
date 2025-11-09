@@ -60,6 +60,8 @@ export class AppButtonComponent {
         break;
     }
 
+    classes.push(`app-button-variant-${this.variant}`);
+
     // Size classes
     if (this.size === 'small') {
       classes.push('p-button-sm');
@@ -73,6 +75,17 @@ export class AppButtonComponent {
     }
 
     return classes.join(' ');
+  }
+
+  get computedLabel(): string {
+    if (this.iconOnly) {
+      return '';
+    }
+    return this.label ?? '';
+  }
+
+  get computedIcon(): string {
+    return this.icon ?? '';
   }
 
   handleClick(event: Event): void {

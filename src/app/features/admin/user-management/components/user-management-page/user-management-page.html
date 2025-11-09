@@ -10,9 +10,9 @@
   <section class="management-section">
     <h2 class="section-title">Gestión de Usuarios</h2>
 
-    <div class="filter-actions-container">
-      <div class="filter-spacer"></div>
-      <div class="button-wrapper">
+    <app-filter-bar>
+      <div filters></div>
+      <div actions>
         <app-button
           label="Nuevo Usuario"
           variant="success"
@@ -20,7 +20,7 @@
           (onClick)="onNewUser()">
         </app-button>
       </div>
-    </div>
+    </app-filter-bar>
 
     <div class="users-table-card">
     <p-table

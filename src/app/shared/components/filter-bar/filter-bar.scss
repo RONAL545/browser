@@ -1,0 +1,146 @@
+.filter-bar-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: end;
+  background: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+
+  .filters-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.75rem;  // Separación moderada entre filtros
+    align-items: end;
+    flex: 0 1 auto;
+  }
+
+  .actions-section {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;  // Separación moderada entre botones
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    margin-left: auto;
+
+    // Forzar separación entre botones proyectados
+    ::ng-deep {
+      app-button {
+        margin-right: 0.5rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      button {
+        margin-right: 0.5rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  // When filters exceed 3 items, buttons drop to next line
+  @media (max-width: 1200px) {
+    .filters-section {
+      flex: 1 1 100%;
+    }
+
+    .actions-section {
+      margin-left: 0;
+      margin-top: 0.75rem;
+    }
+  }
+
+  // Tablets - filters can wrap
+  @media (max-width: 768px) {
+    .filters-section {
+      flex-wrap: wrap;
+    }
+
+    .actions-section {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  }
+
+  // Mobile - full width everything
+  @media (max-width: 576px) {
+    padding: 1rem;
+    gap: 0.75rem;
+
+    .filters-section {
+      width: 100%;
+
+      ::ng-deep {
+        .filter-group {
+          min-width: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+
+    .actions-section {
+      width: 100%;
+
+      ::ng-deep {
+        app-button {
+          flex: 1;
+          min-width: 100px;
+        }
+      }
+    }
+  }
+}
+
+// Control global del tamaño de los filtros (fuera del contenedor para mayor especificidad)
+::ng-deep {
+  .filter-bar-container {
+    .filters-section {
+      .filters-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.75rem;  // Separación moderada entre filtros
+        align-items: end;
+
+        @media (max-width: 768px) {
+          flex-wrap: wrap;
+        }
+      }
+
+      .filter-group {
+        display: flex;
+        flex-direction: column;
+        min-width: 150px;
+        max-width: 180px;
+        flex: 0 0 auto;
+
+        label {
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #333;
+          margin-bottom: 0.4rem;
+        }
+
+        @media (max-width: 576px) {
+          min-width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      .p-select,
+      .p-datepicker,
+      .p-inputtext {
+        width: 100% !important;
+      }
+    }
+  }
+}

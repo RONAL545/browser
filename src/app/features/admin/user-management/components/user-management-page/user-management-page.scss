@@ -16,21 +16,6 @@
     }
   }
 
-  .filter-actions-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin-bottom: 1rem;
-
-    .filter-spacer {
-      flex: 1;
-    }
-
-    .button-wrapper {
-      display: flex;
-      align-items: flex-end;
-    }
-  }
 
   .users-table-card {
     background: var(--surface-card);

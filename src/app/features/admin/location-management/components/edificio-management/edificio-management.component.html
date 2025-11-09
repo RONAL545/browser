@@ -7,10 +7,10 @@
     </p-message>
   </div>
 
-  <!-- Sección de filtros y acciones - GRID LAYOUT -->
-  <div class="filter-actions-grid">
-    <div class="filter-column">
-      <label for="sedeFilter" class="filter-label">Filtrar por sede</label>
+  <!-- Sección de filtros y acciones -->
+  <app-filter-bar>
+    <div filters class="filter-group">
+      <label for="sedeFilter">Filtrar por sede</label>
       <p-select
         id="sedeFilter"
         [(ngModel)]="selectedSede"
@@ -22,7 +22,7 @@
       </p-select>
     </div>
 
-    <div class="button-column">
+    <div actions>
       <app-button
         label="Nuevo edificio"
         variant="success"
@@ -31,7 +31,7 @@
         [disabled]="showForm">
       </app-button>
     </div>
-  </div>
+  </app-filter-bar>
 
   <p-card *ngIf="showForm" class="mb-4 shadow-1 form-card">
     <ng-template pTemplate="header">

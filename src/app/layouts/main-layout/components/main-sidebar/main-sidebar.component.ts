@@ -1,7 +1,6 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth.service';
 
 interface MenuItem {
   label: string;
@@ -17,8 +16,6 @@ interface MenuItem {
   styleUrl: './main-sidebar.component.scss'
 })
 export class MainSidebarComponent implements OnInit {
-  private authService = inject(AuthService);
-
   @Input() isOpen: boolean = true;
 
   menuItems: MenuItem[] = [];
@@ -65,9 +62,5 @@ export class MainSidebarComponent implements OnInit {
         { label: 'Registros', icon: 'pi pi-list', route: '/app/estudiante/registros' }
       ];
     }
-  }
-
-  logout() {
-    this.authService.logout();
   }
 }

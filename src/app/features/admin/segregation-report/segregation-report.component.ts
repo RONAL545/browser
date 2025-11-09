@@ -20,6 +20,7 @@ import { SegregationMetricsComponent } from './components/segregation-metrics/se
 import { SegregationSummaryComponent } from './components/segregation-summary/segregation-summary';
 import { RegistrosTableComponent } from './components/registros-table/registros-table';
 import { AppButtonComponent } from '../../../shared/components/app-button/app-button';
+import { FilterBarComponent } from '../../../shared/components/filter-bar/filter-bar';
 
 @Component({
   selector: 'app-segregation-report',
@@ -36,7 +37,8 @@ import { AppButtonComponent } from '../../../shared/components/app-button/app-bu
     SegregationMetricsComponent,
     SegregationSummaryComponent,
     RegistrosTableComponent,
-    AppButtonComponent
+    AppButtonComponent,
+    FilterBarComponent
   ],
   templateUrl: './segregation-report.component.html',
   styleUrls: ['./segregation-report.component.scss']

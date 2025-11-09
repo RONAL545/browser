@@ -73,7 +73,6 @@
         [label]="loading ? 'Guardando...' : 'Guardar'"
         variant="primary"
         icon="pi pi-save"
-        [fullWidth]="true"
         [loading]="loading">
       </app-button>
 
@@ -82,8 +81,7 @@
         (onClick)="onCancel()"
         label="Cancelar"
         variant="secondary"
-        icon="pi pi-times"
-        [fullWidth]="true">
+        icon="pi pi-times">
       </app-button>
     </div>
   </form>

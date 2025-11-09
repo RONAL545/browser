@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { User } from '../../../../core/models/user.model';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-main-header',
@@ -16,7 +17,10 @@ export class MainHeaderComponent implements OnInit {
   userMenuOpen = false;
   currentUser: User | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -53,6 +57,11 @@ export class MainHeaderComponent implements OnInit {
       console.error('Navigation error:', err);
       this.userMenuOpen = false;
     });
+  }
+
+  logout() {
+    this.userMenuOpen = false;
+    this.authService.logout();
   }
 
   @HostListener('document:click', ['$event'])

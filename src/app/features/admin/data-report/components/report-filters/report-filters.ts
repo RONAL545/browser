@@ -7,6 +7,7 @@ import { DatePicker } from 'primeng/datepicker';
 import { Select } from 'primeng/select';
 import { ReportFilters } from '../../services/report';
 import { AppButtonComponent } from '../../../../../shared/components/app-button/app-button';
+import { FilterBarComponent } from '../../../../../shared/components/filter-bar/filter-bar';
 
 interface Sede {
   id: string;
@@ -22,7 +23,7 @@ interface Edificio {
 @Component({
   selector: 'app-report-filters',
   standalone: true,
-  imports: [CommonModule, FormsModule, DatePicker, Select, AppButtonComponent],
+  imports: [CommonModule, FormsModule, DatePicker, Select, AppButtonComponent, FilterBarComponent],
   templateUrl: './report-filters.html',
   styleUrl: './report-filters.scss',
 })

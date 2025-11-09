@@ -3,8 +3,8 @@
     <h2 class="section-title">Reporte de Segregación</h2>
 
     <!-- Filtros -->
-    <div class="report-filters-card">
-      <div class="filters-grid">
+    <app-filter-bar>
+      <div filters class="filters-grid">
         <div class="filter-group">
           <label for="sede">Sede</label>
           <p-select
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <div class="filter-actions">
+      <div actions>
         <app-button
           label="Limpiar"
           variant="secondary"
@@ -72,7 +72,7 @@
           (onClick)="exportToExcel()">
         </app-button>
       </div>
-    </div>
+    </app-filter-bar>
 
     <!-- Loading state -->
     <div class="loading-container" *ngIf="loading && !reportData">

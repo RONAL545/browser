@@ -16,6 +16,7 @@
       margin: 0;
       font-size: 1.25rem;
       font-weight: 600;
+      color: #ffffff;
     }
   }
 
@@ -59,40 +60,6 @@
             border-left: 3px solid #4CAF50;
           }
         }
-      }
-    }
-  }
-
-  .sidebar-footer {
-    padding: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: auto;
-
-    .logout-button {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0.875rem 1rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.8);
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9375rem;
-
-      i {
-        margin-right: 0.75rem;
-        font-size: 1.125rem;
-      }
-
-      &:hover {
-        background-color: rgba(244, 67, 54, 0.2);
-        color: #ff5252;
-      }
-
-      &:active {
-        transform: scale(0.98);
       }
     }
   }

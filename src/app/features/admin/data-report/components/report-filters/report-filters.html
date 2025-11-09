@@ -1,7 +1,5 @@
-<div class="report-filters-card">
-  <h2>Filtros</h2>
-
-  <div class="filters-grid">
+<app-filter-bar>
+  <div filters class="filters-grid">
     <div class="filter-group">
       <label for="sede">Sede</label>
       <p-select
@@ -61,7 +59,7 @@
     </div>
   </div>
 
-  <div class="filter-actions">
+  <div actions>
     <app-button
       label="Limpiar"
       variant="secondary"
@@ -81,4 +79,4 @@
       (onClick)="onExport()">
     </app-button>
   </div>
-</div>
+</app-filter-bar>

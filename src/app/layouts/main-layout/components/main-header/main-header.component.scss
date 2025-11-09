@@ -109,7 +109,7 @@
           color: #374151;
           text-decoration: none;
           cursor: pointer;
-          transition: background-color 0.2s;
+          transition: all 0.2s;
           background: none;
           border: none;
           width: 100%;
@@ -126,6 +126,20 @@
 
           &:hover {
             background-color: #f3f4f6;
+          }
+
+          &.logout-item {
+            border-top: 1px solid #e5e7eb;
+            margin-top: 0.25rem;
+            color: #dc2626;
+
+            i {
+              color: #dc2626;
+            }
+
+            &:hover {
+              background-color: #fee2e2;
+            }
           }
         }
       }
