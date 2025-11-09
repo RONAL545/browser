@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { Password } from 'primeng/password';
 import { Select } from 'primeng/select';
 import { UserService, User } from '../../services/user';
 import { RoleService } from '../../services/role';
@@ -21,6 +22,7 @@ import { AppButtonComponent } from '../../../../../shared/components/app-button/
     DialogModule,
     ButtonModule,
     InputTextModule,
+    Password,
     Select,
     AppButtonComponent
   ],
@@ -70,9 +72,9 @@ export class UserForm implements OnInit, OnChanges {
 
   initForm() {
     this.userForm = this.fb.group({
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      identifier: ['', Validators.required],
+      nombres: ['', [Validators.required, Validators.minLength(2)]],
+      apellidos: ['', [Validators.required, Validators.minLength(2)]],
+      identifier: ['', [Validators.required, this.identifierValidator.bind(this)]],
       identifierType: ['email', Validators.required],
       clave: ['', [Validators.required, Validators.minLength(6)]],
       roleId: ['', Validators.required],
@@ -80,6 +82,45 @@ export class UserForm implements OnInit, OnChanges {
       edificioId: [''],
       telefono: ['']
     });
+
+    // Listener para revalidar el identifier cuando cambia el tipo
+    this.userForm.get('identifierType')?.valueChanges.subscribe(() => {
+      // Limpiar el campo identifier cuando cambia el tipo
+      this.userForm.get('identifier')?.setValue('');
+      this.userForm.get('identifier')?.updateValueAndValidity();
+    });
+  }
+
+  // Validador personalizado para identifier (DNI o Email)
+  identifierValidator(control: any) {
+    if (!control.value) {
+      return null;
+    }
+
+    const identifierType = this.userForm?.get('identifierType')?.value;
+
+    if (identifierType === 'email') {
+      // Validar email
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const isValid = emailPattern.test(control.value);
+
+      if (!isValid) {
+        return { invalidEmail: true };
+      }
+
+      // Convertir a minúsculas automáticamente
+      if (control.value !== control.value.toLowerCase()) {
+        control.setValue(control.value.toLowerCase(), { emitEvent: false });
+      }
+
+      return null;
+    } else if (identifierType === 'dni') {
+      // Validar DNI (exactamente 8 dígitos por ley)
+      const dniPattern = /^[0-9]{8}$/;
+      return dniPattern.test(control.value) ? null : { invalidDni: true };
+    }
+
+    return null;
   }
 
   updateForm() {

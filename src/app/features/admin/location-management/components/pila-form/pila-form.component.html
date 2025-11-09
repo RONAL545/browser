@@ -1,11 +1,4 @@
-<p-card>
-  <ng-template pTemplate="header">
-    <div class="bg-blue-600 text-white p-4">
-      <h2 class="text-xl font-bold m-0">{{ pila ? 'Editar Pila' : 'Nueva Pila' }}</h2>
-    </div>
-  </ng-template>
-
-  <form [formGroup]="pilaForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="pilaForm" (ngSubmit)="onSubmit()" class="pila-form">
     <!-- Sede -->
     <div class="mb-4">
       <label for="sede" class="block text-sm font-medium text-gray-700 mb-2">
@@ -66,7 +59,15 @@
     </div>
 
     <!-- Botones -->
-    <div class="flex gap-3">
+    <div class="button-container">
+      <app-button
+        type="button"
+        (onClick)="onCancel()"
+        label="Cancelar"
+        variant="secondary"
+        icon="pi pi-times">
+      </app-button>
+
       <app-button
         type="submit"
         [disabled]="loading"
@@ -75,14 +76,5 @@
         icon="pi pi-save"
         [loading]="loading">
       </app-button>
-
-      <app-button
-        type="button"
-        (onClick)="onCancel()"
-        label="Cancelar"
-        variant="secondary"
-        icon="pi pi-times">
-      </app-button>
     </div>
   </form>
-</p-card>

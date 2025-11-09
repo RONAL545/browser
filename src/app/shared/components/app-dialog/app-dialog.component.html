@@ -1,0 +1,18 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="closable"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '90vw', maxWidth: width }"
+  styleClass="app-custom-dialog"
+  (onHide)="handleHide()">
+
+  <ng-template pTemplate="header">
+    <div class="dialog-header">
+      <h2 class="dialog-title">{{ title }}</h2>
+    </div>
+  </ng-template>
+
+  <ng-content></ng-content>
+</p-dialog>

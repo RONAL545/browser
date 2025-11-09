@@ -1,0 +1,53 @@
+:host ::ng-deep {
+  .app-custom-dialog.p-dialog,
+  .p-dialog.app-custom-dialog {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(13, 42, 114, 0.3) !important;
+    overflow: visible !important;
+    border: none !important;
+    background: #ffffff !important;
+
+    .p-dialog-header {
+      background: #ffffff !important;
+      padding: 1.5rem !important;
+      border: none !important;
+      border-bottom: 2px solid #e5e7eb !important;
+      border-radius: 12px 12px 0 0 !important;
+      margin: 0 !important;
+
+      .dialog-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .dialog-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0D2A72 !important;
+        margin: 0;
+      }
+
+      .p-dialog-header-icon {
+        color: #6b7280 !important;
+
+        &:hover {
+          background: #f3f4f6 !important;
+          color: #0D2A72 !important;
+        }
+
+        &:focus {
+          box-shadow: none !important;
+        }
+      }
+    }
+
+    .p-dialog-content {
+      padding: 2rem !important;
+      background: #ffffff !important;
+      border: none !important;
+      border-radius: 0 0 12px 12px !important;
+      margin: 0 !important;
+    }
+  }
+}

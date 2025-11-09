@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 // PrimeNG Imports
-import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -31,7 +30,6 @@ interface Edificio {
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    CardModule,
     InputTextModule,
     ButtonModule,
     AppButtonComponent,

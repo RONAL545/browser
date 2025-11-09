@@ -9,6 +9,7 @@ import { Pila, CreatePilaDto, UpdatePilaDto } from '../../models/pila.interface'
 import { PilaFormComponent } from '../pila-form/pila-form.component';
 import { PilaListComponent } from '../pila-list/pila-list.component';
 import { EdificioManagementComponent } from '../edificio-management/edificio-management.component';
+import { AppDialogComponent } from '../../../../../shared/components/app-dialog/app-dialog.component';
 
 @Component({
   selector: 'app-location-page',
@@ -16,6 +17,7 @@ import { EdificioManagementComponent } from '../edificio-management/edificio-man
   imports: [
     CommonModule,
     MessageModule,
+    AppDialogComponent,
     PilaFormComponent,
     PilaListComponent,
     EdificioManagementComponent

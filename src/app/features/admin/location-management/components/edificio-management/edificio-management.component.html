@@ -33,48 +33,59 @@
     </div>
   </app-filter-bar>
 
-  <p-card *ngIf="showForm" class="mb-4 shadow-1 form-card">
-    <ng-template pTemplate="header">
-      <div class="flex justify-content-between align-items-center">
-        <div>
-          <strong>{{ editMode ? 'Editar edificio' : 'Nuevo edificio' }}</strong>
-          <p class="text-500 mt-1 mb-0 text-sm">Completa los detalles básicos del edificio</p>
+  <!-- Modal de Formulario -->
+  <app-dialog
+    [(visible)]="showForm"
+    [title]="editMode ? 'Editar Edificio' : 'Nuevo Edificio'"
+    [width]="'600px'"
+    (onHide)="onCancel()">
+    <div class="edificio-form">
+      <div class="grid">
+        <div class="col-12 md:col-6">
+          <label for="edificioNombre" class="block text-sm font-semibold mb-2" style="color: #1f2937;">
+            Nombre <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="edificioNombre"
+            type="text"
+            pInputText
+            [(ngModel)]="edificioForm.nombre"
+            placeholder="Ej: Edificio A"
+            class="w-full" />
         </div>
-        <app-button icon="pi pi-times" variant="text" [iconOnly]="true" (onClick)="onCancel()"></app-button>
-      </div>
-    </ng-template>
 
-    <div class="grid">
-      <div class="col-12 md:col-6">
-        <label for="edificioNombre" class="block text-sm font-semibold mb-2">Nombre *</label>
-        <input
-          id="edificioNombre"
-          type="text"
-          pInputText
-          [(ngModel)]="edificioForm.nombre"
-          placeholder="Ej: Edificio A"
-          class="w-full" />
+        <div class="col-12 md:col-6">
+          <label for="edificioSede" class="block text-sm font-semibold mb-2" style="color: #1f2937;">
+            Sede <span class="text-red-500">*</span>
+          </label>
+          <p-select
+            id="edificioSede"
+            [(ngModel)]="edificioForm.sedeId"
+            [options]="sedes"
+            optionLabel="nombre"
+            optionValue="id"
+            placeholder="Seleccionar sede"
+            styleClass="w-full">
+          </p-select>
+        </div>
       </div>
 
-      <div class="col-12 md:col-6">
-        <label for="edificioSede" class="block text-sm font-semibold mb-2">Sede *</label>
-        <p-select
-          id="edificioSede"
-          [(ngModel)]="edificioForm.sedeId"
-          [options]="sedes"
-          optionLabel="nombre"
-          optionValue="id"
-          placeholder="Seleccionar sede"
-          styleClass="w-full">
-        </p-select>
+      <div class="button-container">
+        <app-button
+          label="Cancelar"
+          variant="secondary"
+          icon="pi pi-times"
+          (onClick)="onCancel()">
+        </app-button>
+        <app-button
+          label="Guardar"
+          variant="primary"
+          icon="pi pi-check"
+          (onClick)="onSave()">
+        </app-button>
       </div>
     </div>
-
-    <div class="flex flex-wrap gap-2 mt-4">
-      <app-button label="Guardar" variant="primary" icon="pi pi-check" (onClick)="onSave()"></app-button>
-      <app-button label="Cancelar" variant="secondary" icon="pi pi-times" (onClick)="onCancel()"></app-button>
-    </div>
-  </p-card>
+  </app-dialog>
 
   <p-card class="shadow-1">
 

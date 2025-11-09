@@ -63,11 +63,11 @@
                       formControlName="identifier"
                       placeholder="Ingresa tu email o DNI"
                       class="w-full"
-                      [ngClass]="{'ng-invalid ng-dirty': identifier?.invalid && identifier?.touched}"
+                      autocomplete="username"
                     />
                   </span>
                   <small
-                    *ngIf="identifier?.invalid && identifier?.touched"
+                    *ngIf="submitted && identifier?.invalid"
                     class="mt-1 block"
                     style="color: #dc2626;">
                     <span *ngIf="identifier?.errors?.['required']">El email o DNI es requerido</span>
@@ -80,18 +80,21 @@
                   <label for="password" class="block text-sm font-semibold mb-2" style="color: #1f2937;">
                     Contraseña
                   </label>
-                  <p-password
-                    id="password"
-                    formControlName="password"
-                    placeholder="Ingresa tu contraseña"
-                    [toggleMask]="true"
-                    [feedback]="false"
-                    styleClass="w-full"
-                    inputStyleClass="w-full"
-                    [ngClass]="{'ng-invalid ng-dirty': password?.invalid && password?.touched}">
-                  </p-password>
+                  <span class="p-input-icon-left w-full password-wrapper">
+                    <i class="pi pi-lock"></i>
+                    <p-password
+                      id="password"
+                      formControlName="password"
+                      placeholder="Ingresa tu contraseña"
+                      [toggleMask]="true"
+                      [feedback]="false"
+                      styleClass="w-full"
+                      inputStyleClass="w-full"
+                      autocomplete="current-password">
+                    </p-password>
+                  </span>
                   <small
-                    *ngIf="password?.invalid && password?.touched"
+                    *ngIf="submitted && password?.invalid"
                     class="mt-1 block"
                     style="color: #dc2626;">
                     <span *ngIf="password?.errors?.['required']">La contraseña es requerida</span>
@@ -111,7 +114,7 @@
 
                 <!-- Footer -->
                 <div class="text-center text-sm mt-4" style="color: #1f2937;">
-                  <p>¿Olvidaste tu contraseña? <span style="color: #F4B41A; font-weight: 600;">Contacta al administrador</span></p>
+                  <p>¿Olvidaste tu contraseña? <a href="https://wa.me/51996020212" target="_blank" rel="noopener noreferrer" style="color: #F4B41A; font-weight: 600; text-decoration: none; cursor: pointer;">Contacta al administrador</a></p>
                 </div>
               </form>
             </div>

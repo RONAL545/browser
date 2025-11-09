@@ -17,7 +17,8 @@
           [class.ng-invalid]="userForm.get('nombres')?.invalid && userForm.get('nombres')?.touched"
         />
         <small class="p-error" *ngIf="userForm.get('nombres')?.invalid && userForm.get('nombres')?.touched">
-          Este campo es requerido
+          <span *ngIf="userForm.get('nombres')?.errors?.['required']">Este campo es requerido</span>
+          <span *ngIf="userForm.get('nombres')?.errors?.['minlength']">Mínimo 2 caracteres</span>
         </small>
       </div>
 
@@ -31,7 +32,8 @@
           [class.ng-invalid]="userForm.get('apellidos')?.invalid && userForm.get('apellidos')?.touched"
         />
         <small class="p-error" *ngIf="userForm.get('apellidos')?.invalid && userForm.get('apellidos')?.touched">
-          Este campo es requerido
+          <span *ngIf="userForm.get('apellidos')?.errors?.['required']">Este campo es requerido</span>
+          <span *ngIf="userForm.get('apellidos')?.errors?.['minlength']">Mínimo 2 caracteres</span>
         </small>
       </div>
 
@@ -47,31 +49,40 @@
       </div>
 
       <div class="form-field">
-        <label for="identifier">Identificador *</label>
+        <label for="identifier">
+          {{ userForm.get('identifierType')?.value === 'email' ? 'Correo Electrónico' : 'DNI' }} *
+        </label>
         <input
           pInputText
           id="identifier"
           formControlName="identifier"
-          placeholder="DNI o Email"
+          [type]="userForm.get('identifierType')?.value === 'dni' ? 'text' : 'text'"
+          [placeholder]="userForm.get('identifierType')?.value === 'email' ? 'usuario@ejemplo.com' : '12345678'"
+          [maxlength]="userForm.get('identifierType')?.value === 'dni' ? 8 : 100"
           [class.ng-invalid]="userForm.get('identifier')?.invalid && userForm.get('identifier')?.touched"
         />
         <small class="p-error" *ngIf="userForm.get('identifier')?.invalid && userForm.get('identifier')?.touched">
-          Este campo es requerido
+          <span *ngIf="userForm.get('identifier')?.errors?.['required']">Este campo es requerido</span>
+          <span *ngIf="userForm.get('identifier')?.errors?.['invalidEmail']">Email inválido (ej: usuario@ejemplo.com)</span>
+          <span *ngIf="userForm.get('identifier')?.errors?.['invalidDni']">DNI inválido (exactamente 8 dígitos numéricos)</span>
         </small>
       </div>
 
       <div class="form-field" *ngIf="!user">
         <label for="clave">Contraseña *</label>
-        <input
-          pInputText
-          type="password"
+        <p-password
           id="clave"
           formControlName="clave"
           placeholder="Mínimo 6 caracteres"
-          [class.ng-invalid]="userForm.get('clave')?.invalid && userForm.get('clave')?.touched"
-        />
+          [toggleMask]="true"
+          [feedback]="false"
+          styleClass="w-full"
+          [inputStyle]="{ width: '100%' }"
+          [class.ng-invalid]="userForm.get('clave')?.invalid && userForm.get('clave')?.touched">
+        </p-password>
         <small class="p-error" *ngIf="userForm.get('clave')?.invalid && userForm.get('clave')?.touched">
-          Mínimo 6 caracteres
+          <span *ngIf="userForm.get('clave')?.errors?.['required']">Este campo es requerido</span>
+          <span *ngIf="userForm.get('clave')?.errors?.['minlength']">Mínimo 6 caracteres</span>
         </small>
       </div>
 

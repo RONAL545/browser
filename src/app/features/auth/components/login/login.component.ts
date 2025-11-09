@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   loading = false;
   errorMessage = '';
+  submitted = false;
   private resizeDebounce: any;
 
   constructor() {
@@ -125,8 +126,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.submitted = true;
+
     if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
       return;
     }
 

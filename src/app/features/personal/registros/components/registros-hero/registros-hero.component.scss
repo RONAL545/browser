@@ -1,0 +1,53 @@
+.registros-hero {
+  background: #0D2A72;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(13, 42, 114, 0.1);
+
+  .hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .hero-text {
+    flex: 1;
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .registros-hero {
+    padding: 1.5rem;
+
+    .hero-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .hero-text {
+      .hero-title {
+        font-size: 1.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

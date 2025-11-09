@@ -18,14 +18,18 @@
   <section class="management-section">
     <h2 class="section-title">Gestión de Pilas de Reciclaje</h2>
 
-    <!-- Formulario -->
-    <div *ngIf="showForm" class="mb-4">
+    <!-- Modal de Formulario -->
+    <app-dialog
+      [(visible)]="showForm"
+      [title]="selectedPila ? 'Editar Pila' : 'Nueva Pila'"
+      [width]="'600px'"
+      (onHide)="onCancel()">
       <app-pila-form
         [pila]="selectedPila"
         (save)="onSave($event)"
         (cancel)="onCancel()">
       </app-pila-form>
-    </div>
+    </app-dialog>
 
     <!-- Lista -->
     <app-pila-list

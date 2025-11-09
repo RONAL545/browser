@@ -18,6 +18,7 @@ import { EdificioService, Edificio, CreateEdificioDto, UpdateEdificioDto } from 
 import { SedeService, Sede } from '../../../../../core/services/sede';
 import { AppButtonComponent } from '../../../../../shared/components/app-button/app-button';
 import { FilterBarComponent } from '../../../../../shared/components/filter-bar/filter-bar';
+import { AppDialogComponent } from '../../../../../shared/components/app-dialog/app-dialog.component';
 
 @Component({
   selector: 'app-edificio-management',
@@ -35,6 +36,7 @@ import { FilterBarComponent } from '../../../../../shared/components/filter-bar/
     TooltipModule,
     AppButtonComponent,
     FilterBarComponent,
+    AppDialogComponent,
   ],
   providers: [ConfirmationService],
   templateUrl: './edificio-management.component.html',
