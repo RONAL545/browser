@@ -8,6 +8,7 @@ import { MessageModule } from 'primeng/message';
 import { PasswordModule } from 'primeng/password';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../core/models/user.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -54,7 +55,7 @@ export class ProfileComponent implements OnInit {
     const token = localStorage.getItem('access_token');
 
     // Cargar datos completos del usuario desde el backend usando el nuevo endpoint
-    this.http.get<User>('http://localhost:3000/api/auth/profile', {
+  this.http.get<User>(`${environment.apiUrl}/auth/profile`, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: (data) => {
@@ -102,11 +103,11 @@ export class ProfileComponent implements OnInit {
     console.log('Rol en minúsculas:', roleName);
 
     if (roleName === 'estudiante') {
-      endpoint = 'http://localhost:3000/api/registros/estudiante/cambiar-password';
+      endpoint = `${environment.apiUrl}/registros/estudiante/cambiar-password`;
     } else if (roleName === 'personal') {
-      endpoint = 'http://localhost:3000/api/registros/personal/cambiar-password';
+      endpoint = `${environment.apiUrl}/registros/personal/cambiar-password`;
     } else if (roleName === 'admin') {
-      endpoint = `http://localhost:3000/api/users/${this.user?.id}/reset-password`;
+      endpoint = `${environment.apiUrl}/users/${this.user?.id}/reset-password`;
     } else {
       this.passwordChangeError = `Rol de usuario no válido: "${roleName}". Roles permitidos: estudiante, personal, admin`;
       this.isChangingPassword = false;

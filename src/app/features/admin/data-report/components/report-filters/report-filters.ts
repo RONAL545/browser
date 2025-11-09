@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../../../environments/environment';
 import { DatePicker } from 'primeng/datepicker';
 import { Select } from 'primeng/select';
 import { ReportFilters } from '../../services/report';
@@ -37,7 +38,7 @@ export class ReportFiltersComponent implements OnInit {
   edificios: Edificio[] = [];
   edificiosFiltrados: Edificio[] = [];
 
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

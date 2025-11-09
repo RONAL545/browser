@@ -1,3 +1,4 @@
+import { environment } from '../../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -59,7 +60,7 @@ export interface Statistics {
   providedIn: 'root'
 })
 export class Report {
-  private apiUrl = 'http://localhost:3000/api/registros/personal';
+  private apiUrl = `${environment.apiUrl}/registros/personal`;
 
   constructor(private http: HttpClient) {}
 

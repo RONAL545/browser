@@ -1,3 +1,4 @@
+import { environment } from '../../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -59,7 +60,7 @@ export interface ReportFilters {
   providedIn: 'root'
 })
 export class SegregationReportService {
-  private apiUrl = 'http://localhost:3000/api/registros/segregation-report';
+  private apiUrl = `${environment.apiUrl}/registros/segregation-report`;
 
   constructor(private http: HttpClient) {}
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 // PrimeNG Imports
 import { TableModule } from 'primeng/table';
@@ -46,7 +47,7 @@ interface Registro {
 export class RegistrosComponent implements OnInit {
   registros: Registro[] = [];
   loading = true;
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
