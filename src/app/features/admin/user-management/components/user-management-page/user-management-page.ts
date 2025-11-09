@@ -7,11 +7,12 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { UserForm } from '../user-form/user-form';
+import { AppButtonComponent } from '../../../../../shared/components/app-button/app-button';
 
 @Component({
   selector: 'app-user-management-page',
   standalone: true,
-  imports: [CommonModule, ToastModule, ButtonModule, TableModule, TooltipModule, UserForm],
+  imports: [CommonModule, ToastModule, ButtonModule, TableModule, TooltipModule, UserForm, AppButtonComponent],
   templateUrl: './user-management-page.html',
   styleUrl: './user-management-page.scss',
   providers: [MessageService]

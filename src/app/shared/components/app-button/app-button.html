@@ -1,0 +1,11 @@
+<button
+  pButton
+  [type]="type"
+  [label]="!iconOnly ? label : undefined"
+  [icon]="icon"
+  [disabled]="disabled || loading"
+  [loading]="loading"
+  [class]="buttonClass"
+  [pTooltip]="tooltip"
+  (click)="handleClick($event)">
+</button>

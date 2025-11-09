@@ -1,5 +1,45 @@
 .edificio-management {
-  padding: clamp(0.75rem, 2vw, 1rem);
+  padding: 0;
+
+  // Contenedor de filtros y acciones - CSS GRID
+  .filter-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    background: var(--surface-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+
+    .filter-column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-self: start;
+
+      .filter-label {
+        display: block;
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: var(--text-color);
+        margin: 0;
+      }
+
+      ::ng-deep .p-select {
+        width: 100%;
+        min-width: 300px;
+      }
+    }
+
+    .button-column {
+      display: flex;
+      align-items: flex-end;
+      justify-self: end;
+      padding-bottom: 0;
+    }
+  }
 
   .filter-section {
     margin-bottom: 1.5rem;
@@ -164,6 +204,19 @@
 @media (max-width: 768px) {
   .edificio-management {
     padding: 0.75rem;
+
+    .filter-actions-grid {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+
+      .button-column {
+        margin-top: 0.5rem;
+
+        ::ng-deep .p-button {
+          width: 100%;
+        }
+      }
+    }
 
     .form-card {
       padding: 1rem;

@@ -128,21 +128,20 @@
     </div>
 
     <div class="form-actions">
-      <button
-        pButton
+      <app-button
         label="Cancelar"
+        variant="secondary"
         icon="pi pi-times"
-        class="p-button-text"
         type="button"
-        (click)="closeDialog()"
-      ></button>
-      <button
-        pButton
+        (onClick)="closeDialog()">
+      </app-button>
+      <app-button
         [label]="user ? 'Actualizar' : 'Crear'"
+        variant="primary"
         icon="pi pi-check"
         type="submit"
-        [loading]="loading"
-      ></button>
+        [loading]="loading">
+      </app-button>
     </div>
   </form>
 </p-dialog>

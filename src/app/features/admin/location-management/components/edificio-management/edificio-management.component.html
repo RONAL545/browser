@@ -1,5 +1,4 @@
-<div class="edificio-management">
-  <!-- Message -->
+<div class="edificio-management p-4">
   <div *ngIf="message" class="mb-4">
     <p-message
       [severity]="message.severity"
@@ -8,96 +7,94 @@
     </p-message>
   </div>
 
-  <!-- Filtro por Sede y Botón Agregar -->
-  <p-card>
+  <!-- Sección de filtros y acciones - GRID LAYOUT -->
+  <div class="filter-actions-grid">
+    <div class="filter-column">
+      <label for="sedeFilter" class="filter-label">Filtrar por sede</label>
+      <p-select
+        id="sedeFilter"
+        [(ngModel)]="selectedSede"
+        [options]="sedes"
+        optionLabel="nombre"
+        placeholder="Todas las sedes"
+        [showClear]="true"
+        (onChange)="onSedeChange()">
+      </p-select>
+    </div>
+
+    <div class="button-column">
+      <app-button
+        label="Nuevo edificio"
+        variant="success"
+        icon="pi pi-plus"
+        (onClick)="onAdd()"
+        [disabled]="showForm">
+      </app-button>
+    </div>
+  </div>
+
+  <p-card *ngIf="showForm" class="mb-4 shadow-1 form-card">
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ editMode ? 'Editar edificio' : 'Nuevo edificio' }}</strong>
+          <p class="text-500 mt-1 mb-0 text-sm">Completa los detalles básicos del edificio</p>
+        </div>
+        <app-button icon="pi pi-times" variant="text" [iconOnly]="true" (onClick)="onCancel()"></app-button>
+      </div>
+    </ng-template>
+
     <div class="grid">
-      <div class="col-12 md:col-8 lg:col-6">
-        <label for="sedeFilter" class="block font-semibold mb-3">Filtrar por Sede</label>
+      <div class="col-12 md:col-6">
+        <label for="edificioNombre" class="block text-sm font-semibold mb-2">Nombre *</label>
+        <input
+          id="edificioNombre"
+          type="text"
+          pInputText
+          [(ngModel)]="edificioForm.nombre"
+          placeholder="Ej: Edificio A"
+          class="w-full" />
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="edificioSede" class="block text-sm font-semibold mb-2">Sede *</label>
         <p-select
-          id="sedeFilter"
-          [(ngModel)]="selectedSede"
+          id="edificioSede"
+          [(ngModel)]="edificioForm.sedeId"
           [options]="sedes"
           optionLabel="nombre"
-          placeholder="Todas las sedes"
-          [showClear]="true"
-          (onChange)="onSedeChange()"
+          optionValue="id"
+          placeholder="Seleccionar sede"
           styleClass="w-full">
         </p-select>
       </div>
-      <div class="col-12 md:col-4 lg:col-6 flex align-items-end justify-content-end">
-        <p-button
-          label="Agregar Edificio"
-          icon="pi pi-plus"
-          (onClick)="onAdd()"
-          [disabled]="showForm">
-        </p-button>
-      </div>
     </div>
 
-    <!-- Formulario -->
-    <div *ngIf="showForm" class="form-card mb-4">
-      <h3 class="mb-3">{{ editMode ? 'Editar Edificio' : 'Nuevo Edificio' }}</h3>
-
-      <div class="grid">
-        <div class="col-12 md:col-6">
-          <label for="edificioNombre" class="block mb-2 font-semibold">Nombre del Edificio *</label>
-          <input
-            id="edificioNombre"
-            type="text"
-            pInputText
-            [(ngModel)]="edificioForm.nombre"
-            placeholder="Ej: Edificio A"
-            class="w-full"
-          />
-        </div>
-
-        <div class="col-12 md:col-6">
-          <label for="edificioSede" class="block mb-2 font-semibold">Sede *</label>
-          <p-select
-            id="edificioSede"
-            [(ngModel)]="edificioForm.sedeId"
-            [options]="sedes"
-            optionLabel="nombre"
-            optionValue="id"
-            placeholder="Seleccionar sede"
-            styleClass="w-full">
-          </p-select>
-        </div>
-      </div>
-
-      <div class="flex gap-2 mt-4">
-        <p-button
-          label="Guardar"
-          icon="pi pi-check"
-          (onClick)="onSave()">
-        </p-button>
-        <p-button
-          label="Cancelar"
-          icon="pi pi-times"
-          severity="secondary"
-          (onClick)="onCancel()">
-        </p-button>
-      </div>
+    <div class="flex flex-wrap gap-2 mt-4">
+      <app-button label="Guardar" variant="primary" icon="pi pi-check" (onClick)="onSave()"></app-button>
+      <app-button label="Cancelar" variant="secondary" icon="pi pi-times" (onClick)="onCancel()"></app-button>
     </div>
+  </p-card>
 
-    <!-- Tabla de Edificios -->
+  <p-card class="shadow-1">
+
     <div class="table-container">
       <p-table
         [value]="edificios"
         [loading]="loading"
         [paginator]="true"
         [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} edificios"
-        [rowsPerPageOptions]="[10, 25, 50]"
         styleClass="p-datatable-sm"
         responsiveLayout="scroll">
 
         <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
-            <th pSortableColumn="sede.nombre">Sede <p-sortIcon field="sede.nombre"></p-sortIcon></th>
-            <th class="text-center">Acciones</th>
+            <th pSortableColumn="nombre" class="text-sm text-500 uppercase">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+            <th pSortableColumn="sede.nombre" class="text-sm text-500 uppercase">Sede <p-sortIcon field="sede.nombre"></p-sortIcon></th>
+            <th class="text-center text-sm text-500 uppercase">Acciones</th>
           </tr>
         </ng-template>
 
@@ -105,32 +102,32 @@
           <tr>
             <td>{{ edificio.nombre }}</td>
             <td>{{ edificio.sede?.nombre || '-' }}</td>
-            <td class="text-center actions-cell">
-              <button
-                pButton
+            <td class="text-center">
+              <app-button
                 icon="pi pi-pencil"
-                class="p-button-rounded p-button-text p-button-info"
-                pTooltip="Editar"
-                (click)="onEdit(edificio)"
-              ></button>
-              <button
-                pButton
+                variant="info"
+                [rounded]="true"
+                [iconOnly]="true"
+                tooltip="Editar"
+                (onClick)="onEdit(edificio)">
+              </app-button>
+              <app-button
                 icon="pi pi-trash"
-                class="p-button-rounded p-button-text p-button-danger"
-                pTooltip="Eliminar"
-                (click)="onDelete(edificio)"
-              ></button>
+                variant="danger"
+                [rounded]="true"
+                [iconOnly]="true"
+                tooltip="Eliminar"
+                (onClick)="onDelete(edificio)">
+              </app-button>
             </td>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="3" class="empty-message">
-              <div class="no-data">
-                <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc"></i>
-                <p>{{ selectedSede ? 'No hay edificios en esta sede' : 'No hay edificios registrados' }}</p>
-              </div>
+            <td colspan="3" class="text-center py-6 text-500">
+              <i class="pi pi-inbox text-4xl mb-3 block"></i>
+              {{ selectedSede ? 'No hay edificios en esta sede' : 'Aún no registras edificios' }}
             </td>
           </tr>
         </ng-template>
@@ -138,6 +135,5 @@
     </div>
   </p-card>
 
-  <!-- Confirm Dialog -->
   <p-confirmDialog></p-confirmDialog>
 </div>

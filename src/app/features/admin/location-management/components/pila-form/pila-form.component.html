@@ -37,8 +37,7 @@
         optionLabel="nombre"
         optionValue="id"
         placeholder="Seleccione un edificio"
-        styleClass="w-full"
-        [disabled]="!pilaForm.get('sedeId')?.value">
+        styleClass="w-full">
       </p-select>
       <small *ngIf="edificioId?.invalid && edificioId?.touched" class="text-red-600">
         El edificio es requerido
@@ -68,23 +67,24 @@
 
     <!-- Botones -->
     <div class="flex gap-3">
-      <p-button
+      <app-button
         type="submit"
         [disabled]="loading"
         [label]="loading ? 'Guardando...' : 'Guardar'"
+        variant="primary"
         icon="pi pi-save"
-        styleClass="flex-1"
-        severity="primary">
-      </p-button>
+        [fullWidth]="true"
+        [loading]="loading">
+      </app-button>
 
-      <p-button
+      <app-button
         type="button"
-        (click)="onCancel()"
+        (onClick)="onCancel()"
         label="Cancelar"
+        variant="secondary"
         icon="pi pi-times"
-        styleClass="flex-1"
-        severity="secondary">
-      </p-button>
+        [fullWidth]="true">
+      </app-button>
     </div>
   </form>
 </p-card>

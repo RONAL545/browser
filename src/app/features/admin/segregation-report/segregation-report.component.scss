@@ -1,16 +1,47 @@
-.report-filters-card {
-  background: white;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: clamp(1rem, 3vw, 2rem);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.segregation-report-page {
+  padding: clamp(1rem, 2vw, 1.5rem);
+  max-width: 1400px;
+  margin: 0 auto;
 
-  h2 {
-    color: #0D2A72;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    font-weight: 600;
-    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  .report-section {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+
+    .section-title {
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      color: #0D2A72;
+      margin: 0 0 clamp(1rem, 2vw, 1.5rem) 0;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #0D2A72;
+    }
   }
+
+  .loading-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+    background: var(--surface-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem 0;
+
+    p {
+      font-size: 1.1rem;
+      color: #666;
+    }
+  }
+}
+
+.report-filters-card {
+  background: var(--surface-card);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .filters-grid {
     display: grid;
@@ -39,58 +70,33 @@
     gap: clamp(0.5rem, 2vw, 1rem);
     justify-content: flex-end;
     flex-wrap: wrap;
-
-    .btn {
-      padding: clamp(0.5rem, 1.5vw, 0.625rem) clamp(0.875rem, 2.5vw, 1.25rem);
-      border: none;
-      border-radius: 4px;
-      font-size: clamp(0.75rem, 1.8vw, 0.875rem);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-
-      &.btn-primary {
-        background-color: #0D2A72;
-        color: white;
-
-        &:hover {
-          background-color: #1a3d8f;
-        }
-
-        &:disabled {
-          background-color: #ccc;
-          cursor: not-allowed;
-        }
-      }
-
-      &.btn-secondary {
-        background-color: #f5f5f5;
-        color: #666;
-
-        &:hover {
-          background-color: #e0e0e0;
-        }
-      }
-
-      &.btn-success {
-        background-color: #28a745;
-        color: white;
-
-        &:hover {
-          background-color: #218838;
-        }
-
-        &:disabled {
-          background-color: #ccc;
-          cursor: not-allowed;
-        }
-      }
-    }
   }
 }
 
 @media (max-width: 768px) {
+  .segregation-report-page {
+    padding: 1rem;
+
+    .report-section {
+      margin-bottom: 2rem;
+
+      .section-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom-width: 2px;
+      }
+    }
+
+    .loading-container {
+      padding: 2rem;
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
   .report-filters-card {
     padding: 1rem;
 
@@ -102,23 +108,34 @@
     .filter-actions {
       flex-direction: column;
       gap: 0.75rem;
-
-      .btn {
-        width: 100%;
-      }
     }
   }
 }
 
 @media (max-width: 480px) {
+  .segregation-report-page {
+    padding: 0.75rem;
+
+    .report-section {
+      margin-bottom: 1.5rem;
+
+      .section-title {
+        font-size: 1.125rem;
+      }
+    }
+
+    .loading-container {
+      padding: 1.5rem;
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
   .report-filters-card {
     padding: 0.75rem;
     margin-bottom: 1rem;
-
-    h2 {
-      font-size: 1rem;
-      margin-bottom: 0.75rem;
-    }
   }
 }
 

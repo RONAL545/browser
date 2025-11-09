@@ -7,21 +7,22 @@
     (formSubmit)="onFormClose()"
   ></app-user-form>
 
-  <div class="page-header">
-    <div>
-      <h1>Gestión de Usuarios</h1>
-      <p>Administra los usuarios del sistema</p>
-    </div>
-    <button
-      pButton
-      label="Nuevo Usuario"
-      icon="pi pi-plus"
-      class="p-button-success"
-      (click)="onNewUser()"
-    ></button>
-  </div>
+  <section class="management-section">
+    <h2 class="section-title">Gestión de Usuarios</h2>
 
-  <div class="users-table-card">
+    <div class="filter-actions-container">
+      <div class="filter-spacer"></div>
+      <div class="button-wrapper">
+        <app-button
+          label="Nuevo Usuario"
+          variant="success"
+          icon="pi pi-plus"
+          (onClick)="onNewUser()">
+        </app-button>
+      </div>
+    </div>
+
+    <div class="users-table-card">
     <p-table
       [value]="users"
       [loading]="loading"
@@ -54,27 +55,30 @@
           <td>{{ user.edificio?.nombre || '-' }}</td>
           <td>{{ user.telefono || '-' }}</td>
           <td class="text-center actions-cell">
-            <button
-              pButton
+            <app-button
               icon="pi pi-pencil"
-              class="p-button-rounded p-button-text p-button-info"
-              pTooltip="Editar"
-              (click)="onEditUser(user)"
-            ></button>
-            <button
-              pButton
+              variant="info"
+              [rounded]="true"
+              [iconOnly]="true"
+              tooltip="Editar"
+              (onClick)="onEditUser(user)">
+            </app-button>
+            <app-button
               icon="pi pi-key"
-              class="p-button-rounded p-button-text p-button-warning"
-              pTooltip="Resetear Contraseña"
-              (click)="onResetPassword(user.id)"
-            ></button>
-            <button
-              pButton
+              variant="warning"
+              [rounded]="true"
+              [iconOnly]="true"
+              tooltip="Resetear Contraseña"
+              (onClick)="onResetPassword(user.id)">
+            </app-button>
+            <app-button
               icon="pi pi-trash"
-              class="p-button-rounded p-button-text p-button-danger"
-              pTooltip="Eliminar"
-              (click)="onDeleteUser(user.id)"
-            ></button>
+              variant="danger"
+              [rounded]="true"
+              [iconOnly]="true"
+              tooltip="Eliminar"
+              (onClick)="onDeleteUser(user.id)">
+            </app-button>
           </td>
         </tr>
       </ng-template>
@@ -84,16 +88,17 @@
             <div class="no-data">
               <i class="pi pi-users" style="font-size: 3rem; color: #ccc"></i>
               <p>No hay usuarios registrados</p>
-              <button
-                pButton
+              <app-button
                 label="Crear Primer Usuario"
+                variant="success"
                 icon="pi pi-plus"
-                (click)="onNewUser()"
-              ></button>
+                (onClick)="onNewUser()">
+              </app-button>
             </div>
           </td>
         </tr>
       </ng-template>
     </p-table>
-  </div>
+    </div>
+  </section>
 </div>

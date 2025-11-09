@@ -1,4 +1,4 @@
-<div class="p-4">
+<div class="location-management-page">
   <!-- Message -->
   <div *ngIf="message" class="mb-4">
     <p-message
@@ -9,14 +9,14 @@
   </div>
 
   <!-- Gestión de Edificios -->
-  <div class="mb-5">
-    <h2 class="text-2xl font-bold mb-3">Gestión de Edificios</h2>
+  <section class="management-section">
+    <h2 class="section-title">Gestión de Edificios</h2>
     <app-edificio-management></app-edificio-management>
-  </div>
+  </section>
 
   <!-- Gestión de Pilas -->
-  <div>
-    <h2 class="text-2xl font-bold mb-3">Gestión de Pilas de Reciclaje</h2>
+  <section class="management-section">
+    <h2 class="section-title">Gestión de Pilas de Reciclaje</h2>
 
     <!-- Formulario -->
     <div *ngIf="showForm" class="mb-4">
@@ -35,5 +35,5 @@
       (edit)="onEdit($event)"
       (delete)="onDelete($event)">
     </app-pila-list>
-  </div>
+  </section>
 </div>

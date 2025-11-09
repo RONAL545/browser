@@ -2,43 +2,42 @@
   <!-- Filtros y botón -->
   <div class="filters-section">
     <div class="filters-row">
-      <div class="filter-item">
-        <label for="sedeFilter" class="filter-label">Filtrar por Sede</label>
-        <p-select
-          id="sedeFilter"
-          [(ngModel)]="selectedSede"
-          [options]="sedes"
-          optionLabel="nombre"
-          placeholder="Todas las sedes"
-          [showClear]="true"
-          (onChange)="onSedeChange()"
-          styleClass="w-full">
-        </p-select>
-      </div>
+      <div class="filters-group">
+        <div class="filter-item">
+          <label for="sedeFilter" class="filter-label">Filtrar por Sede</label>
+          <p-select
+            id="sedeFilter"
+            [(ngModel)]="selectedSede"
+            [options]="sedes"
+            optionLabel="nombre"
+            placeholder="Todas las sedes"
+            [showClear]="true"
+            (onChange)="onSedeChange()">
+          </p-select>
+        </div>
 
-      <div class="filter-item">
-        <label for="edificioFilter" class="filter-label">Filtrar por Edificio</label>
-        <p-select
-          id="edificioFilter"
-          [(ngModel)]="selectedEdificio"
-          [options]="edificios"
-          optionLabel="nombre"
-          placeholder="Todos los edificios"
-          [showClear]="true"
-          [disabled]="!selectedSede"
-          (onChange)="onEdificioChange()"
-          styleClass="w-full">
-        </p-select>
+        <div class="filter-item">
+          <label for="edificioFilter" class="filter-label">Filtrar por Edificio</label>
+          <p-select
+            id="edificioFilter"
+            [(ngModel)]="selectedEdificio"
+            [options]="edificios"
+            optionLabel="nombre"
+            placeholder="Todos los edificios"
+            [showClear]="true"
+            [disabled]="!selectedSede"
+            (onChange)="onEdificioChange()">
+          </p-select>
+        </div>
       </div>
 
       <div class="button-item">
-        <button
-          pButton
+        <app-button
           label="Nueva Pila"
+          variant="success"
           icon="pi pi-plus"
-          class="p-button-success"
-          (click)="onAdd()"
-        ></button>
+          (onClick)="onAdd()">
+        </app-button>
       </div>
     </div>
   </div>
@@ -70,20 +69,22 @@
           <td>{{ pila.edificio?.sede?.nombre || 'N/A' }}</td>
           <td>{{ pila.edificio?.nombre || 'N/A' }}</td>
           <td class="text-center actions-cell">
-            <button
-              pButton
+            <app-button
               icon="pi pi-pencil"
-              class="p-button-rounded p-button-text p-button-info"
-              pTooltip="Editar"
-              (click)="onEdit(pila)"
-            ></button>
-            <button
-              pButton
+              variant="info"
+              [rounded]="true"
+              [iconOnly]="true"
+              tooltip="Editar"
+              (onClick)="onEdit(pila)">
+            </app-button>
+            <app-button
               icon="pi pi-trash"
-              class="p-button-rounded p-button-text p-button-danger"
-              pTooltip="Eliminar"
-              (click)="onDelete(pila)"
-            ></button>
+              variant="danger"
+              [rounded]="true"
+              [iconOnly]="true"
+              tooltip="Eliminar"
+              (onClick)="onDelete(pila)">
+            </app-button>
           </td>
         </tr>
       </ng-template>
@@ -94,12 +95,12 @@
             <div class="no-data">
               <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc"></i>
               <p>No hay pilas registradas</p>
-              <button
-                pButton
+              <app-button
                 label="Crear Primera Pila"
+                variant="success"
                 icon="pi pi-plus"
-                (click)="onAdd()"
-              ></button>
+                (onClick)="onAdd()">
+              </app-button>
             </div>
           </td>
         </tr>

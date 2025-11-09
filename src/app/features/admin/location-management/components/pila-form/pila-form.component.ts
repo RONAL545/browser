@@ -12,6 +12,7 @@ import { SelectModule } from 'primeng/select';
 import { Pila } from '../../models/pila.interface';
 import { SedeService } from '../../../user-management/services/sede';
 import { EdificioService } from '../../../user-management/services/edificio';
+import { AppButtonComponent } from '../../../../../shared/components/app-button/app-button';
 
 interface Sede {
   id: string;
@@ -33,6 +34,7 @@ interface Edificio {
     CardModule,
     InputTextModule,
     ButtonModule,
+    AppButtonComponent,
     MessageModule,
     SelectModule
   ],
@@ -67,10 +69,20 @@ export class PilaFormComponent implements OnInit {
     this.loadSedes();
     this.loadEdificios();
 
+    // Deshabilitar edificioId inicialmente
+    this.pilaForm.get('edificioId')?.disable();
+
     // Escuchar cambios en sedeId para filtrar edificios
     this.pilaForm.get('sedeId')?.valueChanges.subscribe(sedeId => {
       this.filterEdificios(sedeId);
       this.pilaForm.patchValue({ edificioId: '' });
+
+      // Habilitar o deshabilitar edificioId según si hay sede seleccionada
+      if (sedeId) {
+        this.pilaForm.get('edificioId')?.enable();
+      } else {
+        this.pilaForm.get('edificioId')?.disable();
+      }
     });
 
     if (this.pila) {

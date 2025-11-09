@@ -19,6 +19,7 @@ import { EdificioService, Edificio } from '../../../core/services/edificio';
 import { SegregationMetricsComponent } from './components/segregation-metrics/segregation-metrics';
 import { SegregationSummaryComponent } from './components/segregation-summary/segregation-summary';
 import { RegistrosTableComponent } from './components/registros-table/registros-table';
+import { AppButtonComponent } from '../../../shared/components/app-button/app-button';
 
 @Component({
   selector: 'app-segregation-report',
@@ -34,7 +35,8 @@ import { RegistrosTableComponent } from './components/registros-table/registros-
     ChartModule,
     SegregationMetricsComponent,
     SegregationSummaryComponent,
-    RegistrosTableComponent
+    RegistrosTableComponent,
+    AppButtonComponent
   ],
   templateUrl: './segregation-report.component.html',
   styleUrls: ['./segregation-report.component.scss']

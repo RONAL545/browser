@@ -1,92 +1,106 @@
-<div class="segregation-report">
-  <!-- Filtros -->
-  <div class="report-filters-card">
-    <h2>Filtros</h2>
+<div class="segregation-report-page">
+  <section class="report-section">
+    <h2 class="section-title">Reporte de Segregación</h2>
 
-    <div class="filters-grid">
-      <div class="filter-group">
-        <label for="sede">Sede</label>
-        <p-select
-          id="sede"
-          [(ngModel)]="selectedSedeId"
-          [options]="sedes"
-          optionLabel="nombre"
-          optionValue="id"
-          placeholder="Todas las sedes"
-          [showClear]="true"
-          styleClass="w-full">
-        </p-select>
+    <!-- Filtros -->
+    <div class="report-filters-card">
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label for="sede">Sede</label>
+          <p-select
+            id="sede"
+            [(ngModel)]="selectedSedeId"
+            [options]="sedes"
+            optionLabel="nombre"
+            optionValue="id"
+            placeholder="Todas las sedes"
+            [showClear]="true"
+            styleClass="w-full">
+          </p-select>
+        </div>
+
+        <div class="filter-group">
+          <label for="edificio">Edificio</label>
+          <p-select
+            id="edificio"
+            [(ngModel)]="selectedEdificioId"
+            [options]="edificiosFiltrados"
+            optionLabel="nombre"
+            optionValue="id"
+            placeholder="Todos los edificios"
+            [showClear]="true"
+            [disabled]="!selectedSedeId"
+            styleClass="w-full">
+          </p-select>
+        </div>
+
+        <div class="filter-group">
+          <label for="fecha">Fecha</label>
+          <p-datepicker
+            id="fecha"
+            [(ngModel)]="selectedDate"
+            [showIcon]="true"
+            placeholder="dd/mm/aaaa"
+            dateFormat="dd/mm/yy"
+            appendTo="body"
+            [showClear]="true"
+            styleClass="w-full">
+          </p-datepicker>
+        </div>
       </div>
 
-      <div class="filter-group">
-        <label for="edificio">Edificio</label>
-        <p-select
-          id="edificio"
-          [(ngModel)]="selectedEdificioId"
-          [options]="edificiosFiltrados"
-          optionLabel="nombre"
-          optionValue="id"
-          placeholder="Todos los edificios"
-          [showClear]="true"
-          [disabled]="!selectedSedeId"
-          styleClass="w-full">
-        </p-select>
-      </div>
-
-      <div class="filter-group">
-        <label for="fecha">Fecha</label>
-        <p-datepicker
-          id="fecha"
-          [(ngModel)]="selectedDate"
-          [showIcon]="true"
-          placeholder="dd/mm/aaaa"
-          dateFormat="dd/mm/yy"
-          appendTo="body"
-          [showClear]="true"
-          styleClass="w-full">
-        </p-datepicker>
+      <div class="filter-actions">
+        <app-button
+          label="Limpiar"
+          variant="secondary"
+          icon="pi pi-filter-slash"
+          (onClick)="clearFilters()">
+        </app-button>
+        <app-button
+          label="Aplicar Filtros"
+          variant="primary"
+          icon="pi pi-search"
+          [disabled]="loading"
+          [loading]="loading"
+          (onClick)="loadReport()">
+        </app-button>
+        <app-button
+          label="Exportar Excel"
+          variant="success"
+          icon="pi pi-file-excel"
+          [disabled]="loading || !reportData?.registros?.length"
+          (onClick)="exportToExcel()">
+        </app-button>
       </div>
     </div>
 
-    <div class="filter-actions">
-      <button class="btn btn-secondary" (click)="clearFilters()">
-        Limpiar
-      </button>
-      <button class="btn btn-primary" (click)="loadReport()" [disabled]="loading">
-        Aplicar Filtros
-      </button>
-      <button class="btn btn-success" (click)="exportToExcel()" [disabled]="loading || !reportData?.registros?.length">
-        Exportar Excel
-      </button>
+    <!-- Loading state -->
+    <div class="loading-container" *ngIf="loading && !reportData">
+      <i class="pi pi-spin pi-spinner" style="font-size: 3rem"></i>
+      <p>Cargando reporte...</p>
     </div>
-  </div>
 
-  <!-- Métricas de Segregación -->
-  <app-segregation-metrics
-    *ngIf="reportData && reportData.registros"
-    [registros]="reportData.registros"
-    [currentDate]="selectedDate"
-    [hasSedeFilter]="!!selectedSedeId"
-    [hasEdificioFilter]="!!selectedEdificioId">
-  </app-segregation-metrics>
+    <!-- Content -->
+    <div *ngIf="reportData && reportData.registros">
+      <!-- Métricas de Segregación -->
+      <app-segregation-metrics
+        [registros]="reportData.registros"
+        [currentDate]="selectedDate"
+        [hasSedeFilter]="!!selectedSedeId"
+        [hasEdificioFilter]="!!selectedEdificioId">
+      </app-segregation-metrics>
 
-  <!-- Resumen con Gráficos de Segregación -->
-  <app-segregation-summary
-    *ngIf="reportData && reportData.registros"
-    [registros]="reportData.registros"
-    [currentFilters]="getCurrentFilters()">
-  </app-segregation-summary>
+      <!-- Resumen con Gráficos de Segregación -->
+      <app-segregation-summary
+        [registros]="reportData.registros"
+        [currentFilters]="getCurrentFilters()">
+      </app-segregation-summary>
 
-  <!-- Tabla de Todos los Registros -->
-  <app-registros-table
-    *ngIf="reportData && reportData.registros"
-    [registros]="reportData.registros"
-    [loading]="loading">
-  </app-registros-table>
-
-  <!-- Loading state -->
-  <div class="loading-container" *ngIf="loading && !reportData">
-    <i class="pi pi-spin pi-spinner" style="font-size: 3rem"></i>
-    <p>Cargando reporte...</p>
-  </div>
+      <!-- Tabla de Todos los Registros -->
+      <app-registros-table
+        [registros]="reportData.registros"
+        [loading]="loading">
+      </app-registros-table>
+    </div>
+  </section>
 </div>

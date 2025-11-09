@@ -11,6 +11,7 @@ import { SelectModule } from 'primeng/select';
 import { Pila } from '../../models/pila.interface';
 import { SedeService, Sede } from '../../../../../core/services/sede';
 import { EdificioService, Edificio } from '../../../../../core/services/edificio';
+import { AppButtonComponent } from '../../../../../shared/components/app-button/app-button';
 
 @Component({
   selector: 'app-pila-list',
@@ -21,7 +22,8 @@ import { EdificioService, Edificio } from '../../../../../core/services/edificio
     TableModule,
     ButtonModule,
     TooltipModule,
-    SelectModule
+    SelectModule,
+    AppButtonComponent
   ],
   templateUrl: './pila-list.component.html',
   styleUrl: './pila-list.component.scss'

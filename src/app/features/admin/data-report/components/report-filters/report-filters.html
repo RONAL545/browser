@@ -62,14 +62,23 @@
   </div>
 
   <div class="filter-actions">
-    <button class="btn btn-secondary" (click)="onClear()">
-      Limpiar
-    </button>
-    <button class="btn btn-primary" (click)="onFilter()">
-      Aplicar Filtros
-    </button>
-    <button class="btn btn-success" (click)="onExport()">
-      Exportar Excel
-    </button>
+    <app-button
+      label="Limpiar"
+      variant="secondary"
+      icon="pi pi-filter-slash"
+      (onClick)="onClear()">
+    </app-button>
+    <app-button
+      label="Aplicar Filtros"
+      variant="primary"
+      icon="pi pi-search"
+      (onClick)="onFilter()">
+    </app-button>
+    <app-button
+      label="Exportar Excel"
+      variant="success"
+      icon="pi pi-file-excel"
+      (onClick)="onExport()">
+    </app-button>
   </div>
 </div>

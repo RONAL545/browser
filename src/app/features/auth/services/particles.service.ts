@@ -64,6 +64,10 @@ export class ParticlesService {
         },
         number: {
           value: this.getParticleCount(),
+          limit: {
+            mode: "delete" as const,
+            value: 150
+          }
         },
         opacity: {
           value: 0.7,
@@ -124,7 +128,13 @@ export class ParticlesService {
       particles: {
         color: { value: "#F4B41A" },
         move: { enable: true, speed: 0.5 },
-        number: { value: this.getParticleCount() },
+        number: {
+          value: this.getParticleCount(),
+          limit: {
+            mode: "delete" as const,
+            value: 150
+          }
+        },
         opacity: { value: 0.7 },
         size: { value: 2 },
         shape: { type: "circle" },
@@ -171,20 +181,25 @@ export class ParticlesService {
   destroyParticles(containerId?: string): void {
     try {
       if (containerId) {
-        // Buscar contenedor específico por índice
+        // Buscar contenedor específico por ID
         const containers = tsParticles.dom();
-        for (let i = 0; i < containers.length; i++) {
+        for (let i = containers.length - 1; i >= 0; i--) {
           const container = containers[i];
           if (container && String(container.id) === containerId) {
+            container.stop();
             container.destroy();
             break;
           }
         }
       } else {
         // Destruir todos los contenedores
-        const container = tsParticles.domItem(0);
-        if (container) {
-          container.destroy();
+        const containers = tsParticles.dom();
+        for (let i = containers.length - 1; i >= 0; i--) {
+          const container = containers[i];
+          if (container) {
+            container.stop();
+            container.destroy();
+          }
         }
       }
     } catch (error) {

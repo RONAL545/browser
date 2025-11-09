@@ -16,6 +16,7 @@ import { ConfirmationService } from 'primeng/api';
 // Services
 import { EdificioService, Edificio, CreateEdificioDto, UpdateEdificioDto } from '../../../../../core/services/edificio';
 import { SedeService, Sede } from '../../../../../core/services/sede';
+import { AppButtonComponent } from '../../../../../shared/components/app-button/app-button';
 
 @Component({
   selector: 'app-edificio-management',
@@ -31,6 +32,7 @@ import { SedeService, Sede } from '../../../../../core/services/sede';
     MessageModule,
     ConfirmDialogModule,
     TooltipModule,
+    AppButtonComponent,
   ],
   providers: [ConfirmationService],
   templateUrl: './edificio-management.component.html',

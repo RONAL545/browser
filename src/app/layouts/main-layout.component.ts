@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MainHeaderComponent } from './main-layout/components/main-header/main-header.component';
@@ -99,8 +99,17 @@ import { MainSidebarComponent } from './main-layout/components/main-sidebar/main
     }
   `]
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
   sidebarOpen = true;
+
+  ngOnInit(): void {
+    const user = JSON.parse(localStorage.getItem('current_user') || '{}');
+    const role = user?.role;
+
+    if (role === 'estudiante' || role === 'personal') {
+      this.sidebarOpen = false;
+    }
+  }
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;

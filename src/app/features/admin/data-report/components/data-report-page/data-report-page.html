@@ -1,36 +1,35 @@
 <div class="data-report-page">
-  <div class="page-header">
-    <h1>Datos de Reciclaje</h1>
-    <p>Visualiza y analiza los datos de reciclaje de la institución</p>
-  </div>
+  <section class="report-section">
+    <h2 class="section-title">Datos de Reciclaje</h2>
 
-  <!-- Filtros -->
-  <app-report-filters
-    (filterChange)="onFilterChange($event)"
-    (exportClick)="onExport()"
-  ></app-report-filters>
+    <!-- Filtros -->
+    <app-report-filters
+      (filterChange)="onFilterChange($event)"
+      (exportClick)="onExport()"
+    ></app-report-filters>
 
-  <!-- Loading state -->
-  <div class="loading-container" *ngIf="loading">
-    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-    <p>Cargando datos...</p>
-  </div>
+    <!-- Loading state -->
+    <div class="loading-container" *ngIf="loading">
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      <p>Cargando datos...</p>
+    </div>
 
-  <!-- Error state -->
-  <div class="error-container" *ngIf="error && !loading">
-    <i class="pi pi-exclamation-triangle" style="font-size: 2rem; color: #ff6b6b;"></i>
-    <p>{{ error }}</p>
-  </div>
+    <!-- Error state -->
+    <div class="error-container" *ngIf="error && !loading">
+      <i class="pi pi-exclamation-triangle" style="font-size: 2rem; color: #ff6b6b;"></i>
+      <p>{{ error }}</p>
+    </div>
 
-  <!-- Content -->
-  <div *ngIf="!loading && !error && statistics">
-    <!-- Métricas principales -->
-    <app-report-metrics [registros]="statistics.registros"></app-report-metrics>
+    <!-- Content -->
+    <div *ngIf="!loading && !error && statistics">
+      <!-- Métricas principales -->
+      <app-report-metrics [registros]="statistics.registros"></app-report-metrics>
 
-    <!-- Resumen/Gráficos -->
-    <app-report-summary [statistics]="statistics" [currentFilters]="currentFilters"></app-report-summary>
+      <!-- Resumen/Gráficos -->
+      <app-report-summary [statistics]="statistics" [currentFilters]="currentFilters"></app-report-summary>
 
-    <!-- Tabla de datos -->
-    <app-report-table [registros]="statistics.registros"></app-report-table>
-  </div>
+      <!-- Tabla de datos -->
+      <app-report-table [registros]="statistics.registros"></app-report-table>
+    </div>
+  </section>
 </div>

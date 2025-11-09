@@ -1,41 +1,55 @@
 .pila-list-container {
   .filters-section {
-    background: white;
+    background: var(--surface-card);
     border-radius: 8px;
-    padding: clamp(1rem, 3vw, 1.5rem);
+    padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+    margin-bottom: 1rem;
 
     .filters-row {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-end;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
 
-      .filter-item {
-        flex: 1;
-        min-width: 200px;
+      .filters-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        justify-self: start;
 
-        .filter-label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: var(--font-semibold);
-          color: #495057;
-          font-size: var(--text-sm);
+        .filter-item {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .filter-label {
+            display: block;
+            font-weight: var(--font-semibold);
+            color: #495057;
+            font-size: var(--text-sm);
+            margin: 0;
+          }
+
+          ::ng-deep .p-select {
+            width: 100%;
+            min-width: 250px;
+          }
         }
       }
 
       .button-item {
         display: flex;
         align-items: flex-end;
+        justify-self: end;
       }
     }
   }
 
   .pila-table-card {
-    background: white;
+    background: var(--surface-card);
     border-radius: 8px;
-    padding: clamp(1rem, 3vw, 1.5rem);
+    padding: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     .no-data {
@@ -169,18 +183,26 @@
       margin-bottom: 1rem;
 
       .filters-row {
-        flex-direction: column;
-        align-items: stretch;
-
-        .filter-item {
-          min-width: 100%;
-        }
+        grid-template-columns: 1fr;
+        gap: 1rem;
 
         .button-item {
           width: 100%;
+          justify-self: stretch;
 
           button {
             width: 100%;
+          }
+        }
+
+        .filters-group {
+          grid-template-columns: 1fr;
+          justify-self: stretch;
+
+          .filter-item {
+            ::ng-deep .p-select {
+              min-width: 100%;
+            }
           }
         }
       }

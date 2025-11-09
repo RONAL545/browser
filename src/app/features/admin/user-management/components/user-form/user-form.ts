@@ -10,6 +10,7 @@ import { RoleService } from '../../services/role';
 import { SedeService } from '../../services/sede';
 import { EdificioService } from '../../services/edificio';
 import { MessageService } from 'primeng/api';
+import { AppButtonComponent } from '../../../../../shared/components/app-button/app-button';
 
 @Component({
   selector: 'app-user-form',
@@ -20,7 +21,8 @@ import { MessageService } from 'primeng/api';
     DialogModule,
     ButtonModule,
     InputTextModule,
-    Select
+    Select,
+    AppButtonComponent
   ],
   templateUrl: './user-form.html',
   styleUrl: './user-form.scss',
