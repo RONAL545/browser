@@ -15,7 +15,10 @@ import { MainSidebarComponent } from './main-layout/components/main-sidebar/main
         <div class="sidebar-overlay"
              *ngIf="sidebarOpen"
              (click)="closeSidebar()"></div>
-        <app-main-sidebar [isOpen]="sidebarOpen" [class.sidebar-open]="sidebarOpen"></app-main-sidebar>
+        <app-main-sidebar
+          [isOpen]="sidebarOpen"
+          [class.sidebar-open]="sidebarOpen"
+          (itemClicked)="closeSidebar()"></app-main-sidebar>
         <main class="main-content">
           <router-outlet></router-outlet>
         </main>
@@ -100,15 +103,12 @@ import { MainSidebarComponent } from './main-layout/components/main-sidebar/main
   `]
 })
 export class MainLayoutComponent implements OnInit {
-  sidebarOpen = true;
+  sidebarOpen = false;
 
   ngOnInit(): void {
-    const user = JSON.parse(localStorage.getItem('current_user') || '{}');
-    const role = user?.role;
-
-    if (role === 'estudiante' || role === 'personal') {
-      this.sidebarOpen = false;
-    }
+    // Verificar el tamaño de la pantalla para determinar si el sidebar debe estar abierto
+    const isLargeScreen = window.innerWidth > 768;
+    this.sidebarOpen = isLargeScreen;
   }
 
   toggleSidebar() {

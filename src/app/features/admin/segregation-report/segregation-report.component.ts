@@ -54,6 +54,7 @@ export class SegregationReportComponent implements OnInit {
 
   reportData: SegregationReportData | null = null;
   loading = false;
+  currentFilters: ReportFilters = {};
 
   chartOptions: any;
 
@@ -146,6 +147,9 @@ export class SegregationReportComponent implements OnInit {
       filters.fecha = this.selectedDate.toISOString().split('T')[0];
     }
 
+    // Actualizar currentFilters antes de la petición
+    this.currentFilters = { ...filters };
+
     this.reportService.getReport(filters).subscribe({
       next: (data: SegregationReportData) => {
         this.reportData = data;
@@ -164,20 +168,6 @@ export class SegregationReportComponent implements OnInit {
     this.selectedDate = null;
     this.filterEdificios();
     this.loadReport();
-  }
-
-  getCurrentFilters(): ReportFilters {
-    const filters: ReportFilters = {};
-    if (this.selectedSedeId) {
-      filters.sedeId = this.selectedSedeId;
-    }
-    if (this.selectedEdificioId) {
-      filters.edificioId = this.selectedEdificioId;
-    }
-    if (this.selectedDate) {
-      filters.fecha = this.selectedDate.toISOString().split('T')[0];
-    }
-    return filters;
   }
 
   getChartData(stat: WasteTypeStats): any {
@@ -199,7 +189,6 @@ export class SegregationReportComponent implements OnInit {
       return;
     }
 
-    const filters = this.getCurrentFilters();
-    this.reportService.exportToExcel(filters);
+    this.reportService.exportToExcel(this.currentFilters);
   }
 }

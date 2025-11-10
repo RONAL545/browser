@@ -24,6 +24,17 @@
       align-items: center;
       width: 100%;
       min-height: 400px;
+      position: relative;
+
+      .chart-display {
+        max-width: 30rem;
+        margin: 0 auto;
+      }
+
+      ::ng-deep canvas {
+        max-width: 100% !important;
+        height: auto !important;
+      }
     }
   }
 

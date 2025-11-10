@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
@@ -19,6 +19,7 @@ interface SegregationMetrics {
   imports: [CommonModule, CardModule, TooltipModule],
   templateUrl: './segregation-metrics.html',
   styleUrl: './segregation-metrics.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SegregationMetricsComponent implements OnChanges {
   @Input() registros: RegistroEstudiante[] = [];

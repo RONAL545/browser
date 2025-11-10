@@ -160,11 +160,19 @@
           .p-datatable-thead > tr > th {
             padding: 0.75rem 0.5rem;
             font-size: var(--text-xs);
+            min-width: 100px;
           }
 
           .p-datatable-tbody > tr > td {
             padding: 0.625rem 0.5rem;
             font-size: var(--text-xs);
+            min-width: 100px;
+            max-height: 3rem;
+            overflow: hidden;
+            line-height: 1.4;
+            word-break: break-word;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
 
           .p-paginator {
@@ -201,10 +209,13 @@
         .p-datatable {
           .p-datatable-thead > tr > th {
             padding: 0.5rem 0.25rem;
+            min-width: 90px;
           }
 
           .p-datatable-tbody > tr > td {
             padding: 0.5rem 0.25rem;
+            min-width: 90px;
+            max-height: 2.8rem;
           }
         }
 

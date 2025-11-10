@@ -1,39 +1,22 @@
-<div class="min-h-screen bg-gray-50 py-8 px-4">
-  <div class="max-w-7xl mx-auto">
-    <p-card styleClass="shadow-lg">
-      <ng-template pTemplate="header">
-        <div class="bg-gradient-to-r from-green-600 to-green-700 text-white p-6 flex justify-between items-center rounded-t-lg">
-          <h1 class="text-3xl font-bold m-0">Historial de Registros</h1>
-          <p-button
-            (onClick)="volver()"
-            label="Volver al formulario"
-            icon="pi pi-arrow-left"
-            severity="secondary"
-            [outlined]="true"
-            styleClass="text-white border-white hover:bg-white hover:text-green-700">
-          </p-button>
-        </div>
-      </ng-template>
+<div class="registros-page">
+  <div class="page-container">
+    <app-registros-hero (onBack)="volver()"></app-registros-hero>
 
-      <!-- Loading State -->
-      <div *ngIf="loading" class="text-center py-12">
-        <p-progressSpinner
-          styleClass="w-16 h-16"
-          strokeWidth="4"
-          animationDuration="1s">
-        </p-progressSpinner>
-        <p class="text-gray-600 mt-4 text-lg">Cargando registros...</p>
-      </div>
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+      <i class="pi pi-spin pi-spinner"></i>
+      <p>Cargando registros...</p>
+    </div>
 
-      <!-- Empty State -->
-      <div *ngIf="!loading && registros.length === 0" class="text-center py-12">
-        <i class="pi pi-inbox text-6xl text-gray-400 mb-4"></i>
-        <p class="text-gray-600 text-xl font-semibold">No hay registros todavía</p>
-        <p class="text-gray-500 mt-2">Realiza tu primer registro desde el formulario</p>
-      </div>
+    <!-- Empty State -->
+    <div *ngIf="!loading && registros.length === 0" class="empty-state">
+      <i class="pi pi-inbox"></i>
+      <p class="empty-title">No hay registros todavía</p>
+      <p class="empty-subtitle">Realiza tu primer registro desde el formulario</p>
+    </div>
 
-      <!-- Table -->
-      <div *ngIf="!loading && registros.length > 0" class="registros-table-container">
+    <!-- Table -->
+    <div *ngIf="!loading && registros.length > 0" class="registros-table-container">
         <p-table
           [value]="registros"
           [paginator]="true"
@@ -100,7 +83,6 @@
             </tr>
           </ng-template>
         </p-table>
-      </div>
-    </p-card>
+    </div>
   </div>
 </div>

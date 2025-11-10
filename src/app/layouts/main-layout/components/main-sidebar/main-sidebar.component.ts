@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -17,6 +17,7 @@ interface MenuItem {
 })
 export class MainSidebarComponent implements OnInit {
   @Input() isOpen: boolean = true;
+  @Output() itemClicked = new EventEmitter<void>();
 
   menuItems: MenuItem[] = [];
   userRole: string = '';
@@ -62,5 +63,9 @@ export class MainSidebarComponent implements OnInit {
         { label: 'Registros', icon: 'pi pi-list', route: '/app/estudiante/registros' }
       ];
     }
+  }
+
+  onItemClick(): void {
+    this.itemClicked.emit();
   }
 }

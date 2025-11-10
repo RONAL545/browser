@@ -28,7 +28,7 @@ export const ADMIN_ROUTES: Routes = [
   },
   {
     path: '',
-    redirectTo: 'ubicacion',
+    redirectTo: 'datos',
     pathMatch: 'full'
   }
 ];

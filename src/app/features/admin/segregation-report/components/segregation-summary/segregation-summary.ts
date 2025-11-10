@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UIChart } from 'primeng/chart';
 import { RegistroEstudiante, ReportFilters } from '../../services/segregation-report.service';
@@ -9,23 +9,38 @@ import { RegistroEstudiante, ReportFilters } from '../../services/segregation-re
   imports: [CommonModule, UIChart],
   templateUrl: './segregation-summary.html',
   styleUrl: './segregation-summary.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SegregationSummaryComponent implements OnChanges {
   @Input() registros: RegistroEstudiante[] = [];
   @Input() currentFilters: ReportFilters = {};
 
   // Gráfico circular (Pie Chart)
-  pieChartData: any;
-  pieChartOptions: any;
+  pieChartData: any = null;
+  pieChartOptions: any = null;
 
   // Gráfico de barras agrupadas y apiladas
-  barChartData: any;
-  barChartOptions: any;
+  barChartData: any = null;
+  barChartOptions: any = null;
+
+  private isInitialized = false;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['registros'] || changes['currentFilters']) {
-      this.updateCharts();
+    if (changes['registros'] && this.registros && this.registros.length > 0) {
+      // Solo actualizar si hay cambios reales en los datos
+      if (!this.isInitialized || this.hasDataChanged(changes['registros'])) {
+        this.updateCharts();
+        this.isInitialized = true;
+      }
+    } else if (changes['currentFilters'] && this.isInitialized) {
+      // Solo actualizar gráfico de barras cuando cambien los filtros
+      this.updateBarChart();
     }
+  }
+
+  private hasDataChanged(change: any): boolean {
+    if (!change.previousValue) return true;
+    return change.currentValue.length !== change.previousValue.length;
   }
 
   private updateCharts(): void {

@@ -11,6 +11,9 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
+// Components
+import { RegistrosHeroComponent } from './components/registros-hero/registros-hero.component';
+
 interface Registro {
   id: string;
   fechaRegistro: string;
@@ -39,7 +42,8 @@ interface Registro {
     CardModule,
     ButtonModule,
     TagModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    RegistrosHeroComponent
   ],
   templateUrl: './registros.html',
   styleUrl: './registros.scss',

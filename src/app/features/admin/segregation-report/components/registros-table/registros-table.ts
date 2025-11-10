@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
@@ -10,6 +10,7 @@ import { RegistroEstudiante } from '../../services/segregation-report.service';
   imports: [CommonModule, TableModule, CardModule],
   templateUrl: './registros-table.html',
   styleUrl: './registros-table.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrosTableComponent {
   @Input() registros: RegistroEstudiante[] = [];

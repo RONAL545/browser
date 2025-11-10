@@ -10,6 +10,7 @@
           [routerLink]="item.route"
           routerLinkActive="active"
           class="menu-link"
+          (click)="onItemClick()"
         >
           <i [class]="item.icon"></i>
           <span>{{ item.label }}</span>
