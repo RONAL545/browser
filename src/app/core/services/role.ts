@@ -19,4 +19,8 @@ export class RoleService {
   getRoles(): Observable<Role[]> {
     return this.http.get<Role[]>(this.apiUrl);
   }
+
+  getAssignableRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(`${this.apiUrl}/assignable`);
+  }
 }

@@ -160,7 +160,7 @@ export class UserForm implements OnInit, OnChanges {
   }
 
   loadRoles() {
-    this.roleService.getRoles().subscribe({
+    this.roleService.getAssignableRoles().subscribe({
       next: (roles) => {
         this.roles = roles.map(r => ({ label: r.nombre, value: r.id }));
       },
