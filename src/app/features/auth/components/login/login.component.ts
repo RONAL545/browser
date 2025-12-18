@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
 
     } catch (error) {
-      console.error('Error al inicializar partículas:', error);
+      // Error silenciado en producción
     }
   }
 
@@ -139,39 +139,26 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        console.log('LOGIN RESPONSE:', response);
-        console.log('USER:', response.user);
-        console.log('ROLE:', response.user.role);
-        console.log('ROLE TYPE:', typeof response.user.role);
-
         this.loading = false;
         // Obtener el rol del usuario (puede ser string o objeto)
         const userRole = typeof response.user.role === 'string'
           ? response.user.role
           : response.user.role?.nombre;
 
-        console.log('USER ROLE EXTRACTED:', userRole);
-
         // Redirigir según el rol del usuario
         if (userRole === 'admin') {
-          console.log('Redirigiendo a /app/admin');
           this.router.navigate(['/app/admin']);
         } else if (userRole === 'gestor-ubicaciones') {
-          console.log('Redirigiendo a /app/admin/ubicacion');
           this.router.navigate(['/app/admin/ubicacion']);
         } else if (userRole === 'personal') {
-          console.log('Redirigiendo a /app/personal/dashboard');
           this.router.navigate(['/app/personal/dashboard']);
         } else if (userRole === 'estudiante') {
-          console.log('Redirigiendo a /app/estudiante/dashboard');
           this.router.navigate(['/app/estudiante/dashboard']);
         } else {
-          console.log('Rol no reconocido, redirigiendo a /app');
           this.router.navigate(['/app']);
         }
       },
       error: (error) => {
-        console.error('LOGIN ERROR:', error);
         this.loading = false;
         this.errorMessage = error.error?.message || 'Error al iniciar sesión. Por favor, verifica tus credenciales.';
       }

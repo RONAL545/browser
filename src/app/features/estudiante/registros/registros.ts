@@ -75,7 +75,6 @@ export class RegistrosComponent implements OnInit {
           this.loading = false;
         },
         error: (error) => {
-          console.error('Error al cargar registros:', error);
           this.loading = false;
         }
       });

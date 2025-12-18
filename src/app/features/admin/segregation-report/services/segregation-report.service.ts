@@ -121,7 +121,6 @@ export class SegregationReportService {
         window.URL.revokeObjectURL(url);
       })
       .catch(error => {
-        console.error('Error al descargar el archivo:', error);
         alert('Error al exportar el archivo. Por favor, intente nuevamente.');
       });
   }

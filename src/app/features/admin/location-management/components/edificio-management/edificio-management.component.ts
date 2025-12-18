@@ -78,7 +78,6 @@ export class EdificioManagementComponent implements OnInit {
         this.sedes = sedes;
       },
       error: (error) => {
-        console.error('Error al cargar sedes:', error);
         this.showMessage('error', 'Error al cargar las sedes');
       },
     });
@@ -93,7 +92,6 @@ export class EdificioManagementComponent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error al cargar edificios:', error);
         this.showMessage('error', 'Error al cargar los edificios');
         this.loading = false;
       },
@@ -137,7 +135,6 @@ export class EdificioManagementComponent implements OnInit {
             this.loadEdificios();
           },
           error: (error) => {
-            console.error('Error al eliminar edificio:', error);
             this.showMessage('error', error.error?.message || 'Error al eliminar el edificio');
           },
         });
@@ -170,7 +167,6 @@ export class EdificioManagementComponent implements OnInit {
           this.loadEdificios();
         },
         error: (error) => {
-          console.error('Error al actualizar edificio:', error);
           this.showMessage('error', error.error?.message || 'Error al actualizar el edificio');
         },
       });
@@ -188,7 +184,6 @@ export class EdificioManagementComponent implements OnInit {
           this.loadEdificios();
         },
         error: (error) => {
-          console.error('Error al crear edificio:', error);
           this.showMessage('error', error.error?.message || 'Error al crear el edificio');
         },
       });

@@ -62,7 +62,6 @@ export class ReportFiltersComponent implements OnInit {
           this.sedes = sedes;
         },
         error: (error) => {
-          console.error('Error al cargar sedes:', error);
         }
       });
   }
@@ -80,7 +79,6 @@ export class ReportFiltersComponent implements OnInit {
           this.edificiosFiltrados = edificios;
         },
         error: (error) => {
-          console.error('Error al cargar edificios:', error);
         }
       });
   }

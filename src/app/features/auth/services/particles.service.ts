@@ -14,16 +14,12 @@ export class ParticlesService {
 
   async initializeParticlesEngine(): Promise<void> {
     if (this.particlesInitialized) return;
-    
+
     try {
-      console.log('Inicializando engine...');
       await loadFull(tsParticles);
-      console.log('Cargando plugin de polígono...');
       await loadPolygonMaskPlugin(tsParticles);
-      console.log('Engine y plugin inicializados');
       this.particlesInitialized = true;
     } catch (error) {
-      console.error('Error inicializando particles engine:', error);
       throw error;
     }
   }
@@ -66,7 +62,7 @@ export class ParticlesService {
           value: this.getParticleCount(),
           limit: {
             mode: "delete" as const,
-            value: 150
+            value: 60
           }
         },
         opacity: {
@@ -108,14 +104,11 @@ export class ParticlesService {
     };
 
     try {
-      console.log(`Cargando partículas con polígono en ${containerId}...`);
       await tsParticles.load({
         id: containerId,
         options: options
       });
-      console.log('Partículas con polígono cargadas');
     } catch (error) {
-      console.error('Error al cargar partículas con polígono:', error);
       // Fallback sin polígono
       await this.loadSimpleParticles(containerId);
     }
@@ -132,7 +125,7 @@ export class ParticlesService {
           value: this.getParticleCount(),
           limit: {
             mode: "delete" as const,
-            value: 150
+            value: 60
           }
         },
         opacity: { value: 0.7 },
@@ -149,20 +142,18 @@ export class ParticlesService {
     };
 
     try {
-      console.log(`Cargando partículas simples en ${containerId}...`);
       await tsParticles.load({
         id: containerId,
         options: simpleOptions
       });
-      console.log('Partículas simples cargadas');
     } catch (error) {
-      console.error('Error al cargar partículas simples:', error);
+      // Error silenciado en producción
     }
   }
 
   private getParticleCount(): number {
     const isSmallScreen = window.innerWidth <= 1024;
-    return isSmallScreen ? 60 : 120;
+    return isSmallScreen ? 30 : 50;
   }
 
   private getResponsiveScale(): number {
@@ -203,7 +194,7 @@ export class ParticlesService {
         }
       }
     } catch (error) {
-      console.log('Error al limpiar partículas:', error);
+      // Error silenciado en producción
     }
   }
 
@@ -214,7 +205,7 @@ export class ParticlesService {
         container.refresh();
       }
     } catch (error) {
-      console.log('Error al refrescar partículas:', error);
+      // Error silenciado en producción
     }
   }
 }

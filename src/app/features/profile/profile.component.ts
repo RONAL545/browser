@@ -47,7 +47,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ProfileComponent ngOnInit called');
     this.loadUserProfile();
   }
 
@@ -60,10 +59,8 @@ export class ProfileComponent implements OnInit {
     }).subscribe({
       next: (data) => {
         this.user = data;
-        console.log('Perfil cargado exitosamente:', data);
       },
       error: (error) => {
-        console.error('Error al cargar perfil:', error);
         // Intentar cargar desde localStorage como fallback
         const userStr = localStorage.getItem('current_user');
         if (userStr) {
@@ -99,9 +96,6 @@ export class ProfileComponent implements OnInit {
     const role = this.user?.role;
     const roleName = typeof role === 'string' ? role.toLowerCase() : role?.nombre?.toLowerCase();
 
-    console.log('Rol del usuario:', typeof role === 'string' ? role : role?.nombre);
-    console.log('Rol en minúsculas:', roleName);
-
     if (roleName === 'estudiante') {
       endpoint = `${environment.apiUrl}/registros/estudiante/cambiar-password`;
     } else if (roleName === 'personal') {
@@ -111,7 +105,6 @@ export class ProfileComponent implements OnInit {
     } else {
       this.passwordChangeError = `Rol de usuario no válido: "${roleName}". Roles permitidos: estudiante, personal, admin`;
       this.isChangingPassword = false;
-      console.error('Rol no reconocido:', roleName, 'Usuario completo:', this.user);
       return;
     }
 

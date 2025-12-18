@@ -116,6 +116,5 @@ export class Report {
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
       })
-      .catch(error => console.error('Error al descargar el archivo:', error));
   }
 }

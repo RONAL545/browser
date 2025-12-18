@@ -54,7 +54,6 @@ export class MainHeaderComponent implements OnInit {
         }, 100);
       }
     }).catch(err => {
-      console.error('Navigation error:', err);
       this.userMenuOpen = false;
     });
   }

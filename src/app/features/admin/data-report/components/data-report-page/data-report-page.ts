@@ -42,7 +42,6 @@ export class DataReportPageComponent {
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error al cargar datos:', error);
         this.error = 'Error al cargar los datos. Por favor, intenta nuevamente.';
         this.loading = false;
       }

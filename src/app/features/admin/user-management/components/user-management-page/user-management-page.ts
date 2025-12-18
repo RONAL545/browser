@@ -46,7 +46,6 @@ export class UserManagementPage implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error loading users:', error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error',

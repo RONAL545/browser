@@ -24,16 +24,12 @@ export class AuthService {
    * El refresh token se envía automáticamente como HttpOnly cookie desde el backend
    */
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    console.log('AUTH SERVICE - Enviando login request:', credentials);
     return this.http.post<LoginResponse>(
       `${environment.apiUrl}/auth/login`,
       credentials,
       { withCredentials: true } // Necesario para recibir cookies
     ).pipe(
       tap(response => {
-        console.log('AUTH SERVICE - Respuesta del servidor:', response);
-        console.log('AUTH SERVICE - Access token:', response.access_token);
-        console.log('AUTH SERVICE - User:', response.user);
         this.setToken(response.access_token);
         this.setUser(response.user);
         this.currentUserSubject.next(response.user);

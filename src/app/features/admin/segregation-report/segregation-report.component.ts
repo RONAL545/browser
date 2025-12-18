@@ -100,7 +100,6 @@ export class SegregationReportComponent implements OnInit {
         this.sedes = sedes;
       },
       error: (error: any) => {
-        console.error('Error al cargar sedes:', error);
       }
     });
   }
@@ -112,7 +111,6 @@ export class SegregationReportComponent implements OnInit {
         this.filterEdificios();
       },
       error: (error: any) => {
-        console.error('Error al cargar edificios:', error);
       }
     });
   }
@@ -156,7 +154,6 @@ export class SegregationReportComponent implements OnInit {
         this.loading = false;
       },
       error: (error: any) => {
-        console.error('Error al cargar reporte:', error);
         this.loading = false;
       }
     });

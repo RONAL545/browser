@@ -165,7 +165,6 @@ export class UserForm implements OnInit, OnChanges {
         this.roles = roles.map(r => ({ label: r.nombre, value: r.id }));
       },
       error: (error) => {
-        console.error('Error loading roles:', error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
@@ -181,7 +180,6 @@ export class UserForm implements OnInit, OnChanges {
         this.sedes = sedes.map(s => ({ label: s.nombre, value: s.id }));
       },
       error: (error) => {
-        console.error('Error loading sedes:', error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
@@ -199,7 +197,6 @@ export class UserForm implements OnInit, OnChanges {
           this.edificios = edificios.map(e => ({ label: e.nombre, value: e.id }));
         },
         error: (error) => {
-          console.error('Error loading edificios:', error);
         }
       });
     } else {

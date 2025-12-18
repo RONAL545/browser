@@ -46,7 +46,6 @@ export class LocationPageComponent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error al cargar pilas:', error);
         this.showMessage('error', 'Error al cargar las pilas');
         this.loading = false;
       }
@@ -70,7 +69,6 @@ export class LocationPageComponent implements OnInit {
         this.loadPilas();
       },
       error: (error) => {
-        console.error('Error al eliminar pila:', error);
         this.showMessage('error', error.error?.message || 'Error al eliminar la pila');
       }
     });
@@ -87,7 +85,6 @@ export class LocationPageComponent implements OnInit {
           this.loadPilas();
         },
         error: (error) => {
-          console.error('Error al actualizar pila:', error);
           this.showMessage('error', error.error?.message || 'Error al actualizar la pila');
         }
       });
@@ -100,7 +97,6 @@ export class LocationPageComponent implements OnInit {
           this.loadPilas();
         },
         error: (error) => {
-          console.error('Error al crear pila:', error);
           this.showMessage('error', error.error?.message || 'Error al crear la pila');
         }
       });

@@ -199,7 +199,6 @@ export class DashboardComponent implements OnInit {
           }, 5000);
         },
         error: (error) => {
-          console.error('Error al guardar registro:', error);
           this.messages = [{
             severity: 'error',
             summary: 'Error',

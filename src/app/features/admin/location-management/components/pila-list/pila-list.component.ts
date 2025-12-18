@@ -63,7 +63,6 @@ export class PilaListComponent implements OnInit, OnChanges {
         this.sedes = sedes;
       },
       error: (error) => {
-        console.error('Error al cargar sedes:', error);
       }
     });
   }
@@ -75,7 +74,6 @@ export class PilaListComponent implements OnInit, OnChanges {
         this.edificios = edificios;
       },
       error: (error) => {
-        console.error('Error al cargar edificios:', error);
       }
     });
   }

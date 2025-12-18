@@ -43,7 +43,6 @@ export class NotFoundComponent implements OnInit, OnDestroy {
       await this.particlesService.initializeParticlesEngine();
       await this.particlesService.loadSimpleParticles('particles-404');
     } catch (error) {
-      console.error('Error loading particles:', error);
     }
   }
 

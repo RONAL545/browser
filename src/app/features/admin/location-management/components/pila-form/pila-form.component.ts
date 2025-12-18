@@ -98,7 +98,6 @@ export class PilaFormComponent implements OnInit {
         this.sedes = sedes;
       },
       error: (error: any) => {
-        console.error('Error al cargar sedes:', error);
         this.errorMessage = 'Error al cargar las sedes';
       }
     });
@@ -113,7 +112,6 @@ export class PilaFormComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        console.error('Error al cargar edificios:', error);
         this.errorMessage = 'Error al cargar los edificios';
       }
     });
