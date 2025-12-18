@@ -23,6 +23,10 @@ export interface RegistroEstudiante {
   noAprovechableSegregado: boolean;
   segregacionCorrecta: boolean;
   observaciones?: string;
+  pila?: {
+    id: string;
+    codigo: string;
+  };
   user?: {
     id: string;
     nombres: string;

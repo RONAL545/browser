@@ -20,6 +20,7 @@
         <th pSortableColumn="user.nombres">Estudiante <p-sortIcon field="user.nombres"></p-sortIcon></th>
         <th pSortableColumn="user.sede.nombre">Sede <p-sortIcon field="user.sede.nombre"></p-sortIcon></th>
         <th pSortableColumn="user.edificio.nombre">Edificio <p-sortIcon field="user.edificio.nombre"></p-sortIcon></th>
+        <th pSortableColumn="pila.codigo">Código de Pila <p-sortIcon field="pila.codigo"></p-sortIcon></th>
         <th class="text-center" pSortableColumn="segregacionCorrecta">Segregación Correcta <p-sortIcon field="segregacionCorrecta"></p-sortIcon></th>
         <th class="text-center" pSortableColumn="plasticoSegregado">Plástico <p-sortIcon field="plasticoSegregado"></p-sortIcon></th>
         <th class="text-center" pSortableColumn="papelCartonSegregado">Papel <p-sortIcon field="papelCartonSegregado"></p-sortIcon></th>
@@ -36,6 +37,7 @@
         <td>{{ registro.user?.nombres }} {{ registro.user?.apellidos }}</td>
         <td>{{ registro.user?.sede?.nombre || '-' }}</td>
         <td>{{ registro.user?.edificio?.nombre || '-' }}</td>
+        <td>{{ registro.pila?.codigo || '-' }}</td>
         <td class="text-center">
           <span [class]="registro.segregacionCorrecta ? 'badge-success' : 'badge-error'">
             {{ registro.segregacionCorrecta ? 'Sí' : 'No' }}
@@ -78,7 +80,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="12" class="text-center">No hay registros disponibles</td>
+        <td colspan="13" class="text-center">No hay registros disponibles</td>
       </tr>
     </ng-template>
   </p-table>
