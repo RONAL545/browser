@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -39,7 +39,7 @@ interface Edificio {
   templateUrl: './pila-form.component.html',
   styleUrl: './pila-form.component.scss'
 })
-export class PilaFormComponent implements OnInit {
+export class PilaFormComponent implements OnInit, OnChanges {
   @Input() pila: Pila | null = null;
   @Output() save = new EventEmitter<any>();
   @Output() cancel = new EventEmitter<void>();
@@ -89,6 +89,20 @@ export class PilaFormComponent implements OnInit {
         edificioId: this.pila.edificioId,
         codigo: this.pila.codigo
       });
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Resetear el estado de loading cuando el input pila cambia (incluyendo cuando se vuelve null)
+    if (changes['pila']) {
+      this.loading = false;
+      this.errorMessage = '';
+
+      // Si pila cambió y no es el primer cambio, resetear el formulario
+      if (!changes['pila'].firstChange && !changes['pila'].currentValue) {
+        this.pilaForm.reset();
+        this.pilaForm.get('edificioId')?.disable();
+      }
     }
   }
 
