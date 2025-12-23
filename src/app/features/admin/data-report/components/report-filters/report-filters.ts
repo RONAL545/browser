@@ -33,8 +33,8 @@ export class ReportFiltersComponent implements OnInit {
 
   startDate: Date | null = null;
   endDate: Date | null = null;
-  selectedSede: Sede | null = null;
-  selectedEdificio: Edificio | null = null;
+  selectedSede: string | null = null;
+  selectedEdificio: string | null = null;
 
   sedes: Sede[] = [];
   edificios: Edificio[] = [];
@@ -86,7 +86,7 @@ export class ReportFiltersComponent implements OnInit {
   onSedeChange(): void {
     if (this.selectedSede) {
       this.edificiosFiltrados = this.edificios.filter(
-        edificio => edificio.sedeId === this.selectedSede!.id
+        edificio => edificio.sedeId === this.selectedSede
       );
       this.selectedEdificio = null;
     } else {
@@ -98,8 +98,8 @@ export class ReportFiltersComponent implements OnInit {
     const filters: ReportFilters = {
       startDate: this.startDate ? this.startDate.toISOString().split('T')[0] : undefined,
       endDate: this.endDate ? this.endDate.toISOString().split('T')[0] : undefined,
-      sedeId: this.selectedSede?.id,
-      edificioId: this.selectedEdificio?.id,
+      sedeId: this.selectedSede || undefined,
+      edificioId: this.selectedEdificio || undefined,
     };
     this.filterChange.emit(filters);
   }

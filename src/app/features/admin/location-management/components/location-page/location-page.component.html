@@ -25,7 +25,9 @@
       [width]="'600px'"
       (onHide)="onCancel()">
       <app-pila-form
+        *ngIf="showForm"
         [pila]="selectedPila"
+        [loading]="pilaFormLoading"
         (save)="onSave($event)"
         (cancel)="onCancel()">
       </app-pila-form>

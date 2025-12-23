@@ -41,6 +41,7 @@ interface Edificio {
 })
 export class PilaFormComponent implements OnInit, OnChanges {
   @Input() pila: Pila | null = null;
+  @Input() loading = false;
   @Output() save = new EventEmitter<any>();
   @Output() cancel = new EventEmitter<void>();
 
@@ -48,7 +49,6 @@ export class PilaFormComponent implements OnInit, OnChanges {
   sedes: Sede[] = [];
   edificios: Edificio[] = [];
   edificiosFiltrados: Edificio[] = [];
-  loading = false;
   errorMessage = '';
 
   constructor(
@@ -93,22 +93,12 @@ export class PilaFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // Resetear el estado de loading cuando el input pila cambia (incluyendo cuando se vuelve null)
+    // Resetear error message cuando el input pila cambia
     if (changes['pila']) {
-      console.log('=== ngOnChanges DETECTADO ===');
-      console.log('Valor anterior de pila:', changes['pila'].previousValue);
-      console.log('Valor nuevo de pila:', changes['pila'].currentValue);
-      console.log('loading ANTES de resetear:', this.loading);
-
-      this.loading = false;
       this.errorMessage = '';
-
-      console.log('loading DESPUÉS de resetear:', this.loading);
-      console.log('usted ya creo el primero ahora deberia poder crear otro');
 
       // Si pila cambió y no es el primer cambio, resetear el formulario
       if (!changes['pila'].firstChange && !changes['pila'].currentValue) {
-        console.log('Reseteando formulario...');
         this.pilaForm.reset();
         this.pilaForm.get('edificioId')?.disable();
       }
@@ -154,11 +144,7 @@ export class PilaFormComponent implements OnInit, OnChanges {
       return;
     }
 
-    console.log('=== ANTES DE GUARDAR ===');
-    console.log('loading ANTES:', this.loading);
-    this.loading = true;
     this.errorMessage = '';
-    console.log('loading DESPUÉS de setear true:', this.loading);
 
     const formValue = this.pilaForm.value;
     const pilaData = {
@@ -166,9 +152,7 @@ export class PilaFormComponent implements OnInit, OnChanges {
       edificioId: formValue.edificioId
     };
 
-    console.log('Emitiendo evento save con:', pilaData);
     this.save.emit(pilaData);
-    console.log('Evento save emitido');
   }
 
   onCancel(): void {

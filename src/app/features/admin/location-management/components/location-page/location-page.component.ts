@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { finalize } from 'rxjs';
 
 // PrimeNG Imports
 import { MessageModule } from 'primeng/message';
@@ -30,6 +31,7 @@ export class LocationPageComponent implements OnInit {
   selectedPila: Pila | null = null;
   showForm = false;
   loading = false;
+  pilaFormLoading = false;
   message: { severity: 'success' | 'error' | 'info' | 'warn'; text: string } | null = null;
 
   constructor(private pilaService: PilaService) {}
@@ -75,42 +77,38 @@ export class LocationPageComponent implements OnInit {
   }
 
   onSave(pilaData: CreatePilaDto | UpdatePilaDto): void {
-    console.log('=== LOCATION-PAGE onSave ===');
-    console.log('selectedPila:', this.selectedPila);
-    console.log('pilaData recibido:', pilaData);
+    this.pilaFormLoading = true;
 
     if (this.selectedPila) {
       // Actualizar
-      this.pilaService.update(this.selectedPila.id, pilaData).subscribe({
-        next: () => {
-          console.log('Pila actualizada exitosamente');
-          this.showMessage('success', 'Pila actualizada correctamente');
-          this.showForm = false;
-          this.selectedPila = null;
-          console.log('selectedPila reseteado a null');
-          this.loadPilas();
-        },
-        error: (error) => {
-          console.error('Error al actualizar:', error);
-          this.showMessage('error', error.error?.message || 'Error al actualizar la pila');
-        }
-      });
+      this.pilaService.update(this.selectedPila.id, pilaData)
+        .pipe(finalize(() => this.pilaFormLoading = false))
+        .subscribe({
+          next: () => {
+            this.showMessage('success', 'Pila actualizada correctamente');
+            this.showForm = false;
+            this.selectedPila = null;
+            this.loadPilas();
+          },
+          error: (error) => {
+            this.showMessage('error', error.error?.message || 'Error al actualizar la pila');
+          }
+        });
     } else {
       // Crear
-      this.pilaService.create(pilaData as CreatePilaDto).subscribe({
-        next: () => {
-          console.log('Pila creada exitosamente');
-          this.showMessage('success', 'Pila creada correctamente');
-          this.showForm = false;
-          this.selectedPila = null;
-          console.log('selectedPila reseteado a null (después de crear)');
-          this.loadPilas();
-        },
-        error: (error) => {
-          console.error('Error al crear:', error);
-          this.showMessage('error', error.error?.message || 'Error al crear la pila');
-        }
-      });
+      this.pilaService.create(pilaData as CreatePilaDto)
+        .pipe(finalize(() => this.pilaFormLoading = false))
+        .subscribe({
+          next: () => {
+            this.showMessage('success', 'Pila creada correctamente');
+            this.showForm = false;
+            this.selectedPila = null;
+            this.loadPilas();
+          },
+          error: (error) => {
+            this.showMessage('error', error.error?.message || 'Error al crear la pila');
+          }
+        });
     }
   }
 

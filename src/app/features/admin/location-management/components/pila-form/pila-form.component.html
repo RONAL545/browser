@@ -11,6 +11,8 @@
         optionLabel="nombre"
         optionValue="id"
         placeholder="Seleccione una sede"
+        [scrollHeight]="'200px'"
+        appendTo="body"
         styleClass="w-full">
       </p-select>
       <small *ngIf="sedeId?.invalid && sedeId?.touched" class="text-red-600">
@@ -30,6 +32,8 @@
         optionLabel="nombre"
         optionValue="id"
         placeholder="Seleccione un edificio"
+        [scrollHeight]="'200px'"
+        appendTo="body"
         styleClass="w-full">
       </p-select>
       <small *ngIf="edificioId?.invalid && edificioId?.touched" class="text-red-600">

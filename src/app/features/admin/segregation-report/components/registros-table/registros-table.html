@@ -42,33 +42,33 @@
           </span>
         </td>
         <td class="text-center">
-          <span [class]="registro.plasticoSegregado ? 'badge-success' : 'badge-error'">
-            {{ registro.plasticoSegregado ? 'Sí' : 'No' }}
+          <span [class]="getStatusClass(registro.plasticoSegregado)">
+            {{ getStatusText(registro.plasticoSegregado) }}
           </span>
         </td>
         <td class="text-center">
-          <span [class]="registro.papelCartonSegregado ? 'badge-success' : 'badge-error'">
-            {{ registro.papelCartonSegregado ? 'Sí' : 'No' }}
+          <span [class]="getStatusClass(registro.papelCartonSegregado)">
+            {{ getStatusText(registro.papelCartonSegregado) }}
           </span>
         </td>
         <td class="text-center">
-          <span [class]="registro.vidrioSegregado ? 'badge-success' : 'badge-error'">
-            {{ registro.vidrioSegregado ? 'Sí' : 'No' }}
+          <span [class]="getStatusClass(registro.vidrioSegregado)">
+            {{ getStatusText(registro.vidrioSegregado) }}
           </span>
         </td>
         <td class="text-center">
-          <span [class]="registro.metalSegregado ? 'badge-success' : 'badge-error'">
-            {{ registro.metalSegregado ? 'Sí' : 'No' }}
+          <span [class]="getStatusClass(registro.metalSegregado)">
+            {{ getStatusText(registro.metalSegregado) }}
           </span>
         </td>
         <td class="text-center">
-          <span [class]="registro.organicoSegregado ? 'badge-success' : 'badge-error'">
-            {{ registro.organicoSegregado ? 'Sí' : 'No' }}
+          <span [class]="getStatusClass(registro.organicoSegregado)">
+            {{ getStatusText(registro.organicoSegregado) }}
           </span>
         </td>
         <td class="text-center">
-          <span [class]="registro.noAprovechableSegregado ? 'badge-success' : 'badge-error'">
-            {{ registro.noAprovechableSegregado ? 'Sí' : 'No' }}
+          <span [class]="getStatusClass(registro.noAprovechableSegregado)">
+            {{ getStatusText(registro.noAprovechableSegregado) }}
           </span>
         </td>
         <td>

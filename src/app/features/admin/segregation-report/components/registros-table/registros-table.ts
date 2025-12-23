@@ -15,4 +15,14 @@ import { RegistroEstudiante } from '../../services/segregation-report.service';
 export class RegistrosTableComponent {
   @Input() registros: RegistroEstudiante[] = [];
   @Input() loading = false;
+
+  getStatusText(value: boolean | null): string {
+    if (value === null) return 'No hay tacho';
+    return value ? 'Sí' : 'No';
+  }
+
+  getStatusClass(value: boolean | null): string {
+    if (value === null) return 'badge-neutral';
+    return value ? 'badge-success' : 'badge-error';
+  }
 }

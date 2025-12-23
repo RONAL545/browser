@@ -41,6 +41,17 @@
     white-space: nowrap;
   }
 
+  .badge-neutral {
+    padding: clamp(0.2rem, 0.5vw, 0.25rem) clamp(0.5rem, 1.5vw, 0.75rem);
+    border-radius: 12px;
+    background: #e5e7eb;
+    color: #374151;
+    font-weight: var(--font-semibold);
+    font-size: var(--text-xs);
+    display: inline-block;
+    white-space: nowrap;
+  }
+
   .observaciones-text {
     display: block;
     max-width: 300px;
