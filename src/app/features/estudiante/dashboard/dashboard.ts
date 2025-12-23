@@ -108,6 +108,19 @@ export class DashboardComponent implements OnInit {
 
   loadPilas(): void {
     const token = localStorage.getItem('access_token');
+
+    if (!token) {
+      this.messages = [{
+        severity: 'error',
+        summary: 'Error',
+        detail: 'No se encontró token de autenticación. Por favor, inicia sesión nuevamente.'
+      }];
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000);
+      return;
+    }
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -125,10 +138,24 @@ export class DashboardComponent implements OnInit {
           }
         },
         error: (error) => {
+          console.error('Error loading pilas:', error);
+          let errorMessage = 'No se pudieron cargar las pilas';
+
+          if (error.status === 401) {
+            errorMessage = 'Sesión expirada. Por favor, inicia sesión nuevamente.';
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 2000);
+          } else if (error.status === 403) {
+            errorMessage = 'No tienes permisos para acceder a esta funcionalidad.';
+          } else if (error.error?.message) {
+            errorMessage = error.error.message;
+          }
+
           this.messages = [{
             severity: 'error',
             summary: 'Error',
-            detail: 'No se pudieron cargar las pilas'
+            detail: errorMessage
           }];
           setTimeout(() => { this.messages = []; }, 5000);
         }
