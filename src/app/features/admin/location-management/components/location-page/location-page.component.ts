@@ -75,16 +75,23 @@ export class LocationPageComponent implements OnInit {
   }
 
   onSave(pilaData: CreatePilaDto | UpdatePilaDto): void {
+    console.log('=== LOCATION-PAGE onSave ===');
+    console.log('selectedPila:', this.selectedPila);
+    console.log('pilaData recibido:', pilaData);
+
     if (this.selectedPila) {
       // Actualizar
       this.pilaService.update(this.selectedPila.id, pilaData).subscribe({
         next: () => {
+          console.log('Pila actualizada exitosamente');
           this.showMessage('success', 'Pila actualizada correctamente');
           this.showForm = false;
           this.selectedPila = null;
+          console.log('selectedPila reseteado a null');
           this.loadPilas();
         },
         error: (error) => {
+          console.error('Error al actualizar:', error);
           this.showMessage('error', error.error?.message || 'Error al actualizar la pila');
         }
       });
@@ -92,11 +99,15 @@ export class LocationPageComponent implements OnInit {
       // Crear
       this.pilaService.create(pilaData as CreatePilaDto).subscribe({
         next: () => {
+          console.log('Pila creada exitosamente');
           this.showMessage('success', 'Pila creada correctamente');
           this.showForm = false;
+          this.selectedPila = null;
+          console.log('selectedPila reseteado a null (después de crear)');
           this.loadPilas();
         },
         error: (error) => {
+          console.error('Error al crear:', error);
           this.showMessage('error', error.error?.message || 'Error al crear la pila');
         }
       });
