@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: ecotec-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-ecotec_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-ecotec_password}
+      POSTGRES_DB: ${DB_DATABASE:-ecotec_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: 
+      context: ./api-ecotec
+      dockerfile: Dockerfile
+    container_name: ecotec-api
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME:-ecotec_user}
+      DB_PASSWORD: ${DB_PASSWORD:-ecotec_password}
+      DB_DATABASE: ${DB_DATABASE:-ecotec_db}
+      DB_DIALECT: postgres
+      JWT_SECRET: ${JWT_SECRET:-desarrollo_secreto_muy_largo_123456789}
+      NODE_ENV: development
+      ALLOWED_ORIGINS: http://localhost:4200
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:
